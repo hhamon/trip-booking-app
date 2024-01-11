@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destinations - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/offer_card.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/destination.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center" id="destinations-row">
+            <div class="col text-center">
+                {% for destination in destinations %}
+                    {% include 'destination/country_card.html.twig' with {'destination': destination}%}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

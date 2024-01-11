@@ -1,0 +1,46 @@
+{{ form_start(filtersForm) }}
+<div id="filters-header-container">
+    <h3>Search</h3>
+    <div class="text-right">
+        {{ form_widget(filtersForm.reset) }}
+    </div>
+</div>
+<div class="filter-form-section">
+    <h4>{{ form_label(filtersForm.offerTypes) }}</h4>
+    {% for offer_type_field in filtersForm.offerTypes %}
+        <div class="form-check">
+            {{ form_widget(offer_type_field) }}
+            {{ form_label(offer_type_field) }}
+        </div>
+    {% endfor %}
+    <h4>Price range</h4>
+    <div class="d-inline-block">
+        {{ form_label(filtersForm.priceMin) }}
+        {{ form_widget(filtersForm.priceMin) }}
+
+        {{ form_label(filtersForm.priceMax) }}
+        {{ form_widget(filtersForm.priceMax) }}
+    </div>
+    <h4>Depart and return date</h4>
+    <div class="d-inline-block">
+        {{ form_label(filtersForm.departureDate) }}
+        {{ form_widget(filtersForm.departureDate) }}
+
+        {{ form_label(filtersForm.comebackDate) }}
+        {{ form_widget(filtersForm.comebackDate) }}
+    </div>
+    <h4>Departure spot</h4>
+    <div class="form-group">
+        {{ form_label(filtersForm.departureSpot) }}
+        {{ form_widget(filtersForm.departureSpot) }}
+    </div>
+    <h4>Destination</h4>
+    <div class="form-group">
+        {{ form_label(filtersForm.destination) }}
+        {{ form_widget(filtersForm.destination) }}
+    </div>
+    <div id="filters-submit-container">
+        {{ form_widget(filtersForm.submit) }}
+    </div>
+</div>
+{{ form_end(filtersForm) }}

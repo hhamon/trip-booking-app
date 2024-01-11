@@ -1,0 +1,36 @@
+/*Offers column*/
+#offers-column {
+    padding: 2rem 2rem;
+}
+#sorting-row {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: .55rem;
+}
+#sorting-row select {
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: "Montserrat", sans-serif;
+    background: transparent url("data:image/svg+xml;utf8,<svg fill='rgb(0,58,110)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat center right;
+    color: #1d2124;
+    font-size: .8rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 8rem;
+}
+#sorting-row label {
+    margin-right: .5rem;
+}
+@media(max-width: 991px) {
+    #select-sort-container {
+        display: flex;
+        justify-content: end;
+    }
+    #select-sort-container label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+}

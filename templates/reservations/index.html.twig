@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block title %}Reservations - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/offer-browser-item.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/your-bookings.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-10 col-xl-6 position-relative">
+                <div class="row" id="title-row">
+                    <h1 class="text-center" id="title">Reservations</h1>
+                </div>
+                {% if reservations|length == 0 %}
+                    <div class="row">
+                        <h3 class="text-center mt-4 d-block w-100">You haven't made any reservations yet...</h3>
+                        <p class="text-center d-block w-100">Go ahead and browse our <a
+                                    href="{{ path('offer_browse') }}">offers</a> now!</p>
+                    </div>
+                {% endif %}
+                {% if reservations|length > 0 %}
+                    <div id="reservations-wrapper">
+                        {% for i in 0..reservations|length-1 %}
+                            <div class="row offer-table-row">
+                                <div class="offer-image-container">
+                                    <img src="../{{ reservations[i].bookingOffer.photosDirectory }}/1.jpg" alt="{{ reservations[i].bookingOffer.offerName }}"/>
+                                    {% if isRatingAvailable[i] == true %}
+                                        <a href="{{ path('rateOffer', {'reservationId': reservations[i].Id}) }}">Rate offer</a>
+                                    {% endif %}
+                                </div>
+                                <div class="offer-info-container">
+                                    <div class="country-continent">{{ reservations[i].bookingOffer.destination }} / {{ reservations[i].bookingOffer.destination.continent }}</div>
+                                    <div class="offer-name">{{ reservations[i].bookingOffer.offerName }}</div>
+                                    <div class="offer-info-list">
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                <i class="fas fa-calendar-check"></i>
+                                            </div>
+                                            {{ reservations[i].bookingOffer.departureDate|date("d.m.Y") }} - {{ reservations[i].bookingOffer.comebackDate|date("d.m.Y") }}
+                                        </div>
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                <i class="fas fa-plane-departure"></i>
+                                            </div>
+                                            {{ reservations[i].bookingOffer.departureSpot }}
+                                        </div>
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            {% if reservations[i].adultNumber == 1 %}
+                                                {{ reservations[i].adultNumber }} adult
+                                            {% else %}
+                                                {{ reservations[i].adultNumber }} adults
+                                            {% endif %}
+                                            {% if reservations[i].childNumber == 1 %}
+                                                and {{ reservations[i].adultNumber }} child.
+                                            {% elseif reservations[i].childNumber > 1 %}
+                                                and {{ reservations[i].adultNumber }} children.
+                                            {% endif %}
+                                        </div>
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                {% if reservations[i].isPaidFor %}
+                                                    <i class="fas fa-check" style="color: #00bb00"></i>
+                                                {% else %}
+                                                    <i class="fas fa-times" style="color:red;"></i>
+                                                {% endif %}
+                                            </div>
+                                            {% if reservations[i].isPaidFor == true %}
+                                                Reservation was paid for on {{ reservations[i].bankTransferDate|date("d.m.Y") }}
+                                            {% else %}
+                                                Reservation was not paid for
+                                            {% endif %}
+                                        </div>
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                <i class="fas fa-money-check-alt"></i>
+                                            </div>
+                                            <strong>Transfer title</strong> &amp; account number: <strong>{{ reservations[i].bankTransferTitle }}</strong>, 11111 11111
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="offer-price-container justify-content-end">
+                                    <p><span class="total">Total:</span> &dollar;{{ reservations[i].totalCost|number_format(0, '.', ',') }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

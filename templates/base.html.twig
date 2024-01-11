@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dream Holiday{% endblock %}</title>
+    <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9bfed1b833.js" crossorigin="anonymous"></script> {# tiny pics from font-awesome #}
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto+Condensed&display=swap"
+            rel="stylesheet"
+    />
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <section class="d-flex flex-column justify-content-between" id="hero">
+        <div id="hero-top">
+            {% block navbar %}
+                <nav class="navbar navbar-dark navbar-expand-lg navbar-text primary-bg w-100">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ path('home') }}">
+                            <img class="d-inline-block align-top"
+                                 height="39"
+                                 src="{{ asset('images/logo.png') }}"
+                                 alt="dream holiday logo"/>
+                        </a>
+                        <a class="navbar-brand" id="brand-name-text" href="{{ path('home') }}">Dream Holiday</a>
+                        <button class="navbar-toggler"
+                                data-target="#navcol1"
+                                data-toggle="collapse"
+                                id="menu-toggle-button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navcol1">
+                            <ul class="nav navbar-nav text-center mx-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('home') }}">Home <span
+                                                class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('destinations') }}">Destinations</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Holiday
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'First Minute'}) }}">First Minute</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Last Minute'}) }}">Last Minute</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'All Inclusive'}) }}">All Inclusive</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'For Children'}) }}">For Children</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Group Tours'}) }}">Group Tours</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Cruises'}) }}">Cruises</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Bargain Zone'}) }}">Bargain Zone</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About Us</a>
+                            </ul>
+                            <ul class="nav navbar-nav text-center">
+                                {% if is_granted('ROLE_USER') %}
+                                    <li class="nav-item">
+                                        <a id="user-nav-icon"
+                                           href="{{ path('app_logout') }}"
+                                           class="nav-link">
+                                            Sign out
+                                            <i class="fa fa-sign-out mx-2"></i>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a id="user-nav-icon"
+                                           href="{{ path('app_login') }}"
+                                           class="nav-link">
+                                            Sign in
+                                            <i class="fa fa-user mx-2"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            {% endblock %}
+            {% block page_content %}
+            {% endblock %}
+        </div>
+        <div id="hero-bottom">
+            {% block footer %}
+                <footer class="footer-custom primary-bg">
+                    <div class="container-fluid">
+                        <div class="row text-center justify-content-center">
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Information</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">How to book?</a></li>
+                                    <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                                    <li class="footer-link"><a href="#">Cookies</a></li>
+                                    <li class="footer-link"><a href="#">Help Center</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Account</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="{{ path('reservations') }}">Your bookings</a></li>
+                                    <li class="footer-link"><a href="{{ path('app_register') }}">Register</a></li>
+                                    <li class="footer-link"><a href="{{ path('app_login') }}">Sign in</a></li>
+                                    <li class="footer-link"><a href="{{ path('auth') }}">Edit Data</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Promotions</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="{{ path('offer_browse', {'offerType': 'First Minute'}) }}">First Minute</a></li>
+                                    <li class="footer-link"><a href="{{ path('offer_browse', {'offerType': 'Last Minute'}) }}">Last Minute</a></li>
+                                    <li class="footer-link"><a href="{{ path('offer_browse', {'offerType': 'Bargain Zone'}) }}">Bargain Zone</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Dream Holiday</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">About us</a></li>
+                                    <li class="footer-link"><a href="#">Contact</a></li>
+                                    <li class="footer-link"><a href="{{ path('careers') }}">Career</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3">
+                                <h5 class="mt-4">Sign up for Newsletter</h5>
+                                <div id="newsletter-form-container" class="text-center">
+                                    {{ render(controller('App\\Controller\\NewsletterController::renderForm')) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6 text-center">
+                                <p class="text-center">Copyright &copy; 2020 Dream Holiday</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            {% endblock %}
+        </div>
+    </section>
+{% endblock %}
+{% for message in app.flashes('notice') %}
+<div class="toast" style="position: fixed; bottom: 0; right: 0;">
+    <div class="toast-header">
+        <img src="{{ asset('images/logo.png') }}" class="rounded mr-2" alt="logo">
+        <strong class="mr-auto">Notification</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
+{% block javascripts %}{% endblock %}
+<script>
+    $(function () {
+        $('.toast').toast({
+            delay: 5000
+        })
+        $('.toast').toast('show')
+    })
+</script>
+</body>
+</html>

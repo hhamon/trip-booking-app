@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+{% block body %}
+<div id="hero">
+    <div class="container-fluid">
+        <div class="row register-form-row justify-content-center">
+            <div class="col-10 col-sm-8 col-md-6 col-lg-9 col-xl-6" id="main-column">
+                {{ form_start(form) }}
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 form-space">
+                        <div id="form-header">
+                            <h3 class="form-title">Register</h3>
+                        </div>
+                        <div id="form-body">
+                            {% for error in form.vars.errors.form.getErrors(true) %}
+                                <div class="alert alert-danger" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="inputFirstName"><span class="red">*</span>{{ form_label(form.firstName) }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.firstName) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastName"><span class="red">*</span>{{ form_label(form.lastName) }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.lastName) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail"><span class="red">*</span>{{ form_label(form.email) }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="input-group-addon"><i class="fa fa-envelope fa-md" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.email) }}
+                                </div>
+                                <div class="my-custom-class-for-errors">
+                                    {% if errors is defined %}
+                                        {% if errors|length > 0 %}
+                                            <script>
+                                                $('#registration_email').focus();
+                                            </script>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword"><span class="red">*</span>{{ form_label(form.password.first) }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.password.first) }}
+                                </div>
+                                <div class="form-group">
+                                    <div id="popover-password">
+                                        <div class="progress">
+                                            <div id="password-strength" class="progress-bar progress-bar-success"
+                                                 role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0">
+                                            </div>
+                                        </div>
+                                        <p id="p-password-str">Password strength: <span id="result"> </span></p>
+                                        <ul class="list-unstyled" id="password-cond-list">
+                                            <li>
+                                                <span class="low-upper-case"><i class="fa fa-times"></i></span>&nbsp;
+                                                1 small &amp; 1 capital letter
+                                            </li>
+                                            <li>
+                                                <span class="one-number"><i class="fa fa-times"></i></span>&nbsp;
+                                                Number (0-9)
+                                            </li>
+                                            <li>
+                                                <span class="one-special-char"><i class="fa fa-times"></i></span>&nbsp;
+                                                1 special character (!@#$%^&*)
+                                            </li>
+                                            <li>
+                                                <span class="eight-character"><i class="fa fa-times"></i></span>&nbsp;
+                                                Min. 8 characters
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputRepeatPassword"><span class="red">*</span>{{ form_label(form.password.second) }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.password.second) }}
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                {{ form_widget(form.subscribeNewsletter) }}
+                                <label class="form-check-label">{{ form_label(form.subscribeNewsletter) }}</label>
+                            </div>
+                            <div class="text-center">
+                                {{ form_widget(form.submit) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/passwordStrength.js') }}" type="text/javascript"></script>
+{% endblock %}

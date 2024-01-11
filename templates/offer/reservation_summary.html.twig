@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ reservation.bookingOffer.offerName }} - Confirm reservation{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/reservation-summary.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-4">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-7" id="confirmation-container">
+                <div class="row" id="reservation-header-row">
+                    <h1 id="title">Confirm Reservation</h1>
+                </div>
+                <div class="row" id="reservation-info-row">
+                    <div class="col-md-6 info-col d-flex justify-content-between flex-column">
+                        <div>
+                            <div class="info-header-container">
+                                <h1>Your Information</h1>
+                            </div>
+                            <div id="user-info-list">
+                                <div class="info-list-item">
+                                    <strong>Name:</strong> {{ app.user.firstName }} {{ app.user.lastName }}
+                                </div>
+                                <div class="info-list-item">
+                                    <strong>Email:</strong> {{ app.user.email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 mt-md-0">
+                            <div class="info-header-container">
+                                <h1>Bank Transfer Data</h1>
+                            </div>
+                            <div id="transfer-info-list">
+                                <div class="info-list-item">
+                                    <strong>Transfer Title:</strong> {{ reservation.bankTransferTitle }}
+                                </div>
+                                <div class="info-list-item">
+                                    <strong>Account Number:</strong> 11111 11111
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 info-col">
+                        <div class="info-header-container">
+                            <h1>Booking Information</h1>
+                        </div>
+                        <div id="booking-info-list">
+                            <div class="info-list-item">
+                                <strong>Offer Name:</strong> {{ reservation.bookingOffer.offerName }}
+                            </div>
+                            <div class="info-list-item">
+                                <strong>From-To:</strong> {{ reservation.bookingOffer.departureDate|date("d.m.Y") }} -
+                                {{ reservation.bookingOffer.comebackDate|date("d.m.Y") }}
+                            </div>
+                            <div class="info-list-item">
+                                <strong>Departure Spot:</strong> {{ reservation.bookingOffer.departureSpot }}
+                            </div>
+                            <div class="info-list-item">
+                                <strong>Comeback Spot:</strong> {{ reservation.bookingOffer.comebackSpot }}
+                            </div>
+                            <div class="info-list-item">
+                                <strong>Number of adults:</strong> {{ reservation.adultNumber }}
+                            </div>
+                            {% if reservation.childNumber > 0 %}
+                            <div class="info-list-item">
+                                <strong>Number of children:</strong> {{ reservation.childNumber }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="text-right" id="total-info-list">
+                            <div class="info-list-item mb-0">
+                                <strong>{{ reservation.adultNumber }} &times;</strong> &dollar;{{ reservation.bookingOffer.offerPrice }}
+                            </div>
+                            {% if reservation.childNumber > 0 %}
+                                <div class="info-list-item mb-0">
+                                    +
+                                </div>
+                                <div class="info-list-item">
+                                    <strong>{{ reservation.childNumber }} &times;</strong> &dollar;{{ reservation.bookingOffer.childPrice }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="text-right" id="total-label">
+                            <p><span>Total:</span> &dollar;{{ reservation.adultNumber * reservation.bookingOffer.offerPrice + reservation.childNumber * reservation.bookingOffer.childPrice }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="submit-row">
+                    <div class="col-12 text-right">
+                        {% set desktop_form = form.createView %}
+                        {{ form_start(desktop_form) }}
+                            {{ form_widget(desktop_form.submit, {'attr': {'class': 'confirm-btn'}}) }}
+                        {{ form_end(desktop_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

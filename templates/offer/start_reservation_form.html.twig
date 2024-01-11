@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+<div class="form-group">
+    {{ form_label(form.adultNumber) }}
+    {{ form_widget(form.adultNumber, {'attr': {'data-adult-price': offer.offerPrice}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.childNumber) }}
+    {{ form_widget(form.childNumber, {'attr': {'data-child-price': offer.childPrice}}) }}
+</div>
+<div class="offer-info-list">
+    <div class="offer-info-list-item">
+        <div class="icon-container">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
+    </div>
+    <div class="offer-info-list-item">
+        <div class="icon-container">
+            <i class="fas fa-clock"></i>
+        </div>
+        {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
+        {{ difference.days }} days
+    </div>
+    <div class="offer-info-list-item">
+        <div class="icon-container">
+            <i class="fas fa-plane-departure"></i>
+        </div>
+        {{ offer.departureSpot }}
+    </div>
+    <div class="offer-info-list-item">
+        <div class="icon-container">
+            {% include 'offer/offer_type_icons.html.twig' with {'offerType': offer.offerType} %}
+        </div>
+        {{ offer.offerType }}
+    </div>
+</div>
+<div>
+    <p class="text-right total-price-label"><span id="total-value">&dollar;{{ offer.offerPrice }}</span><span class="per-person">/person</span></p>
+</div>
+<div id="reservation-btn-container">
+    {{ form_widget(form.submit) }}
+</div>
+{{ form_end(form) }}

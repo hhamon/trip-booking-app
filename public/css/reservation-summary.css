@@ -1,0 +1,68 @@
+#reservation-header-row {
+    background-color: rgb(0,58,110);
+    padding: 1rem 2rem;
+}
+#title {
+    font-size: 1.5rem;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 0;
+}
+#confirmation-container {
+    max-width: 1200px;
+}
+#reservation-info-row {
+    border-left: 1px solid #a09f9f;
+    border-right: 1px solid #a09f9f;
+}
+.info-col {
+    padding: 1rem 1rem;
+}
+.info-header-container {
+    border-bottom: 2px dashed #a09f9f;
+}
+.info-header-container>h1 {
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+}
+#user-info-list, #booking-info-list, #transfer-info-list {
+    margin-top: 1rem;
+}
+.info-list-item {
+    font-size: .9rem;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: .4rem;
+}
+.info-list-item strong {
+    font-weight: 600;
+}
+#total-label p {
+    font-size: 1.2rem;
+    color: darkorange;
+    font-weight: 600;
+    margin-top: .5rem;
+}
+#total-label p span {
+    color: rgb(0,58,110);
+    font-weight: 500;
+}
+#submit-row {
+    border: 1px solid #a09f9f;
+    border-top: none;
+    padding-bottom: 1rem;
+}
+.confirm-btn {
+    background-color: #00bb00;
+    color: #ffffff;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    padding: .5rem 2rem;
+    transition: .2s ease-out;
+}
+.confirm-btn:hover {
+    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    background-color: #159d15;
+}

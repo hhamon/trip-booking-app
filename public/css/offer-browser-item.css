@@ -1,0 +1,116 @@
+.offer-link {
+    display: flex;
+    color: rgb(0,58,110);
+    height: 250px;
+    width: 100%;
+}
+.offer-link:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: darkorange;
+}
+.offer-table-row {
+    margin-top: 2rem;
+}
+.offer-image-container {
+    width: 33.33%;
+}
+.offer-image-container img {
+    width: 100%;
+    height: 250px;
+}
+.offer-info-container {
+    width: 40%;
+    border: 1px solid #a09f9f;
+    border-left: none;
+    border-right: none;
+    padding: .5rem 0 .5rem 1rem;
+    font-family: "Montserrat", sans-serif;
+}
+.offer-info-container .country-continent {
+    font-size: .7rem;
+    color: #a09f9f;
+}
+.offer-info-container .offer-rating {
+    color: #FFD43B;
+}
+.offer-info-container .offer-name {
+    font-size: 1.2rem;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+.offer-info-container .offer-info-list {
+    font-size: .8rem;
+    color: #a09f9f;
+    margin-top: .5rem;
+}
+.offer-info-container .offer-info-list .offer-info-list-item {
+    margin-bottom: .3rem;
+}
+.offer-info-container .offer-info-list .offer-info-list-item .icon-container {
+    color: rgb(0,58,110);
+    padding-right: .5rem;
+    display: inline;
+}
+.offer-price-container {
+    width: 26.5%;
+    border: 1px solid #a09f9f;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding-right: 1rem;
+}
+.offer-price-container p {
+    font-size: 1.2rem;
+    color: darkorange;
+    font-weight: 600;
+}
+.offer-price-container p span {
+    font-size: .8rem;
+    color: #a09f9f;
+    font-weight: 400;
+}
+.offer-price-container p span.total {
+    color: rgb(0,58,110);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+@media(max-width: 562px) {
+    .offer-table-row {
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .offer-image-container, .offer-info-container {
+        display: block;
+        width: 100%;
+    }
+    .offer-image-container img{
+        border-top-right-radius: .25rem;
+        border-top-left-radius: .25rem;
+    }
+    .offer-info-container {
+        border: 1px solid #a09f9f;
+        border-top: none;
+        border-bottom: none;
+    }
+    .offer-price-container {
+        display: block;
+        width: 100%;
+        border: 1px solid #a09f9f;
+        border-top: none;
+        border-radius: 0 0 .25rem .25rem;
+    }
+    .offer-link, .offer-info-container {
+        display: block;
+    }
+    .offer-link {
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+    }
+}

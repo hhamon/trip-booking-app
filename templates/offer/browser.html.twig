@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Browse Offers - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/offer_card.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/booking_filters_form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/offer-browser-item.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div id="side-menu">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 d-none d-lg-block" id="filters-column">
+                    {% set filters_desktop=filtersForm.createView %}
+                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_desktop}%}
+                </div>
+                <div class="col-11 col-sm-11 col-md-9 col-lg-9 col-xl-6" id="offers-column">
+                    <div class="row justify-content-between" id="sorting-row">
+                        <div class="d-none d-lg-block"></div>
+                        <div class="d-lg-none">
+                            <button id="filters-btn-mobile"
+                                    type="button"
+                                    data-toggle="modal"
+                                    data-target="#filtersFormModal">
+                                Filters
+                            </button>
+                        </div>
+                        <div id="select-sort-container">
+                            <label for="sorting-select">Sort by:</label>
+                            <select id="sorting-select" name="sorting-select">
+                                <option value="price">Price</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% if offers|length == 0 %}
+                        <div class="row">
+                            <h3 class="text-center mt-4 d-block w-100">Sorry, nothing was found...</h3>
+                            <p class="text-center d-block w-100">Please try changing or removing some of the filters.</p>
+                        </div>
+                    {% endif %}
+                    <div id="offers-wrapper">
+                        {% for offer in offers %}
+                            <div class="row offer-table-row"
+                                 data-price="{{ offer.offerPrice }}"
+                                 data-rating="{% if offer.rating %}{{ offer.rating }}{% else %}0{% endif %}">
+                                <a href="{{ path('offer_single', {'id': offer.id}) }}" class="offer-link">
+                                    <div class="offer-image-container">
+                                        <img src="../{{ offer.photosDirectory }}/1.jpg" alt="{{ offer.offerName }}"/>
+                                    </div>
+                                    <div class="offer-info-container">
+                                        <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
+                                        {% if offer.rating %}
+                                            <div class="offer-rating">
+                                                {% for i in 1..offer.rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% endfor %}
+                                                {% if offer.rating<5 %}
+                                                    {% for i in 1..(5-offer.rating) %}
+                                                    <i class="far fa-star"></i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        <div class="offer-name">{{ offer.offerName }}</div>
+                                        <div class="offer-info-list">
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-calendar-check"></i>
+                                                </div>
+                                                {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-clock"></i>
+                                                </div>
+                                                {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
+                                                {{ difference.days }} days
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-plane-departure"></i>
+                                                </div>
+                                                {{ offer.departureSpot }}
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    {% include 'offer/offer_type_icons.html.twig' with {'offerType': offer.offerType} %}
+                                                </div>
+                                                {{ offer.offerType }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="offer-price-container justify-content-end">
+                                        <p>&dollar;{{ offer.offerPrice|number_format(0, '.', ',') }}<span>/person</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="filtersFormModal" tabindex="-1" role="dialog" aria-labelledby="filtersFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: red">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% set filters_mobile=filtersForm.createView %}
+                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_mobile}%}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('javascript/offerSort.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({
+                weekStart: 1,
+                startDate: '-0d',
+                daysOfWeekHighlighted: "6,0",
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+                orientation: "bottom left",
+            });
+            let departureDateInput = $('#booking_offer_filters_departureDate');
+            let comebackDateInput = $('#booking_offer_filters_comebackDate');
+            departureDateInput.datepicker().on('changeDate', function(e) {
+                let minDate = new Date(e.date.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+            })
+            comebackDateInput.datepicker().on('changeDate', function(e) {
+                let maxDate = new Date(e.date.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate)
+            })
+            if(departureDateInput.val() !== '' && comebackDateInput.val() !== '') {
+                let minDate = new Date(departureDateInput.data('datepicker').viewDate.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+                let maxDate = new Date(comebackDateInput.data('datepicker').viewDate.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate);
+            }
+            else if(departureDateInput.val() !== '' && comebackDateInput.val() === '') {
+                let minDate = new Date(departureDateInput.data('datepicker').viewDate.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+            }
+            else {
+                let maxDate = new Date(comebackDateInput.data('datepicker').viewDate.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate);
+            }
+            $('#sorting-select').on('change', function () {
+                let prop = $('#sorting-select option:selected').val();
+                sortOffersByProperty(prop);
+            });
+            sortOffersByProperty($('#sorting-select option:selected').val());
+        });
+    </script>
+{% endblock %}
+
+

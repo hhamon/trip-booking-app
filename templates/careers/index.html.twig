@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}Careers - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/careers.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid h-100" id="career-hero">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mt-4" id="title">Join Our Team</h1>
+                <h2 class="text-center mt-4" id="subtitle">We are looking for enthusiastic, responsible and friendly
+                    candidates to provide fast and reliable service to our valued customers.</h2>
+                <h3 class="text-center mt-4" id="apply-header">Apply Today via: <a href="mailto:careers@dreamholiday.com?subject=Career application">careers@dreamholiday.com</a></h3>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h3 class="text-center" id="positions-title">Open Positions</h3>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            {% for career in careers %}
+                <div class="card career-card">
+                    <div class="card-body">
+                        <h5 class="card-title" title="{{ career.jobTitle }}">{{ career.jobTitle }}</h5>
+                        <p class="career-desc-item"><i class="fas fa-calendar-day"></i>
+                            <span>Recruitment starts:</span> {{ career.recruitmentStartDate|date('d.m.Y') }}
+                        </p>
+                        <p class="career-desc-item"><i class="fas fa-calendar-day"></i>
+                            <span>Recruitment ends:</span> {{ career.recruitmentEndDate|date('d.m.Y') }}
+                        </p>
+                        <p class="card-text career-desc-item"><i class="fas fa-briefcase"></i>
+                            <span>Responsibilities:</span> {{ career.description }}
+                        </p>
+                        <p class="card-text career-desc-item"><i class="fas fa-check"></i>
+                            <span>Requirements:</span> {{ career.requirements }}
+                        </p>
+                        <p class="career-salary">Salary: <span>&dollar;{{ career.salary }}</span></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

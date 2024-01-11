@@ -1,0 +1,10 @@
+#destinations-row {
+    margin-top: 2rem;
+}
+.f-offer-card .card-body {
+    padding: .5rem 2rem;
+}
+.f-offer-card .card-body h5 {
+    text-align: center;
+    font-size: 1.2rem;
+}

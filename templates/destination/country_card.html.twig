@@ -1,0 +1,9 @@
+<a href="{{ path('offer_browse', {'destinationName': destination.destinationName}) }}" class="f-offer-card-link d-inline-flex">
+    <div class="card f-offer-card d-flex">
+        <img class="card-img-top" src="{{ asset(destination.image) }}"
+             alt="{{ destination.destinationName }}">
+        <div class="card-body">
+            <h5 class="card-title" title="{{ destination.destinationName }}">{{ destination.destinationName }}</h5>
+        </div>
+    </div>
+</a>

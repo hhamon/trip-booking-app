@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ offer.offerName }} - Dream Holiday
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/single_offer.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-2">
+            <div class="col-11 col-xl-10" id="main-content-container">
+                <div id="offer-header">
+                    <h1>{{ offer.offerName }} </h1>
+                    <div class="stars-container ml-2">
+                        <sup>
+                        {% if offer.rating %}
+                            {% for i in 1..offer.rating %}
+                                <span class="fas fa-star"></span>
+                            {% endfor %}
+                            {% if offer.rating<5 %}
+                                {% for i in 1..(5-offer.rating) %}
+                                    <span class="far fa-star"></span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        </sup>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="gallery-container col-lg-8 px-0 position-relative">
+                        <div class="gallery-hero">
+                            <img src="{{ asset(offer.photosDirectory) }}/1.jpg"
+                                 alt="{{ offer.offerName }}">
+                            <button class="d-lg-none mobile-reservation-btn"
+                                    data-toggle="modal"
+                                    data-target="#reservationFormModal">
+                                Book now!
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-none d-lg-block" id="reservation-column">
+                        <div class="reservation-form-container">
+                            <h2>Book now</h2>
+                            <div id="reservation-form">
+                                {% set form_desktop = reservationForm.createView %}
+                                {% include 'offer/start_reservation_form.html.twig' with {'form': form_desktop, 'offer': offer}%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="secondary-gallery-container">
+                    <div class="gallery-secondary col-12">
+                        {% for i in 0..photosCount - 2 %}
+                            <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg"
+                                 alt="gallery image {{ i+2 }}"
+                                 class="mb-2" onclick="$('#secondaryImageModal{{ i+2 }}').modal('show')">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row" id="description-container">
+                    <div class="col-12 px-lg-0">
+                        <h3>Offer Description</h3>
+                        <p>{{ offer.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reservationFormModal" tabindex="-1" role="dialog" aria-labelledby="reservationFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reservationFormModalLabel">Book now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: red">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% set form_mobile=reservationForm.createView %}
+                    {% include 'offer/start_reservation_form.html.twig' with {'form': form_mobile}%}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for i in 0..photosCount - 2 %}
+        <div class="modal fade secondary-img-modal" id="secondaryImageModal{{ i+2 }}" tabindex="-1" role="dialog" aria-labelledby="secondaryImageModal{{ i+2 }}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: red">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg" alt="gallery image {{ i+2 }}" class="w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('javascript/calculateOfferPrice.js') }}" type="text/javascript"></script>
+    <script>
+        $(function () {
+           $('#reservation_start_adultNumber').on('change', function () {
+               let adultInput = $('#reservation_start_adultNumber');
+               let childInput = $('#reservation_start_childNumber');
+               let adultPrice = adultInput.data("adultPrice");
+               let adultCount = adultInput.val();
+               let childPrice = childInput.data("childPrice");
+               let childCount = childInput.val();
+               let calculatedPrice = calculatePrice(adultCount, adultPrice, childCount, childPrice);
+               let pricePerPerson = parseInt(calculatedPrice/(parseInt(adultCount)+parseInt(childCount)));
+               $('#total-value').text(`\$${pricePerPerson}`);
+           });
+            $('#reservation_start_childNumber').on('change', function () {
+                let adultInput = $('#reservation_start_adultNumber');
+                let childInput = $('#reservation_start_childNumber');
+                let adultPrice = adultInput.data("adultPrice");
+                let adultCount = adultInput.val();
+                let childPrice = childInput.data("childPrice");
+                let childCount = childInput.val();
+                let calculatedPrice = calculatePrice(adultCount, adultPrice, childCount, childPrice);
+                let pricePerPerson = parseInt(calculatedPrice/(parseInt(adultCount)+parseInt(childCount)));
+                $('#total-value').text(`\$${pricePerPerson}`);
+            });
+        });
+    </script>
+{% endblock %}

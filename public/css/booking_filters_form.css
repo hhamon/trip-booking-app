@@ -1,0 +1,102 @@
+#filters-column {
+    background-color: white;
+    padding-top: 2rem;
+    color: rgb(0,58,110);
+    max-width: 250px;
+    font-family: "Montserrat", sans-serif;
+}
+#filters-header-container {
+    display:-moz-box; /* Firefox */
+    display:-webkit-box; /* Safari and Chrome */
+    display:box;
+    -webkit-box-align:end;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+#filters-header-container * {
+    -moz-box-flex:1.0; /* Firefox */
+    -webkit-box-flex:1.0; /* Safari and Chrome */
+    box-flex:1.0;
+}
+#filters-header-container h3 {
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+#filters-header-container button {
+    display: inline-block;
+    font-size: .8rem;
+    background-color: transparent;
+    padding: 0 0;
+    margin-left: .2rem;
+    border: none;
+    color: #a09f9f;
+}
+#filters-header-container button:hover {
+    text-decoration: underline;
+}
+.filter-form-section {
+    padding: 1rem 0;
+}
+.filter-form-section h4 {
+    padding: .5rem 0;
+    font-size: .8rem;
+    font-weight: 600;
+}
+#booking_offer_filters_priceMin, #booking_offer_filters_priceMax{
+    width: 45%;
+    margin-right: 5%;
+    float: left;
+    font-size: .8rem;
+}
+.form-check label {
+    font-size: .8rem;
+}
+#booking_offer_filters_departureDate, #booking_offer_filters_comebackDate {
+    width: 45%;
+    margin-right: 5%;
+    float: left;
+    font-size: .8rem;
+}
+form[name="booking_offer_filters"] select {
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: "Montserrat", sans-serif;
+    background: transparent url("data:image/svg+xml;utf8,<svg fill='rgb(0,58,110)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat center right;
+    color: #1d2124;
+    font-size: .8rem;
+}
+form[name="booking_offer_filters"] select:hover {
+    cursor: pointer;
+}
+#filters-submit-container {
+    text-align: center;
+}
+#filters-submit-container button {
+    background-color: #ffffff;
+    color: rgb(0,58,110);
+    border: 2px solid rgb(0,58,110);
+    border-radius: 22px;
+    padding: .5rem 2rem;
+    transition: .2s ease-out;
+    font-size: .8rem;
+    font-weight: 600;
+}
+#filters-submit-container button:hover {
+    background-color: rgb(0,58,110);
+    color: #ffffff;
+}
+
+#filters-btn-mobile {
+    background-color: rgb(0,58,110);
+    color: #ffffff;
+    border: 2px solid rgb(0,58,110);
+    border-radius: 22px;
+    padding: .5rem 2rem;
+    transition: .2s ease-out;
+    font-size: .8rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+}

@@ -1,0 +1,12 @@
+{{ form_start(newsletterForm) }}
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text py-0 envelope-container"><i class="fas fa-envelope"></i></div>
+        </div>
+        {{ form_label(newsletterForm.email) }}
+        {{ form_widget(newsletterForm.email) }}
+        <div class="input-group-append">
+            <div class="input-group-text py-0 newsletter-submit-container">{{ form_widget(newsletterForm.submit, {'attr': {'class': 'newsletter-submit-btn'}}) }}</div>
+        </div>
+    </div>
+{{ form_end(newsletterForm) }}
