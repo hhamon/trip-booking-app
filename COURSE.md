@@ -85,3 +85,32 @@ Structure
       Non-Public Constants                           1 (2.63%)
 
 ```
+
+## Detecting Code Duplication
+
+`phpcpd` is a Copy/Paste Detector (CPD) for PHP code.
+
+```bash
+$ cd bin/
+$ wget https://phar.phpunit.de/phpcpd.phar
+$ chmod +x phpcpd.phar
+```
+
+```bash
+$ symfony php bin/phpcpd.phar src
+
+phpcpd 6.0.3 by Sebastian Bergmann.
+
+Found 2 clones with 68 duplicated lines in 4 files:
+
+  - /Users/hhamon/Code/legacy-trip-booking/src/Form/BookingOfferFiltersType.php:110-146 (36 lines)
+    /Users/hhamon/Code/legacy-trip-booking/src/Form/BookingOfferSearchType.php:69-105
+
+  - /Users/hhamon/Code/legacy-trip-booking/src/Form/RegistrationType.php:16-48 (32 lines)
+    /Users/hhamon/Code/legacy-trip-booking/src/Form/SettingsType.php:17-49
+
+1.77% duplicated lines out of 3843 total lines of code.
+Average size of duplication is 34 lines, largest clone has 36 of lines
+
+Time: 00:00.010, Memory: 4.00 MB
+```
