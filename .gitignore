@@ -1,3 +1,4 @@
+/bin/phploc.phar
 
 ###> symfony/framework-bundle ###
 /.env.local
