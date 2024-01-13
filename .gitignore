@@ -1,6 +1,7 @@
 /bin/pdepend.phar
 /bin/phpcpd.phar
 /bin/phploc.phar
+/bin/phpmd.phar
 
 ###> symfony/framework-bundle ###
 /.env.local

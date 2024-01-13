@@ -184,3 +184,41 @@ Time: 0:00:00; Memory: 18.39Mb
 ```
 
 * http://igm.univ-mlv.fr/~dr/XPOSE2005/JDepend/presentation.php
+
+## Surfacing Potential Bugs & Suboptimal Code
+
+`phpmd` (PHP Mess Detector) is a spin-off project of `PHP_Depend` and aims to be a PHP equivalent of the well known Java
+tool `PMD`. PHPMD can be seen as a user-friendly and easy to configure frontend for the raw metrics measured by
+PHP Depend.
+
+What PHPMD does is: It takes a given PHP source code base and look for several potential problems within that source.
+These problems can be things like:
+
+- Possible bugs
+- Suboptimal code
+- Overcomplicated expressions
+- Unused parameters, methods, properties
+
+PHPMD is a mature project and provides a diverse set of predefined rules (though may be not as many its Java brother PMD)
+to detect code smells and possible errors within the analyzed source code.
+
+```bash
+$ cd bin/
+$ wget -c https://phpmd.org/static/latest/phpmd.phar
+$ chmod +x phpmd.phar
+```
+
+```bash
+$ symfony php bin/phpmd.phar src/ text cleancode,codesize,controversial,design,naming,unusedcode
+
+/Users/hhamon/Code/legacy-trip-booking/bin/phpmd.phar/vendor/symfony/config/Resource/FileResource.php on line 21
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/CareerController.php:17                 ShortVariable           Avoid variables with short names like $em. Configured minimum length is 3.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/HomeController.php:27                   UndefinedVariable       Avoid using undefined variables such as '$departureSpots' which will lead to PHP notices.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/HomeController.php:35                   UndefinedVariable       Avoid using undefined variables such as '$departureSpots' which will lead to PHP notices.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:20             CamelCaseVariableName   The variable $news_object is not named in camelCase.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:21             CamelCaseVariableName   The variable $news_form is not named in camelCase.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:44             ShortVariable           Avoid variables with short names like $em. Configured minimum length is 3.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:45             LongVariable            Avoid excessively long variable names like $newsletterSubscription. Keep variable name length under 20.
+/Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:50             ElseExpression          The method signUp uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+...
+```
