@@ -114,3 +114,73 @@ Average size of duplication is 34 lines, largest clone has 36 of lines
 
 Time: 00:00.010, Memory: 4.00 MB
 ```
+
+## Gathering Metrics Dependencies
+
+`PHP_Depend` is a small program that performs static code analysis on a given source base. It first takes the source
+code and parses it into an easily processable internal data structure. Then it measures several values, the so-called
+software metrics. Each of these values stands for a quality aspect in the analyzed software.
+
+```bash
+$ cd bin/
+$ wget https://pdepend.org/static/latest/pdepend.phar
+$ chmod +x pdepend.phar
+```
+
+```bash
+$ symfony php bin/pdepend.phar \
+    --summary-xml=var/tmp/summary.xml \
+    --jdepend-chart=var/tmp/jdepend.svg \ 
+    --overview-pyramid=var/tmp/pyramid.svg \ 
+    src
+
+PDepend 2.16.1snapshot202312101839
+
+Parsing source files:
+....................................................            52
+
+Calculating Cyclomatic Complexity metrics:
+....................                                           404
+
+Calculating Node Loc metrics:
+................                                               338
+
+Calculating NPath Complexity metrics:
+....................                                           404
+
+Calculating Inheritance metrics:
+...                                                             63
+
+Calculating Node Count metrics:
+..............                                                 286
+
+Calculating Hierarchy metrics:
+.................                                              352
+
+Calculating Code Rank metrics:
+...                                                             63
+
+Calculating Coupling metrics:
+....................                                           404
+
+Calculating Class Level metrics:
+.................                                              352
+
+Calculating Cohesion metrics:
+................................                               641
+
+Calculating Halstead metrics:
+....................                                           404
+
+Calculating Maintainability Index metrics:
+....................                                           404
+
+Calculating Dependency metrics:
+..............                                                 286
+
+Generating pdepend log files, this may take a moment.
+
+Time: 0:00:00; Memory: 18.39Mb
+```
+
+* http://igm.univ-mlv.fr/~dr/XPOSE2005/JDepend/presentation.php
