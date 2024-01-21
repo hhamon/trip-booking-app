@@ -519,3 +519,46 @@ $ (symfony) composer require symfony/polyfill-php72 \
   symfony/polyfill-php82 \
   symfony/polyfill-php83
 ```
+
+## Upgrading Code
+
+`Rector` is a PHP tool that you can run on any PHP project to get an instant upgrade or automated refactoring. It helps
+with PHP upgrades, framework upgrades and improves your code quality. Also, it helps with type-coverage and getting to
+the latest PHPStan level.
+
+```bash
+$ (symfony) composer require --dev rector/rector
+```
+
+Configure Rector.
+
+```php
+<?php
+
+// rector.php
+
+declare(strict_types=1);
+
+use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
+use Rector\Config\RectorConfig;
+use Rector\Set\ValueObject\LevelSetList;
+
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths([
+        __DIR__ . '/config',
+        __DIR__ . '/public',
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ]);
+
+    $rectorConfig->sets([
+        LevelSetList::UP_TO_PHP_83,
+    ]);
+};
+```
+
+Run Rector.
+
+```bash
+$ (symfony) composer require --dev rector/rector
+```
