@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DestinationRepository")
  */
-class Destination
+class Destination implements \Stringable
 {
     /**
      * @ORM\Id
@@ -85,9 +85,10 @@ class Destination
         return $this;
     }
 
-    public function __toString()
+    #[\Override]
+    public function __toString(): string
     {
-        return $this->destinationName;
+        return (string) $this->destinationName;
     }
 
     /**
@@ -99,9 +100,7 @@ class Destination
     {
         $doctrineDestinationCollection = new ArrayCollection($destinations);
         $iterator = $doctrineDestinationCollection->getIterator();
-        $iterator->uasort(function ($d1, $d2) {
-            return (strtolower($d1->getDestinationName()) < strtolower($d2->getDestinationName())) ? -1 : 1;
-        });
+        $iterator->uasort(fn ($d1, $d2) => (strtolower((string) $d1->getDestinationName()) < strtolower((string) $d2->getDestinationName())) ? -1 : 1);
 
         return iterator_to_array($iterator);
     }

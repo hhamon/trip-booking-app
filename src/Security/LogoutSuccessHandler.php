@@ -9,13 +9,11 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
-    private $router;
-
-    public function __construct(RouterInterface $router)
+    public function __construct(private readonly RouterInterface $router)
     {
-        $this->router = $router;
     }
 
+    #[\Override]
     public function onLogoutSuccess(Request $request)
     {
         return new RedirectResponse($this->router->generate('home'));

@@ -9,17 +9,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixture extends Fixture
 {
-    public const USER1_REFERENCE = 'user1';
-    public const USER2_REFERENCE = 'user2';
-    public const ADMIN_REFERENCE = 'admin';
+    final public const USER1_REFERENCE = 'user1';
+    final public const USER2_REFERENCE = 'user2';
+    final public const ADMIN_REFERENCE = 'admin';
 
-    private $passwordEncoder;
-
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(private readonly UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->passwordEncoder = $passwordEncoder;
     }
 
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $user1 = $this->createUser('Jan', 'Kowalski', 'jan_kowalski@dreamholiday.com');

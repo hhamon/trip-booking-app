@@ -8,13 +8,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class BookingOfferTypeFixtures extends Fixture
 {
-    public const FIRST_MINUTE_REFERENCE = 'first_minute';
-    public const LAST_MINUTE_REFERENCE = 'last_minute';
-    public const ALL_INCLUSIVE_REFERENCE = 'all_inclusive';
-    public const FOR_CHILDREN_REFERENCE = 'for_children';
-    public const GROUP_TOURS_REFERENCE = 'group_tours';
-    public const CRUISES_REFERENCE = 'cruises';
+    final public const FIRST_MINUTE_REFERENCE = 'first_minute';
+    final public const LAST_MINUTE_REFERENCE = 'last_minute';
+    final public const ALL_INCLUSIVE_REFERENCE = 'all_inclusive';
+    final public const FOR_CHILDREN_REFERENCE = 'for_children';
+    final public const GROUP_TOURS_REFERENCE = 'group_tours';
+    final public const CRUISES_REFERENCE = 'cruises';
 
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $offerType = new BookingOfferType();

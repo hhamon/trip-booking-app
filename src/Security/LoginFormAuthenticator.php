@@ -17,22 +17,18 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
-    private $userRepository;
-    private $router;
-    private $passwordEncoder;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(private readonly UserRepository $userRepository, private readonly RouterInterface $router, private readonly UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->userRepository = $userRepository;
-        $this->router = $router;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
+    #[\Override]
     public function supports(Request $request)
     {
         return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
+    #[\Override]
     public function getCredentials(Request $request)
     {
         // this is called immediately when supports returns true
@@ -53,16 +49,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
+    #[\Override]
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         return $this->userRepository->findOneBy(['email' => $credentials['email']]);
     }
 
+    #[\Override]
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
+    #[\Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
@@ -72,6 +71,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->router->generate('home'));
     }
 
+    #[\Override]
     protected function getLoginUrl()
     {
         return $this->router->generate('app_login');

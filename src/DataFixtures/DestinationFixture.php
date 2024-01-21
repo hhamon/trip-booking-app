@@ -9,17 +9,18 @@ use Doctrine\Persistence\ObjectManager;
 
 class DestinationFixture extends Fixture implements DependentFixtureInterface
 {
-    public const SPAIN_REFERENCE = 'spain';
-    public const TURKEY_REFERENCE = 'turkey';
-    public const INDIA_REFERENCE = 'india';
-    public const JAPAN_REFERENCE = 'japan';
-    public const AUSTRALIA_REFERENCE = 'australia';
-    public const NEW_ZEALAND_REFERENCE = 'new_zealand';
-    public const ITALY_REFERENCE = 'italy';
-    public const THAILAND_REFERENCE = 'thailand';
-    public const CHINA_REFERENCE = 'china';
-    public const ARGENTINA_REFERENCE = 'argentina';
+    final public const SPAIN_REFERENCE = 'spain';
+    final public const TURKEY_REFERENCE = 'turkey';
+    final public const INDIA_REFERENCE = 'india';
+    final public const JAPAN_REFERENCE = 'japan';
+    final public const AUSTRALIA_REFERENCE = 'australia';
+    final public const NEW_ZEALAND_REFERENCE = 'new_zealand';
+    final public const ITALY_REFERENCE = 'italy';
+    final public const THAILAND_REFERENCE = 'thailand';
+    final public const CHINA_REFERENCE = 'china';
+    final public const ARGENTINA_REFERENCE = 'argentina';
 
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $destination = $this->createDestination('Spain',
@@ -85,6 +86,7 @@ class DestinationFixture extends Fixture implements DependentFixtureInterface
         return $destination;
     }
 
+    #[\Override]
     public function getDependencies()
     {
         return [ContinentFixture::class];

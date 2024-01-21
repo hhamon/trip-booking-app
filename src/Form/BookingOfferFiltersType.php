@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingOfferFiltersType extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -94,9 +95,7 @@ class BookingOfferFiltersType extends AbstractType
             ->add('offerTypes', EntityType::class, [
                 'class' => BookingOfferType::class,
                 'choices' => $options['offer_types'],
-                'choice_attr' => function () {
-                    return ['class' => 'form-check-input'];
-                },
+                'choice_attr' => fn () => ['class' => 'form-check-input'],
                 'label_attr' => [
                     'class' => 'form-check-label',
                 ],
@@ -147,6 +146,7 @@ class BookingOfferFiltersType extends AbstractType
         ));
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

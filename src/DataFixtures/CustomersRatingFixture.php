@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class CustomersRatingFixture extends Fixture implements DependentFixtureInterface
 {
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $rating = $this->createRating(
@@ -53,6 +54,7 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
         return $customersRating;
     }
 
+    #[\Override]
     public function getDependencies()
     {
         return [UserFixture::class, BookingOfferFixture::class];

@@ -8,14 +8,15 @@ use Doctrine\Persistence\ObjectManager;
 
 class ContinentFixture extends Fixture
 {
-    public const AFRICA_REFERENCE = 'africa';
-    public const ANTARCTICA_REFERENCE = 'antarctica';
-    public const ASIA_REFERENCE = 'asia';
-    public const OCEANIA_REFERENCE = 'oceania';
-    public const EUROPE_REFERENCE = 'europe';
-    public const NORTH_AMERICA_REFERENCE = 'north america';
-    public const SOUTH_AMERICA_REFERENCE = 'south america';
+    final public const AFRICA_REFERENCE = 'africa';
+    final public const ANTARCTICA_REFERENCE = 'antarctica';
+    final public const ASIA_REFERENCE = 'asia';
+    final public const OCEANIA_REFERENCE = 'oceania';
+    final public const EUROPE_REFERENCE = 'europe';
+    final public const NORTH_AMERICA_REFERENCE = 'north america';
+    final public const SOUTH_AMERICA_REFERENCE = 'south america';
 
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $continent = $this->createContinent('Africa');

@@ -562,3 +562,17 @@ Run Rector.
 ```bash
 $ (symfony) composer require --dev rector/rector
 ```
+
+### Upgrade Code to PHP 8.3
+
+```php
+// ...
+
+return static function (RectorConfig $rectorConfig): void {
+    // ...
+
+    $rectorConfig->sets([
+        LevelSetList::UP_TO_PHP_83,
+    ]);
+};
+```

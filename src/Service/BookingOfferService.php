@@ -4,16 +4,13 @@ namespace App\Service;
 
 use App\Repository\BookingOfferRepository;
 
-final class BookingOfferService
+final readonly class BookingOfferService
 {
-    private $itemRepository;
-
     /**
      * ItemService constructor.
      */
-    public function __construct(BookingOfferRepository $bookingOfferRepository)
+    public function __construct(private BookingOfferRepository $itemRepository)
     {
-        $this->itemRepository = $bookingOfferRepository;
     }
 
     public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)

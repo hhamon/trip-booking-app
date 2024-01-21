@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingOfferTypeRepository")
  */
-class BookingOfferType
+class BookingOfferType implements \Stringable
 {
     /**
      * @ORM\Id
@@ -83,8 +83,9 @@ class BookingOfferType
         return $this;
     }
 
-    public function __toString()
+    #[\Override]
+    public function __toString(): string
     {
-        return $this->typeName;
+        return (string) $this->typeName;
     }
 }

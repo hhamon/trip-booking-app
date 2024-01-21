@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class NewsletterFixture extends Fixture
 {
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createNewsletter('john_cena@holidaydream.com'));

@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class ReservationFixture extends Fixture implements DependentFixtureInterface
 {
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $reservation = $this->createReservation(
@@ -94,6 +95,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         return $reservation;
     }
 
+    #[\Override]
     public function getDependencies()
     {
         return [UserFixture::class, BookingOfferFixture::class];

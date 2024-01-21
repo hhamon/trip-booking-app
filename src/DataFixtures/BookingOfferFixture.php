@@ -9,18 +9,19 @@ use Doctrine\Persistence\ObjectManager;
 
 class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 {
-    public const SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
-    public const FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
-    public const MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
-    public const MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
-    public const AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
-    public const SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
-    public const MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
-    public const MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
-    public const BUDDHA_REFERENCE = 'H- Buddha\'s way';
-    public const BEIJING_REFERENCE = 'H- Bei-JING';
-    public const PATAGONIA_REFERENCE = 'H- Patagonia';
+    final public const SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
+    final public const FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
+    final public const MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
+    final public const MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
+    final public const AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
+    final public const SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
+    final public const MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
+    final public const MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
+    final public const BUDDHA_REFERENCE = 'H- Buddha\'s way';
+    final public const BEIJING_REFERENCE = 'H- Bei-JING';
+    final public const PATAGONIA_REFERENCE = 'H- Patagonia';
 
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         $bookingOffer = $this->createBookingOffer(
@@ -284,6 +285,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         return $bookingOffer;
     }
 
+    #[\Override]
     public function getDependencies()
     {
         return [DestinationFixture::class, BookingOfferTypeFixtures::class];

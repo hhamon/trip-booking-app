@@ -9,11 +9,13 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20221215103942 extends AbstractMigration
 {
+    #[\Override]
     public function getDescription(): string
     {
         return 'Setup initial database schema';
     }
 
+    #[\Override]
     public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE app_user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, registration_date DATE NOT NULL, UNIQUE INDEX UNIQ_88BDF3E9E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -33,6 +35,7 @@ final class Version20221215103942 extends AbstractMigration
         $this->addSql('ALTER TABLE reservation ADD CONSTRAINT FK_42C8495568F2EA63 FOREIGN KEY (booking_offer_id) REFERENCES booking_offer (id)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE customers_rating DROP FOREIGN KEY FK_93BE1206A76ED395');

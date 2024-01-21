@@ -87,6 +87,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
+    #[\Override]
     public function getUsername(): string
     {
         return (string) $this->email;
@@ -95,6 +96,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -114,6 +116,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[\Override]
     public function getPassword(): string
     {
         return (string) $this->password;
@@ -129,6 +132,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[\Override]
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
@@ -137,6 +141,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[\Override]
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
