@@ -390,3 +390,24 @@ Note: Using configuration file /Users/hhamon/Code/legacy-trip-booking/phpstan.di
 
 ...
 ```
+
+## Adding PHP Forward Compatibility with Polyfills
+
+The Symfony Polyfill project backports features found in the latest PHP versions and provides compatibility layers for
+some extensions and functions. It is intended to be used when portability across PHP versions and extensions is desired.
+It is strongly recommended to upgrade your PHP version and/or install the missing extensions whenever possible. Polyfill
+should be used only when there is no better choice or when portability is a requirement.
+
+See https://github.com/symfony/polyfill
+
+Installing Polyfills for PHP version up to PHP 8.3.
+
+```bash
+$ (symfony) composer require symfony/polyfill-php72 \
+  symfony/polyfill-php73 \
+  symfony/polyfill-php74 \
+  symfony/polyfill-php80 \
+  symfony/polyfill-php81 \
+  symfony/polyfill-php82 \
+  symfony/polyfill-php83
+```
