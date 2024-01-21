@@ -5,6 +5,7 @@ namespace App\Controller\UsersData;
 use App\Repository\CustomersRatingRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +20,7 @@ class ReservationController extends AbstractController
     /**
      * @Route("/reservations", name="reservations")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $user = $this->getUser();
         $reservations = $this->reservationRepository->findReservationsByUser($user);
@@ -39,7 +40,9 @@ class ReservationController extends AbstractController
                 $session_array[$reservation->getId()] = false;
             }
         }
-        $_SESSION['display_rate_offer'] = $session_array;
+
+        $session = $request->getSession();
+        $session->set('display_rate_offer', $session_array);
 
         return $this->render('reservations/index.html.twig', [
             'controller_name' => 'ReservationController',

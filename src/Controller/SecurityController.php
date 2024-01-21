@@ -109,7 +109,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $authFields = $request->request->get('auth');
             if ($formAuthenticator->checkCredentials($authFields, $user)) {
-                $_SESSION['display_settings'] = true;
+                $request->getSession()->set('display_settings', true);
 
                 return $this->redirectToRoute('settings');
             } else {

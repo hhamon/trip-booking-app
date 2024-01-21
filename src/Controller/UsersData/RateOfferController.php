@@ -26,8 +26,15 @@ class RateOfferController extends AbstractController
      */
     public function displayRateOfferForm(Request $request, int $reservationId)
     {
-        if ((isset($_SESSION['display_rate_offer'][$reservationId]) && true === $_SESSION['display_rate_offer'][$reservationId]) || !empty($request->request->all())) {
-            $_SESSION['display_rate_offer'][$reservationId] = false;
+        $session = $request->getSession();
+
+        /** @var array<int, bool> $displayRateOffers */
+        $displayRateOffers = $session->get('display_rate_offer', []);
+        $displayRateOffer = $displayRateOffers[$reservationId] ?? false;
+
+        if ($displayRateOffer || \count($request->request->all()) > 0) {
+            $session->set('display_rate_offer', \array_merge($displayRateOffers, [$reservationId => false]));
+
             $reservation = $this->reservationRepository->find($reservationId);
             $offer = $reservation->getBookingOffer();
             $packageId = $offer->getPackageId();

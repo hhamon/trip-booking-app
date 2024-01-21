@@ -19,13 +19,16 @@ class SettingController extends AbstractController
 
     /**
      * @Route("/settings", name="settings")
-     *
-     * @return Response
      */
-    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        if ((isset($_SESSION['display_settings']) && true === $_SESSION['display_settings']) || !empty($request->request->all())) {
-            unset($_SESSION['display_settings']);
+        $session = $request->getSession();
+
+        $displaySettings = $session->get('display_settings', false);
+        \assert(\is_bool($displaySettings));
+
+        if ($displaySettings || \count($request->request->all()) > 0) {
+            $session->remove('display_settings');
             $user = $this->getUser();
             $settingsForm = $this->createForm(SettingsType::class);
             $settingsForm->createView();

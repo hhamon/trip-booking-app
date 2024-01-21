@@ -847,3 +847,4 @@ twig:
 * Use Symfony `Mailer` component instead of `Swift_Mailer`
 * Remove `sensio/framework-extra-bundle` dependency
 * Remove `symfony/swiftmailer-bundle` dependency
+* Fix session usage
