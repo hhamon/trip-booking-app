@@ -603,3 +603,18 @@ return static function (RectorConfig $rectorConfig): void {
 };
 ```
 
+### Update PHP Version Minimum Requirements
+
+```json
+{
+    "require": {
+        "php": ">=8.3"
+    }
+}
+```
+
+Update Composer.
+
+```bash
+$ (symfony) composer up
+```
