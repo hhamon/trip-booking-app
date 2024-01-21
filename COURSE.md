@@ -225,8 +225,6 @@ $ symfony php bin/phpmd.phar src/ text cleancode,codesize,controversial,design,n
 
 ## Fixing Code Discrepancies
 
-### Fixing Code Styles
-
 `ECS` (`Easy Coding Standards`) is a standalone tool for fixing your PHP code coding standards violations.
 It does both detecting coding styles discrepancies and fixing them.
 
@@ -273,4 +271,87 @@ $ # Dry-run
 $ (symfony) php vendor/bin/ecs
 $ # Fix run
 $ (symfony) symfony php vendor/bin/ecs --fix 
+```
+
+## Analyzing Code Statically
+
+`PHPStan` focuses on finding errors in your code without actually running it. It catches whole classes of bugs even
+before you write tests for the code. It moves PHP closer to compiled languages in the sense that the correctness of
+each line of the code can be checked before you run the actual line.
+
+```bash
+$ symfony composer require phpstan/phpstan --dev
+```
+
+Configure PHPStan behavior.
+
+```neon
+# phpstan.neon.dist
+parameters:
+    level: max
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+
+```
+
+Run ECS to fix PHP code.
+
+```bash
+$ (symfony) php vendor/bin/phpstan
+
+ 56/56 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ -------------------------------------------------------------------------------
+  Line   src/Controller/CareerController.php
+ ------ -------------------------------------------------------------------------------
+  14     Method App\Controller\CareerController::index() has no return type specified.
+ ------ -------------------------------------------------------------------------------
+
+ ------ ----------------------------------------------------------------------------------------------------------
+  Line   src/Controller/HomeController.php
+ ------ ----------------------------------------------------------------------------------------------------------
+  34     Variable $departureSpots might not be defined.
+  48     Call to an undefined method Doctrine\Persistence\ObjectRepository<App\Entity\BookingOffer>::findOffer().
+ ------ ----------------------------------------------------------------------------------------------------------
+
+...
+```
+
+Generating a PHPStan baseline file.
+
+```bash
+$ (symfony) php vendor/bin/phpstan --generate-baseline
+```
+
+```neon
+includes:
+    - phpstan-baseline.neon
+parameters:
+    level: max
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+
+```
+
+```neon
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method App\\\\Controller\\\\CareerController\\:\\:index\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/CareerController.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/HomeController.php
+...
 ```

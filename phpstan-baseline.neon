@@ -1,0 +1,1346 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method App\\\\Controller\\\\CareerController\\:\\:index\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/CareerController.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: "#^Variable \\$departureSpots might not be defined\\.$#"
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: "#^Cannot access offset 'email' on mixed\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\NewsletterController\\:\\:renderForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Parameter \\#1 \\$email of method App\\\\Entity\\\\Newsletter\\:\\:setEmail\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of method Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController\\:\\:redirect\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\DestinationController\\:\\:index\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/DestinationController.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'comebackDate' on mixed\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'departureDate' on mixed\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'departureSpot' on mixed\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'destination' on mixed\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnFormSubmission\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnFormSubmission\\(\\) has parameter \\$filtersForm with no value type specified in iterable type Symfony\\\\Component\\\\Form\\\\FormInterface\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnOfferType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnRequestQuery\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getReservationTotalCost\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getReservationTotalCost\\(\\) has parameter \\$reservation with no type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getWellFormattedDate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$date of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getWellFormattedDate\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Entity\\\\BookingOffer\\:\\:setDepartureSpot\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\Reservation\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, object\\|null given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#2 \\$destinationName of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#2 \\$offerTypeName of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnOfferType\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Variable \\$departureSpots might not be defined\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'first' on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot access offset 'password' on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method setPassword\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method setRegistrationDate\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:login\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:logout\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:persist\\(\\) expects object, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#2 \\$user of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:checkCredentials\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, object\\|null given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method getBookingOffer\\(\\) on App\\\\Entity\\\\Reservation\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/RateOfferController.php
+
+		-
+			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/RateOfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\CustomersRating\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, object\\|null given\\.$#"
+			count: 1
+			path: src/Controller/UsersData/RateOfferController.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\CustomersRating\\>\\:\\:findIfOfferIsRated\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/UsersData/ReservationController.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\Reservation\\>\\:\\:findReservationsByUser\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/UsersData/ReservationController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\UsersData\\\\ReservationController\\:\\:index\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/UsersData/ReservationController.php
+
+		-
+			message: "#^Cannot call method getEmail\\(\\) on object\\|null\\.$#"
+			count: 2
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method getFirstName\\(\\) on object\\|null\\.$#"
+			count: 2
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method getLastName\\(\\) on object\\|null\\.$#"
+			count: 2
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method setEmail\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method setFirstName\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method setLastName\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot call method setPassword\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:UpdateUserData\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:UpdateUserData\\(\\) has parameter \\$fields with no type specified\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, object\\|null given\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\AppFixtures\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/AppFixtures.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$bookingEndDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$bookingStartDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$childPrice with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$comebackSpot with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$departureDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$description with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$destination with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$isFeatured with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$offerName with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$offerPrice with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$offerType with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$packageId with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\BookingOfferTypeFixtures\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/BookingOfferTypeFixtures.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$description with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$endDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$jobTitle with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$requirements with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$salary with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has parameter \\$startDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CareerFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ContinentFixture\\:\\:createContinent\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ContinentFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ContinentFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ContinentFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRating\\(\\) has parameter \\$package_id with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRating\\(\\) has parameter \\$rating with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRating\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRatingWithComment\\(\\) has parameter \\$comment with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRatingWithComment\\(\\) has parameter \\$package_id with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRatingWithComment\\(\\) has parameter \\$rating with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:createRatingWithComment\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/CustomersRatingFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\DestinationFixture\\:\\:createDestination\\(\\) has parameter \\$continent with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/DestinationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\DestinationFixture\\:\\:createDestination\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/DestinationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\DestinationFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/DestinationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:createNewsletter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/NewsletterFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:createNewsletter\\(\\) has parameter \\$email with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/NewsletterFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/NewsletterFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$adultNumber with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$bankTransferDate with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$bookingOffer with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$childNumber with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$dateOfBooking with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createPaidReservation\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$adultNumber with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$bookingOffer with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$childNumber with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$dateOfBooking with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$paid with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/ReservationFixture.php
+
+		-
+			message: "#^Method App\\\\DataFixtures\\\\UserFixture\\:\\:load\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/UserFixture.php
+
+		-
+			message: "#^Property App\\\\DataFixtures\\\\UserFixture\\:\\:\\$passwordEncoder has no type specified\\.$#"
+			count: 1
+			path: src/DataFixtures/UserFixture.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOffer\\:\\:setRating\\(\\) has parameter \\$rating with no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$bookingEndDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$bookingStartDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$childPrice has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$comebackDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$comebackSpot has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$departureDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$departureSpot has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$description has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$destination has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$isFeatured has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$offerName has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$offerPrice has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$offerType has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$packageId has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$photosDirectory has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$rating has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOfferType\\:\\:getBookingOffers\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$bookingOffers has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$typeName has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$description has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$jobTitle has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$recruitmentEndDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$recruitmentStartDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$requirements has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$salary has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Career.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Continent\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Continent.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Continent\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Continent.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Continent\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Continent.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$comment has no type specified\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$package has no type specified\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$rating has no type specified\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$user has no type specified\\.$#"
+			count: 1
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Call to an undefined method Traversable\\<\\(int\\|string\\), mixed\\>\\:\\:uasort\\(\\)\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Destination\\:\\:sortDestinationsByName\\(\\) has parameter \\$destinations with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Destination\\:\\:sortDestinationsByName\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$continent has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$destinationName has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$image has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Newsletter\\:\\:\\$email has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Newsletter.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Newsletter\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Newsletter.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Newsletter\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Newsletter.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Reservation\\:\\:generateRandomString\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Reservation\\:\\:generateRandomString\\(\\) has parameter \\$length with no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Parameter \\#2 \\$times of function str_repeat expects int, float given\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$adultNumber has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$bankTransferDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$bankTransferTitle has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$bookingOffer has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$childNumber has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$dateOfBooking has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$destination has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$isPaidFor has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$totalCost has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$user has no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:eraseCredentials\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:getSalt\\(\\) should return string\\|null but return statement is missing\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:setRoles\\(\\) has parameter \\$roles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$email has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$firstName has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$lastName has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$registrationDate has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$reservations has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$reservations is unused\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$roles has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/BookingOfferFiltersType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/BookingOfferFiltersType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/BookingOfferSearchType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/BookingOfferSearchType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/NewsletterType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/NewsletterType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/RateOfferType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/RateOfferType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/RegistrationType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/RegistrationType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/ReservationStartType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/ReservationStartType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/SettingsType.php
+
+		-
+			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Form/SettingsType.php
+
+		-
+			message: "#^Generator expects value type Symfony\\\\Component\\\\HttpKernel\\\\Bundle\\\\BundleInterface, object given\\.$#"
+			count: 1
+			path: src/Kernel.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Cannot call method getPackageId\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Cannot call method setRating\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Cannot call method setRating\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\BookingOfferRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$departureDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$destination with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$priceMax with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$priceMin with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffer\\(\\) has parameter \\$id with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$departureDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$destination with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$priceMax with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$priceMin with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$packageId of method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOfferRating\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Property App\\\\Repository\\\\BookingOfferRepository\\:\\:\\$registry has no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\BookingOfferTypeRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/BookingOfferTypeRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\CareerRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/CareerRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\ContinentRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/ContinentRepository.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Cannot call method getRating\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\CustomersRatingRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findAvgRatingForPackage\\(\\) has parameter \\$packageId with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findAvgRatingForPackage\\(\\) should return int\\|null but returns float\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findIfOfferIsRated\\(\\) has parameter \\$packageId with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findIfOfferIsRated\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, mixed given\\.$#"
+			count: 2
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\DestinationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/DestinationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\NewsletterRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/NewsletterRepository.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getAdultNumber\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getBookingOffer\\(\\) on mixed\\.$#"
+			count: 3
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getChildNumber\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method setDestination\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method setTotalCost\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\ReservationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ReservationRepository\\:\\:findReservationsByUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ReservationRepository\\:\\:findReservationsByUser\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: src/Repository/UserRepository.php
+
+		-
+			message: "#^Cannot access offset 'email' on mixed\\.$#"
+			count: 2
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Cannot access offset 'password' on mixed\\.$#"
+			count: 2
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Property App\\\\Security\\\\LoginFormAuthenticator\\:\\:\\$passwordEncoder has no type specified\\.$#"
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Property App\\\\Security\\\\LoginFormAuthenticator\\:\\:\\$router has no type specified\\.$#"
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Property App\\\\Security\\\\LoginFormAuthenticator\\:\\:\\$userRepository has no type specified\\.$#"
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Property App\\\\Security\\\\LogoutSuccessHandler\\:\\:\\$router has no type specified\\.$#"
+			count: 1
+			path: src/Security/LogoutSuccessHandler.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$departureDate with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$destination with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$priceMax with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$priceMin with no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Property App\\\\Service\\\\BookingOfferService\\:\\:\\$itemRepository has no type specified\\.$#"
+			count: 1
+			path: src/Service/BookingOfferService.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Dotenv\\\\Dotenv\\:\\:bootEnv\\(\\)\\.$#"
+			count: 1
+			path: tests/bootstrap.php
+
+		-
+			message: "#^Call to function method_exists\\(\\) with 'Symfony\\\\\\\\Component\\\\\\\\Dotenv\\\\\\\\Dotenv' and 'bootEnv' will always evaluate to false\\.$#"
+			count: 1
+			path: tests/bootstrap.php
