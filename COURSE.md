@@ -713,3 +713,39 @@ $ (symfony) composer rectify
 
 ```
 
+## Fixing Symfony Deprecations
+
+### Removing `WebServerBundle` bundle
+
+```bash
+$ (symfony) composer remove symfony/web-server-bundle
+```
+
+### Moving Doctrine Migrations
+
+Move migrations directory in the root directory.
+
+```bash
+$ mv src/Migrations ./migrations
+```
+
+Change migration namespace to `App\Migrations`.
+
+Update the `config/packages/doctrine_migrations.yaml` file.
+
+```yaml
+doctrine_migrations:
+    migrations_paths:
+        # namespace is arbitrary but should be different from App\Migrations
+        # as migrations classes should NOT be autoloaded
+        'DoctrineMigrations': '%kernel.project_dir%/migrations'
+```
+
+### Update Twig Configuration
+
+```yaml
+# config/packages/twig.yaml
+twig:
+    # deprecated - to be removed in Symfony 5.x
+    exception_controller: null
+```
