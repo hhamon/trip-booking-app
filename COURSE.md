@@ -835,3 +835,15 @@ twig:
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `config/routes/dev/twig.yaml` file
 - Update Composer recipe for `symfony/framework-bundle` bundle
+
+## Upgrading Symfony to 6.x
+
+* Update Composer Flex recipes
+* Update config files (routes, packages, services, etc)
+* Use new Security system
+* Convert annotations to PHP attributes
+* Leverage `#[CurrentUser]` PHP attribute in controllers
+* Remove `$this->getDoctrine()` usage in controllers
+* Use Symfony `Mailer` component instead of `Swift_Mailer`
+* Remove `sensio/framework-extra-bundle` dependency
+* Remove `symfony/swiftmailer-bundle` dependency
