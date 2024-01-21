@@ -204,7 +204,7 @@ $ wget https://phar.phpunit.de/phpcpd.phar
 $ chmod +x phpcpd.phar
 ```
 
-```bash
+```
 $ symfony php bin/phpcpd.phar src
 
 phpcpd 6.0.3 by Sebastian Bergmann.
@@ -235,7 +235,7 @@ $ wget https://pdepend.org/static/latest/pdepend.phar
 $ chmod +x pdepend.phar
 ```
 
-```bash
+```
 $ symfony php bin/pdepend.phar \
     --summary-xml=var/tmp/summary.xml \
     --jdepend-chart=var/tmp/jdepend.svg \ 
@@ -316,7 +316,7 @@ $ wget -c https://phpmd.org/static/latest/phpmd.phar
 $ chmod +x phpmd.phar
 ```
 
-```bash
+```
 $ symfony php bin/phpmd.phar src/ text cleancode,codesize,controversial,design,naming,unusedcode
 
 /Users/hhamon/Code/legacy-trip-booking/bin/phpmd.phar/vendor/symfony/config/Resource/FileResource.php on line 21
@@ -377,6 +377,7 @@ Run ECS to fix PHP code.
 ```bash
 $ # Dry-run
 $ (symfony) php vendor/bin/ecs
+
 $ # Fix run
 $ (symfony) symfony php vendor/bin/ecs --fix 
 ```
@@ -408,7 +409,7 @@ parameters:
 
 Run ECS to fix PHP code.
 
-```bash
+```text
 $ (symfony) php vendor/bin/phpstan
 
  56/56 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
@@ -446,7 +447,6 @@ parameters:
         - public/
         - src/
         - tests/
-
 ```
 
 ```neon
@@ -476,7 +476,7 @@ $ (symfony) composer require --dev phpstan/phpstan-deprecation-rules \
 
 Running PHPStan with extra extensions.
 
-```bash
+```
 $ (symfony) php vendor/bin/phpstan
 
 Note: Using configuration file /Users/hhamon/Code/legacy-trip-booking/phpstan.dist.neon.
