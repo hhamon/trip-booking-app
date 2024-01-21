@@ -1,5 +1,113 @@
 # Auditing the Codebase
 
+## Fixing Composer Dependencies
+
+As a general best practice, relying on `dev` minimum stability in `composer.json` file should be discouraged.
+
+```json
+{
+    "minimum-stability": "dev",
+    "require": {
+        "composer/package-versions-deprecated": "1.x-dev",
+        "easycorp/easyadmin-bundle": "^2.0@dev",
+        "phpdocumentor/reflection-docblock": "5.x-dev",
+        "sensio/framework-extra-bundle": "^5.4@dev"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3@dev",
+        "phpunit/phpunit": "10.0.x-dev"
+    }
+}
+```
+
+Application code should always rely on `stable` minimum stability.
+
+```json
+{
+    "minimum-stability": "stable"
+}
+```
+
+As a consequence, declared third party dependencies should rely on stable version numbers.
+
+```json
+{
+    "require": {
+        "composer/package-versions-deprecated": "^1.11.99.5",
+        "easycorp/easyadmin-bundle": "^2.3.15",
+        "phpdocumentor/reflection-docblock": "^5.3.0",
+        "sensio/framework-extra-bundle": "^5.6.1"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4.5",
+        "phpunit/phpunit": "^10.5.8"
+    }
+}
+```
+
+Update third party dependencies.
+
+```bash
+$ (symfony) composer up
+```
+
+Force fixed third party dependencies.
+
+```bash
+$ (symfony) composer bump
+```
+
+```json
+{
+    "require": {
+        "php": ">=7.1.3",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "composer/package-versions-deprecated": "^1.11.99.5",
+        "doctrine/annotations": "^1.14.3",
+        "doctrine/doctrine-bundle": "^2.7.2",
+        "doctrine/doctrine-migrations-bundle": "^2.2.3",
+        "doctrine/orm": "^2.17.3",
+        "easycorp/easyadmin-bundle": "^2.3.15",
+        "phpdocumentor/reflection-docblock": "^5.3.0",
+        "sensio/framework-extra-bundle": "^5.6.1",
+        "symfony/apache-pack": "v1.0.1",
+        "symfony/asset": "4.4.*",
+        "symfony/console": "4.4.*",
+        "symfony/dotenv": "4.4.*",
+        "symfony/expression-language": "4.4.*",
+        "symfony/finder": "4.4.*",
+        "symfony/flex": "^1.21.4",
+        "symfony/form": "4.4.*",
+        "symfony/framework-bundle": "4.4.*",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/process": "4.4.*",
+        "symfony/property-access": "4.4.*",
+        "symfony/property-info": "4.4.*",
+        "symfony/security-bundle": "4.4.*",
+        "symfony/serializer": "4.4.*",
+        "symfony/swiftmailer-bundle": "^3.5.4",
+        "symfony/translation": "4.4.*",
+        "symfony/twig-bundle": "4.4.*",
+        "symfony/validator": "4.4.*",
+        "symfony/web-link": "4.4.*",
+        "symfony/yaml": "4.4.*"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4.5",
+        "phpunit/phpunit": "^10.5.8",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/css-selector": "4.4.*",
+        "symfony/debug-bundle": "4.4.*",
+        "symfony/maker-bundle": "^1.39.1",
+        "symfony/phpunit-bridge": "4.4.*",
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*",
+        "symfony/web-server-bundle": "4.4.*"
+    }
+}
+```
+
 ## Measuring Code Size
 
 `phploc` is a tool for quickly measuring the size of a PHP project.
@@ -353,7 +461,7 @@ parameters:
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/HomeController.php
-...
+#...
 ```
 
 Adding PHPStan extensions.
