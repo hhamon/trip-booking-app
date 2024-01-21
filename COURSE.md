@@ -618,3 +618,57 @@ Update Composer.
 ```bash
 $ (symfony) composer up
 ```
+
+## Leveraging Architecture Design Decisions
+
+`Deptrac` is a static code analysis tool for PHP that helps you communicate, visualize and enforce architectural
+decisions in your projects. You can freely define your architectural layers over classes and which rules should apply
+to them.
+
+For example, you can use Deptrac to ensure that bundles/modules/extensions in your project are truly independent of each
+other to make them easier to reuse.
+
+Deptrac can be used in a CI pipeline to make sure a pull request does not violate any of the architectural rules you
+defined. With the optional Graphviz formatter you can visualize your layers, rules and violations.
+
+See https://speakerdeck.com/dbrumann/an-intro-to-deptrac
+
+```bash
+$ (symfony) composer require --dev qossmic/deptrac-shim
+````
+
+```
+$ symfony php vendor/bin/deptrac
+
+ 52/52 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ----------- ---------------------------------------------------------------------------------------------------------------------------------------------
+  Reason      Repository
+ ----------- ---------------------------------------------------------------------------------------------------------------------------------------------
+  Violation   App\Repository\CustomersRatingRepository must not depend on Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository (Repository)
+              /Users/hhamon/Code/legacy-trip-booking/src/Repository/CustomersRatingRepository.php:15
+  Violation   App\Repository\CustomersRatingRepository must not depend on Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository (Service)
+              /Users/hhamon/Code/legacy-trip-booking/src/Repository/CustomersRatingRepository.php:15
+  Violation   App\Repository\CustomersRatingRepository must not depend on Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository (Repository)
+              /Users/hhamon/Code/legacy-trip-booking/src/Repository/CustomersRatingRepository.php:6
+  Violation   App\Repository\CustomersRatingRepository must not depend on Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository (Service)
+              /Users/hhamon/Code/legacy-trip-booking/src/Repository/CustomersRatingRepository.php:6
+...
+
+----------- ---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ -------------------- -----
+  Report
+ -------------------- -----
+  Violations           36
+  Skipped violations   0
+  Uncovered            177
+  Allowed              8
+  Warnings             0
+  Errors               0
+ -------------------- -----
+```
+
+
+
