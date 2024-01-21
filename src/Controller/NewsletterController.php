@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class NewsletterController extends AbstractController
 {
-    public function renderForm(Request $request, ValidatorInterface $validator)
+    public function renderNewsletterForm(Request $request, ValidatorInterface $validator)
     {
         $news_object = new Newsletter();
         $news_form = $this->createForm(NewsletterType::class, $news_object, [

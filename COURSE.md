@@ -713,7 +713,7 @@ $ (symfony) composer rectify
 
 ```
 
-## Fixing Symfony Deprecations
+## Upgrading Symfony to 5.x
 
 ### Removing `WebServerBundle` bundle
 
@@ -749,3 +749,89 @@ twig:
     # deprecated - to be removed in Symfony 5.x
     exception_controller: null
 ```
+
+### Upgrade Composer Dependencies
+
+```yaml
+{
+    "require": {
+        "php": ">=8.3",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "composer/package-versions-deprecated": "^1.11.99.5",
+        "doctrine/annotations": "^1.14.3",
+        "doctrine/doctrine-bundle": "^2.7.2",
+        "doctrine/doctrine-migrations-bundle": "^2.2.3",
+        "doctrine/orm": "^2.17.3",
+        "easycorp/easyadmin-bundle": "^2.3.15",
+        "phpdocumentor/reflection-docblock": "^5.3.0",
+        "sensio/framework-extra-bundle": "^5.6.1",
+        "symfony/apache-pack": "v1.0.1",
+        "symfony/asset": "5.4.*",
+        "symfony/console": "5.4.*",
+        "symfony/dotenv": "5.4.*",
+        "symfony/expression-language": "5.4.*",
+        "symfony/finder": "5.4.*",
+        "symfony/flex": "^2.4.3",
+        "symfony/form": "5.4.*",
+        "symfony/framework-bundle": "5.4.*",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/process": "5.4.*",
+        "symfony/property-access": "5.4.*",
+        "symfony/property-info": "5.4.*",
+        "symfony/runtime": "5.4.*",
+        "symfony/security-bundle": "5.4.*",
+        "symfony/serializer": "5.4.*",
+        "symfony/swiftmailer-bundle": "^3.5.4",
+        "symfony/translation": "5.4.*",
+        "symfony/twig-bundle": "5.4.*",
+        "symfony/validator": "5.4.*",
+        "symfony/web-link": "5.4.*",
+        "symfony/yaml": "5.4.*"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4.5",
+        "phpstan/extension-installer": "^1.3.1",
+        "phpstan/phpstan": "^1.10.56",
+        "phpstan/phpstan-deprecation-rules": "^1.1.4",
+        "phpstan/phpstan-doctrine": "^1.3.59",
+        "phpstan/phpstan-phpunit": "^1.3.15",
+        "phpstan/phpstan-symfony": "^1.3.7",
+        "phpunit/phpunit": "^10.5.8",
+        "qossmic/deptrac-shim": "^1.0.2",
+        "rector/rector": "^0.19.2",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
+        "symfony/debug-bundle": "5.4.*",
+        "symfony/maker-bundle": "^1.50.0",
+        "symfony/phpunit-bridge": "5.4.*",
+        "symfony/stopwatch": "5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*",
+        "symplify/easy-coding-standard": "^12.1.8"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "phpstan/extension-installer": true,
+            "symfony/runtime": true
+        },
+        "platform": {
+            "php": "8.3"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "5.4.*"
+        }
+    }
+}
+```
+
+- Rename `NewsletterController::renderForm` method (conflicts with base controller)
+- Update `config/routes/dev/twig.yaml` file
+- Update Composer recipe for `symfony/framework-bundle` bundle
