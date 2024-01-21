@@ -18,12 +18,12 @@ class Destination implements \Stringable
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $destinationName;
+    private ?string $destinationName = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -31,14 +31,14 @@ class Destination implements \Stringable
      * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png"},
      * maxSize="1024k")
      */
-    private $image;
+    private ?string $image = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
      *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $continent;
+    private ?Continent $continent = null;
 
     public function __construct()
     {

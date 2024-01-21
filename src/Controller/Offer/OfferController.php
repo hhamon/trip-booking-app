@@ -25,11 +25,9 @@ class OfferController extends AbstractController
     /**
      * @Route("/browse", name="browse")
      *
-     * @return Response
-     *
      * @throws \Exception
      */
-    public function displayOfferList(Request $request, BookingOfferService $offerService)
+    public function displayOfferList(Request $request, BookingOfferService $offerService): Response
     {
         $bookingOffer = new BookingOffer();
         if ($request->query->get('booking_offer_search')) {

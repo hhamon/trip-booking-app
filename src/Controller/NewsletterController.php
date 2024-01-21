@@ -33,10 +33,8 @@ class NewsletterController extends AbstractController
 
     /**
      * @Route("/signup", name="signup")
-     *
-     * @return RedirectResponse
      */
-    public function signUp(Request $request)
+    public function signUp(Request $request): RedirectResponse
     {
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');

@@ -11,7 +11,7 @@ class DestinationController extends AbstractController
     /**
      * @Route("/destinations", name="destinations")
      */
-    public function index()
+    public function index(): \Symfony\Component\HttpFoundation\Response
     {
         $em = $this->getDoctrine()->getManager();
         $destinations = $em->getRepository(Destination::class)->findAll();

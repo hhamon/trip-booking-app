@@ -17,51 +17,51 @@ class Reservation
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
      *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=BookingOffer::class, fetch="EAGER")
      *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $bookingOffer;
+    private ?BookingOffer $bookingOffer = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateOfBooking;
+    private ?\DateTimeInterface $dateOfBooking = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $adultNumber;
+    private ?int $adultNumber = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $childNumber;
+    private ?int $childNumber = null;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPaidFor;
+    private ?bool $isPaidFor = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $bankTransferDate;
+    private ?\DateTimeInterface $bankTransferDate = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $bankTransferTitle;
+    private ?string $bankTransferTitle = null;
 
     private $destination;
 

@@ -18,29 +18,29 @@ class CustomersRating
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=user::class)
      *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?user $user = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $package;
+    private ?int $package = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $rating;
+    private ?int $rating = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $comment;
+    private ?string $comment = null;
 
     public function getId(): ?int
     {

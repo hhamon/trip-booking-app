@@ -17,37 +17,37 @@ class Career
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $jobTitle;
+    private ?string $jobTitle = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $requirements;
+    private ?string $requirements = null;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
      */
-    private $salary;
+    private ?string $salary = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $recruitmentStartDate;
+    private ?\DateTimeInterface $recruitmentStartDate = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $recruitmentEndDate;
+    private ?\DateTimeInterface $recruitmentEndDate = null;
 
     public function getId(): ?int
     {

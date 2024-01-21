@@ -18,17 +18,19 @@ class BookingOfferType implements \Stringable
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $typeName;
+    private ?string $typeName = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\BookingOffer", mappedBy="offerType", orphanRemoval=true)
+     *
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\BookingOffer>
      */
-    private $bookingOffers;
+    private Collection $bookingOffers;
 
     public function __construct()
     {

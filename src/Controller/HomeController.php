@@ -14,11 +14,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      *
-     * @return Response
-     *
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $bookingOffer = new BookingOffer();
         $offers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();

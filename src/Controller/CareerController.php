@@ -11,7 +11,7 @@ class CareerController extends AbstractController
     /**
      * @Route("/careers", name="careers")
      */
-    public function index()
+    public function index(): \Symfony\Component\HttpFoundation\Response
     {
         $em = $this->getDoctrine()->getManager();
         $careers = $em->getRepository(Career::class)->findAll();

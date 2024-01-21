@@ -22,12 +22,12 @@ class User implements UserInterface
      *
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="json")
@@ -39,30 +39,33 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string")
      */
-    private $password;
+    private ?string $password = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
+    private ?string $firstName = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    private ?string $lastName = null;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $registrationDate;
+    private ?\DateTimeInterface $registrationDate = null;
 
     /**
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
+     *
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Reservation>
      */
-    private $reservations;
+    private \Doctrine\Common\Collections\Collection $reservations;
 
     public function __construct()
     {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getId(): ?int

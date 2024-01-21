@@ -12,7 +12,7 @@ class ReservationController extends AbstractController
     /**
      * @Route("/reservations", name="reservations")
      */
-    public function index()
+    public function index(): \Symfony\Component\HttpFoundation\Response
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
