@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CareerRepository;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,7 +12,9 @@ class Career
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -101,24 +102,24 @@ class Career
         return $this;
     }
 
-    public function getRecruitmentStartDate(): ?DateTimeInterface
+    public function getRecruitmentStartDate(): ?\DateTimeInterface
     {
         return $this->recruitmentStartDate;
     }
 
-    public function setRecruitmentStartDate(DateTimeInterface $recruitmentStartDate): self
+    public function setRecruitmentStartDate(\DateTimeInterface $recruitmentStartDate): self
     {
         $this->recruitmentStartDate = $recruitmentStartDate;
 
         return $this;
     }
 
-    public function getRecruitmentEndDate(): ?DateTimeInterface
+    public function getRecruitmentEndDate(): ?\DateTimeInterface
     {
         return $this->recruitmentEndDate;
     }
 
-    public function setRecruitmentEndDate(DateTimeInterface $recruitmentEndDate): self
+    public function setRecruitmentEndDate(\DateTimeInterface $recruitmentEndDate): self
     {
         $this->recruitmentEndDate = $recruitmentEndDate;
 

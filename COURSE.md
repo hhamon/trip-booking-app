@@ -222,3 +222,55 @@ $ symfony php bin/phpmd.phar src/ text cleancode,codesize,controversial,design,n
 /Users/hhamon/Code/legacy-trip-booking/src/Controller/NewsletterController.php:50             ElseExpression          The method signUp uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
 ...
 ```
+
+## Fixing Code Discrepancies
+
+### Fixing Code Styles
+
+`ECS` (`Easy Coding Standards`) is a standalone tool for fixing your PHP code coding standards violations.
+It does both detecting coding styles discrepancies and fixing them.
+
+```bash
+$ symfony composer require symplify/easy-coding-standard --dev
+```
+
+Configure ECS behavior.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
+
+return ECSConfig::configure()
+    ->withParallel()
+    ->withPaths([
+        __DIR__ . '/config',
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ])
+    ->withRules([
+        ArraySyntaxFixer::class,
+    ])
+    ->withPhpCsFixerSets(
+        php74Migration: true,
+        php80Migration: true,
+        php81Migration: true,
+        php82Migration: true,
+        php83Migration: true,
+        symfony: true,
+        doctrineAnnotation: true,
+    )
+;
+```
+
+Run ECS to fix PHP code.
+
+```bash
+$ # Dry-run
+$ (symfony) php vendor/bin/ecs
+$ # Fix run
+$ (symfony) symfony php vendor/bin/ecs --fix 
+```

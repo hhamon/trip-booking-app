@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Form;
-
 
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
@@ -16,7 +14,7 @@ class ConfirmReservationType extends AbstractType
     {
         $builder
             ->add('submit', SubmitType::class, [
-                'label' => 'Confirm reservation'
+                'label' => 'Confirm reservation',
             ]);
     }
 

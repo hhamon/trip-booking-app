@@ -3,13 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Career;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class CareerFixture extends Fixture
 {
-
     public function load(ObjectManager $manager)
     {
         $career = $this->createCareer(
@@ -17,8 +15,8 @@ class CareerFixture extends Fixture
             'Team management',
             '2 years experience',
             4500.00,
-            new DateTime('2020-11-22'),
-            new DateTime('2020-12-30')
+            new \DateTime('2020-11-22'),
+            new \DateTime('2020-12-30')
         );
         $manager->persist($career);
         $career = $this->createCareer(
@@ -26,8 +24,8 @@ class CareerFixture extends Fixture
             'Tour guidance',
             'Student status',
             2000.00,
-            new DateTime('2020-11-22'),
-            new DateTime('2020-12-30')
+            new \DateTime('2020-11-22'),
+            new \DateTime('2020-12-30')
         );
         $manager->persist($career);
         $manager->flush();
@@ -42,6 +40,7 @@ class CareerFixture extends Fixture
         $career->setSalary($salary);
         $career->setRecruitmentStartDate($startDate);
         $career->setRecruitmentEndDate($endDate);
+
         return $career;
     }
 }

@@ -20,19 +20,20 @@ class NewsletterController extends AbstractController
         $news_object = new Newsletter();
         $news_form = $this->createForm(NewsletterType::class, $news_object, [
             'action' => $this->generateUrl('newsletter_signup'),
-            'method' => 'POST'
+            'method' => 'POST',
         ]);
         $news_form->handleRequest($request);
         $errors = $validator->validate($news_object);
+
         return $this->render('newsletter/form.html.twig', [
             'newsletterForm' => $news_form->createView(),
-            'errors' => $errors
+            'errors' => $errors,
         ]);
     }
 
     /**
      * @Route("/signup", name="signup")
-     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function signUp(Request $request)
@@ -40,7 +41,7 @@ class NewsletterController extends AbstractController
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');
             $email = $formData['email'];
-            if(!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
+            if (!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
                 $em = $this->getDoctrine()->getManager();
                 $newsletterSubscription = new Newsletter();
                 $newsletterSubscription->setEmail($email);
@@ -52,6 +53,7 @@ class NewsletterController extends AbstractController
             }
         }
         $referer = $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 }

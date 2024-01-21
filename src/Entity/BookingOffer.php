@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,8 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 class BookingOffer
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     *
+     * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -24,6 +25,7 @@ class BookingOffer
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $offerType;
@@ -45,6 +47,7 @@ class BookingOffer
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Destination")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $destination;
@@ -98,7 +101,6 @@ class BookingOffer
 
     public function __construct()
     {
-
     }
 
     public function getRating(): ?int
@@ -176,7 +178,7 @@ class BookingOffer
         return $this;
     }
 
-    public function getDescription() :?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -184,51 +186,52 @@ class BookingOffer
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
-    public function getBookingStartDate(): ?DateTimeInterface
+    public function getBookingStartDate(): ?\DateTimeInterface
     {
         return $this->bookingStartDate;
     }
 
-    public function setBookingStartDate(DateTimeInterface $bookingStartDate): self
+    public function setBookingStartDate(\DateTimeInterface $bookingStartDate): self
     {
         $this->bookingStartDate = $bookingStartDate;
 
         return $this;
     }
 
-    public function getBookingEndDate(): ?DateTimeInterface
+    public function getBookingEndDate(): ?\DateTimeInterface
     {
         return $this->bookingEndDate;
     }
 
-    public function setBookingEndDate(DateTimeInterface $bookingEndDate): self
+    public function setBookingEndDate(\DateTimeInterface $bookingEndDate): self
     {
         $this->bookingEndDate = $bookingEndDate;
 
         return $this;
     }
 
-    public function getDepartureDate(): ?DateTimeInterface
+    public function getDepartureDate(): ?\DateTimeInterface
     {
         return $this->departureDate;
     }
 
-    public function setDepartureDate(?DateTimeInterface $departureDate): self
+    public function setDepartureDate(?\DateTimeInterface $departureDate): self
     {
         $this->departureDate = $departureDate;
 
         return $this;
     }
 
-    public function getComebackDate(): ?DateTimeInterface
+    public function getComebackDate(): ?\DateTimeInterface
     {
         return $this->comebackDate;
     }
 
-    public function setComebackDate(?DateTimeInterface $comebackDate): self
+    public function setComebackDate(?\DateTimeInterface $comebackDate): self
     {
         $this->comebackDate = $comebackDate;
 
@@ -290,7 +293,7 @@ class BookingOffer
 
     public function setPhotosDirectory(string $photosDirectory): self
     {
-        $this->photosDirectory = $photosDirectory;;
+        $this->photosDirectory = $photosDirectory;
 
         return $this;
     }

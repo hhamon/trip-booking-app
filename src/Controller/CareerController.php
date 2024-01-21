@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Career;
@@ -16,9 +15,10 @@ class CareerController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $careers = $em->getRepository(Career::class)->findAll();
+
         return $this->render('careers/index.html.twig', [
             'controller_name' => 'CareerController',
-            'careers' => $careers
+            'careers' => $careers,
         ]);
     }
 }

@@ -19,7 +19,7 @@ class ReservationStartType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Number of adults',
-                    'min' => 1
+                    'min' => 1,
                 ],
                 'html5' => true,
                 'label' => 'Number of adults',
@@ -29,7 +29,7 @@ class ReservationStartType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Number of children',
-                    'min' => 0
+                    'min' => 0,
                 ],
                 'html5' => true,
                 'label' => 'Number of children',

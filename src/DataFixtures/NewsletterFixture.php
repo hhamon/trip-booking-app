@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\DataFixtures;
 
 use App\Entity\Newsletter;
@@ -16,10 +15,12 @@ class NewsletterFixture extends Fixture
 
         $manager->flush();
     }
+
     private function createNewsletter($email)
     {
         $newsletter = new Newsletter();
         $newsletter->setEmail($email);
+
         return $newsletter;
     }
 }
