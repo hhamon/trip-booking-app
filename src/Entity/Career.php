@@ -5,48 +5,30 @@ namespace App\Entity;
 use App\Repository\CareerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CareerRepository::class)
- */
+#[ORM\Entity(repositoryClass: CareerRepository::class)]
 class Career
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $jobTitle = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $requirements = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DECIMAL, precision: 7, scale: 2, nullable: true)]
     private ?string $salary = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $recruitmentStartDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $recruitmentEndDate = null;
 
     public function getId(): ?int

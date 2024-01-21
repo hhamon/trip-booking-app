@@ -5,62 +5,38 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository", repositoryClass=ReservationRepository::class)
- */
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=BookingOffer::class, fetch="EAGER")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: BookingOffer::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?BookingOffer $bookingOffer = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateOfBooking = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $adultNumber = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $childNumber = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     private ?bool $isPaidFor = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $bankTransferDate = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $bankTransferTitle = null;
 
     private $destination;

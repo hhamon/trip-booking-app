@@ -17,9 +17,7 @@ class ReservationController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/reservations", name="reservations")
-     */
+    #[Route(path: '/reservations', name: 'reservations')]
     public function index(Request $request): Response
     {
         $user = $this->getUser();

@@ -24,9 +24,7 @@ class SecurityController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/login", name="app_login")
-     */
+    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -47,17 +45,13 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): never
     {
         throw new \Exception('Action forbidden');
     }
 
-    /**
-     * @Route("/register", name="app_register")
-     */
+    #[Route(path: '/register', name: 'app_register')]
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -94,11 +88,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/auth", name="auth")
-     *
-     * @return Response
-     */
+    #[Route(path: '/auth', name: 'auth')]
     public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {
         $user = $this->getUser();

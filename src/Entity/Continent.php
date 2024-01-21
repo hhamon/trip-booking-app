@@ -5,23 +5,15 @@ namespace App\Entity;
 use App\Repository\ContinentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ContinentRepository::class)
- */
+#[ORM\Entity(repositoryClass: ContinentRepository::class)]
 class Continent implements \Stringable
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $name = null;
 
     public function getId(): ?int

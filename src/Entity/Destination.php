@@ -6,38 +6,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\DestinationRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\DestinationRepository::class)]
 class Destination implements \Stringable
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $destinationName = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png"},
-     * maxSize="1024k")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
+    #[Assert\File(mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'], maxSize: '1024k')]
     private ?string $image = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Continent::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Continent $continent = null;
 
     public function __construct()

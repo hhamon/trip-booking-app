@@ -4,42 +4,26 @@ namespace App\Entity;
 
 use App\Repository\CustomersRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Integer;
 
-/**
- * @ORM\Entity(repositoryClass=CustomersRatingRepository::class)
- */
+#[ORM\Entity(repositoryClass: CustomersRatingRepository::class)]
 class CustomersRating
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=user::class)
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: user::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?user $user = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $package = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $rating = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255, nullable: true)]
     private ?string $comment = null;
 
     public function getId(): ?int

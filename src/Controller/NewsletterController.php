@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * @Route("/newsletter", name="newsletter_")
- */
+#[Route(path: '/newsletter', name: 'newsletter_')]
 class NewsletterController extends AbstractController
 {
     public function __construct(
@@ -40,9 +38,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/signup", name="signup")
-     */
+    #[Route(path: '/signup', name: 'signup')]
     public function signUp(Request $request): RedirectResponse
     {
         if ($request->request->get('newsletter')) {

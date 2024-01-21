@@ -6,62 +6,42 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- *
- * @UniqueEntity(fields={"email"}, message="Given e-mail is already taken.")
- *
- * @ORM\Table(name="app_user")
- */
+#[ORM\Table(name: 'app_user')]
+#[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Given e-mail is already taken.')]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 180, unique: true)]
     private ?string $email = null;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON)]
     private $roles = [];
 
     /**
      * @var string The hashed password
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING)]
     private ?string $password = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $firstName = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $lastName = null;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $registrationDate = null;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
-     *
      * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Reservation>
      */
-    private \Doctrine\Common\Collections\Collection $reservations;
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'user')]
+    private readonly \Doctrine\Common\Collections\Collection $reservations;
 
     public function __construct()
     {

@@ -14,9 +14,7 @@ class DestinationController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/destinations", name="destinations")
-     */
+    #[Route(path: '/destinations', name: 'destinations')]
     public function index(): Response
     {
         return $this->render('destination/index.html.twig', [

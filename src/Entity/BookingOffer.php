@@ -4,97 +4,59 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BookingOfferRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferRepository::class)]
 class BookingOffer
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $offerName = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: BookingOfferType::class, inversedBy: 'bookingOffers')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?BookingOfferType $offerType = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $packageId = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $offerPrice = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $childPrice = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Destination")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Destination::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Destination $destination = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::TEXT)]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $bookingStartDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $bookingEndDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $departureDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $comebackDate = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $departureSpot = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $comebackSpot = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     private ?bool $isFeatured = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $photosDirectory = null;
 
     private $rating;

@@ -6,30 +6,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BookingOfferTypeRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferTypeRepository::class)]
 class BookingOfferType implements \Stringable
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $typeName = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BookingOffer", mappedBy="offerType", orphanRemoval=true)
-     *
      * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\BookingOffer>
      */
+    #[ORM\OneToMany(targetEntity: BookingOffer::class, mappedBy: 'offerType', orphanRemoval: true)]
     private Collection $bookingOffers;
 
     public function __construct()

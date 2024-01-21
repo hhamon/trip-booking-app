@@ -18,10 +18,9 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/", name="home")
-     *
      * @throws \Exception
      */
+    #[Route(path: '/', name: 'home')]
     public function index(Request $request): Response
     {
         $bookingOffer = new BookingOffer();

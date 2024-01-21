@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/offer", name="offer_")
- */
+#[Route(path: '/offer', name: 'offer_')]
 class OfferController extends AbstractController
 {
     public function __construct(
@@ -33,10 +31,9 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/browse", name="browse")
-     *
      * @throws \Exception
      */
+    #[Route(path: '/browse', name: 'browse')]
     public function displayOfferList(Request $request, BookingOfferService $offerService): Response
     {
         $bookingOffer = new BookingOffer();
@@ -79,10 +76,9 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
-     *
      * @return Response
      */
+    #[Route(path: '/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}', name: 'reservationSummary')]
     public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber)
     {
         $offer = $this->bookingOfferRepository->find($offerId);
@@ -112,12 +108,11 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="single")
-     *
      * @param int $id
      *
      * @return Response
      */
+    #[Route(path: '/{id}', name: 'single')]
     public function displayOffer(Request $request, $id)
     {
         $offer = $this->bookingOfferRepository->findOffer($id);

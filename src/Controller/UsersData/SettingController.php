@@ -17,9 +17,7 @@ class SettingController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/settings", name="settings")
-     */
+    #[Route(path: '/settings', name: 'settings')]
     public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $session = $request->getSession();

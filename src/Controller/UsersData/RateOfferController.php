@@ -20,10 +20,9 @@ class RateOfferController extends AbstractController
     }
 
     /**
-     * @Route("rateOffer/{reservationId}", name="rateOffer")
-     *
      * @return Response
      */
+    #[Route(path: 'rateOffer/{reservationId}', name: 'rateOffer')]
     public function displayRateOfferForm(Request $request, int $reservationId)
     {
         $session = $request->getSession();

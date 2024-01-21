@@ -17,10 +17,10 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_83,
-        //DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
-        //DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
-        SymfonySetList::SYMFONY_50_TYPES,
+        DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::SYMFONY_54,
         SymfonySetList::SYMFONY_CODE_QUALITY,
     ]);
 };
