@@ -355,3 +355,38 @@ parameters:
 			path: src/Controller/HomeController.php
 ...
 ```
+
+Adding PHPStan extensions.
+
+```bash
+$ (symfony) composer require --dev phpstan/extension-installer
+$ (symfony) composer require --dev phpstan/phpstan-deprecation-rules \
+  phpstan/phpstan-doctrine \
+  phpstan/phpstan-symfony \
+  phpstan/phpstan-phpunit
+```
+
+Running PHPStan with extra extensions.
+
+```bash
+$ (symfony) php vendor/bin/phpstan
+
+Note: Using configuration file /Users/hhamon/Code/legacy-trip-booking/phpstan.dist.neon.
+ 56/56 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ ------------------------------------------------------------------------------------------------------------------
+  Line   config/bundles.php
+ ------ ------------------------------------------------------------------------------------------------------------------
+  16     Fetching class constant class of deprecated class Symfony\Bundle\WebServerBundle\WebServerBundle:
+         since Symfony 4.4, to be removed in 5.0; the new Symfony local server has more features, you can use it instead.
+ ------ ------------------------------------------------------------------------------------------------------------------
+
+ ------ ----------------------------------------------------------------------------
+  Line   public/index.php
+ ------ ----------------------------------------------------------------------------
+  12     Call to method enable() of deprecated class Symfony\Component\Debug\Debug:
+         since Symfony 4.4, use Symfony\Component\ErrorHandler\Debug instead.
+ ------ ----------------------------------------------------------------------------
+
+...
+```
