@@ -3,6 +3,7 @@
 namespace App\Controller\UsersData;
 
 use App\Form\SettingsType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SettingController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     /**
      * @Route("/settings", name="settings")
      *
@@ -25,11 +31,10 @@ class SettingController extends AbstractController
             $settingsForm->createView();
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 $settingsFields = $request->request->get('settings');
                 $user = $this->UpdateUserData($settingsFields, $passwordEncoder);
-                $em->persist($user);
-                $em->flush();
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
 
                 return $this->redirectToRoute('home');
             }

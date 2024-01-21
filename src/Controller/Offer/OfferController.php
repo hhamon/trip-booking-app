@@ -3,13 +3,15 @@
 namespace App\Controller\Offer;
 
 use App\Entity\BookingOffer;
-use App\Entity\BookingOfferType;
-use App\Entity\Destination;
 use App\Entity\Reservation;
 use App\Form\BookingOfferFiltersType;
 use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
+use App\Repository\BookingOfferRepository;
+use App\Repository\BookingOfferTypeRepository;
+use App\Repository\DestinationRepository;
 use App\Service\BookingOfferService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormInterface;
@@ -22,6 +24,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OfferController extends AbstractController
 {
+    public function __construct(
+        private readonly BookingOfferRepository $bookingOfferRepository,
+        private readonly BookingOfferTypeRepository $bookingOfferTypeRepository,
+        private readonly DestinationRepository $destinationRepository,
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     /**
      * @Route("/browse", name="browse")
      *
@@ -36,13 +46,12 @@ class OfferController extends AbstractController
             $offers = $this->getOffersBasedOnOfferType($offerService, $request->query->get('offerType'));
         } elseif ($request->query->get('destinationName')) {
             $offers = $this->getOffersBasedOnDestination($offerService, $request->query->get('destinationName'));
-            $queryDestination = $this->getDoctrine()->getRepository(Destination::class)
-                ->findOneBy(['destinationName' => $request->query->get('destinationName')]);
+            $queryDestination = $this->destinationRepository->findOneBy(['destinationName' => $request->query->get('destinationName')]);
             $bookingOffer->setDestination($queryDestination);
         } else {
             $offers = $offerService->findOffers();
         }
-        $allOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        $allOffers = $this->bookingOfferRepository->findAll();
         foreach ($allOffers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
@@ -51,8 +60,7 @@ class OfferController extends AbstractController
             'departureSpots' => $departureSpots,
         ]);
         if ($request->query->get('offerType')) {
-            $fetchedType = $this->getDoctrine()->getRepository(BookingOfferType::class)
-                ->findOneBy(['typeName' => $request->query->get('offerType')]);
+            $fetchedType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $request->query->get('offerType')]);
             if ($fetchedType) {
                 $typeId = $fetchedType->getId();
                 $filtersForm->get('offerTypes')->get("$typeId")->setData(true);
@@ -77,8 +85,9 @@ class OfferController extends AbstractController
      */
     public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber)
     {
+        $offer = $this->bookingOfferRepository->find($offerId);
+
         $reservation = new Reservation();
-        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
         $reservation->setBookingOffer($offer);
         $reservation->setAdultNumber($adultNumber);
         $reservation->setChildNumber($childNumber);
@@ -88,11 +97,10 @@ class OfferController extends AbstractController
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $reservation->setDateOfBooking(new \DateTime('NOW'));
             $reservation->setIsPaidFor(false);
-            $em->persist($reservation);
-            $em->flush();
+            $this->entityManager->persist($reservation);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('reservations');
         }
@@ -112,13 +120,16 @@ class OfferController extends AbstractController
      */
     public function displayOffer(Request $request, $id)
     {
-        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($id);
+        $offer = $this->bookingOfferRepository->findOffer($id);
+
         $finder = new Finder();
         $finder->files()->in($offer->getPhotosDirectory());
+
         $photosCount = 0;
         if ($finder->hasResults()) {
             $photosCount = $finder->count();
         }
+
         $reservation = new Reservation();
         $reservation->setBookingOffer($offer);
         $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
@@ -177,7 +188,7 @@ class OfferController extends AbstractController
             $bookingOffer->setComebackDate($this->getWellFormattedDate($comebackDate));
         }
         $bookingOffer->setDepartureSpot($departureSpot);
-        $bookingOffer->setDestination($this->getDoctrine()->getRepository(Destination::class)->find($destination));
+        $bookingOffer->setDestination($this->destinationRepository->find($destination));
 
         return $offerService->findOffers($departureSpot,
             $destination,
@@ -187,7 +198,8 @@ class OfferController extends AbstractController
 
     private function getOffersBasedOnOfferType(BookingOfferService $offerService, string $offerTypeName)
     {
-        $offerType = $this->getDoctrine()->getRepository(BookingOfferType::class)->findOneBy(['typeName' => $offerTypeName]);
+        $offerType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $offerTypeName]);
+
         if (null != $offerType) {
             $offers = $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
         } else {
@@ -199,7 +211,8 @@ class OfferController extends AbstractController
 
     private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName)
     {
-        $destination = $this->getDoctrine()->getRepository(Destination::class)->findOneBy(['destinationName' => $destinationName]);
+        $destination = $this->destinationRepository->findOneBy(['destinationName' => $destinationName]);
+
         if (null != $destination) {
             $offers = $offerService->findOffers(null, $destination, null, null, null, null, null);
         } else {

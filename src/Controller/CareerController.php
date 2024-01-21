@@ -2,23 +2,26 @@
 
 namespace App\Controller;
 
-use App\Entity\Career;
+use App\Repository\CareerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CareerController extends AbstractController
 {
+    public function __construct(
+        private readonly CareerRepository $careerRepository,
+    ) {
+    }
+
     /**
      * @Route("/careers", name="careers")
      */
-    public function index(): \Symfony\Component\HttpFoundation\Response
+    public function index(): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $careers = $em->getRepository(Career::class)->findAll();
-
         return $this->render('careers/index.html.twig', [
             'controller_name' => 'CareerController',
-            'careers' => $careers,
+            'careers' => $this->careerRepository->findAll(),
         ]);
     }
 }

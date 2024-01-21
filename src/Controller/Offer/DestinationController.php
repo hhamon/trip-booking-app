@@ -2,23 +2,25 @@
 
 namespace App\Controller\Offer;
 
-use App\Entity\Destination;
+use App\Repository\DestinationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DestinationController extends AbstractController
 {
+    public function __construct(
+        private readonly DestinationRepository $destinationRepository,
+    ) {
+    }
+
     /**
      * @Route("/destinations", name="destinations")
      */
-    public function index(): \Symfony\Component\HttpFoundation\Response
+    public function index(): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $destinations = $em->getRepository(Destination::class)->findAll();
-
         return $this->render('destination/index.html.twig', [
-            'controller_name' => 'DestinationController',
-            'destinations' => $destinations,
+            'destinations' => $this->destinationRepository->findAll(),
         ]);
     }
 }

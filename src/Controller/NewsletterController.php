@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
+use App\Repository\NewsletterRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -15,7 +18,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class NewsletterController extends AbstractController
 {
-    public function renderNewsletterForm(Request $request, ValidatorInterface $validator)
+    public function __construct(
+        private readonly NewsletterRepository $newsletterRepository,
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
+    public function renderNewsletterForm(Request $request, ValidatorInterface $validator): Response
     {
         $news_object = new Newsletter();
         $news_form = $this->createForm(NewsletterType::class, $news_object, [
@@ -39,12 +48,11 @@ class NewsletterController extends AbstractController
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');
             $email = $formData['email'];
-            if (!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
-                $em = $this->getDoctrine()->getManager();
+            if (!$this->newsletterRepository->findOneBy(['email' => $email])) {
                 $newsletterSubscription = new Newsletter();
                 $newsletterSubscription->setEmail($email);
-                $em->persist($newsletterSubscription);
-                $em->flush();
+                $this->entityManager->persist($newsletterSubscription);
+                $this->entityManager->flush();
                 $this->addFlash('notice', 'Thank you! You will now receive information about changes in our offer.');
             } else {
                 $this->addFlash('notice', 'Thank you! You are already a newsletter subscriber.');

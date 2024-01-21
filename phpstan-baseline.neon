@@ -1,38 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: """
-				#^Fetching class constant class of deprecated class Symfony\\\\Bundle\\\\WebServerBundle\\\\WebServerBundle\\:
-				since Symfony 4\\.4, to be removed in 5\\.0; the new Symfony local server has more features, you can use it instead\\.$#
-			"""
-			count: 1
-			path: config/bundles.php
-
-		-
-			message: """
-				#^Call to method enable\\(\\) of deprecated class Symfony\\\\Component\\\\Debug\\\\Debug\\:
-				since Symfony 4\\.4, use Symfony\\\\Component\\\\ErrorHandler\\\\Debug instead\\.$#
-			"""
-			count: 1
-			path: public/index.php
-
-		-
 			message: "#^Variable \\$departureSpots might not be defined\\.$#"
 			count: 1
 			path: src/Controller/HomeController.php
 
 		-
-			message: "#^Cannot access offset 'email' on mixed\\.$#"
-			count: 1
-			path: src/Controller/NewsletterController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\NewsletterController\\:\\:renderForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/NewsletterController.php
-
-		-
-			message: "#^Parameter \\#1 \\$email of method App\\\\Entity\\\\Newsletter\\:\\:setEmail\\(\\) expects string, mixed given\\.$#"
+			message: "#^Cannot access offset 'email' on float\\|int\\<min, \\-1\\>\\|int\\<1, max\\>\\|non\\-falsy\\-string\\|true\\.$#"
 			count: 1
 			path: src/Controller/NewsletterController.php
 
@@ -42,28 +16,13 @@ parameters:
 			path: src/Controller/NewsletterController.php
 
 		-
-			message: "#^Cannot access offset 'comebackDate' on mixed\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Cannot access offset 'departureDate' on mixed\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Cannot access offset 'departureSpot' on mixed\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Cannot access offset 'destination' on mixed\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
 			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^If condition is always false\\.$#"
+			count: 2
 			path: src/Controller/Offer/OfferController.php
 
 		-
@@ -102,12 +61,27 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Parameter \\#1 \\$date of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getWellFormattedDate\\(\\) expects string, mixed given\\.$#"
-			count: 2
+			message: "#^Offset 'comebackDate' on string\\|null on left side of \\?\\? does not exist\\.$#"
+			count: 1
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Entity\\\\BookingOffer\\:\\:setDepartureSpot\\(\\) expects string, mixed given\\.$#"
+			message: "#^Offset 'departureDate' on string\\|null on left side of \\?\\? does not exist\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Offset 'departureSpot' on string\\|null on left side of \\?\\? does not exist\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Offset 'destination' on string\\|null on left side of \\?\\? does not exist\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Entity\\\\BookingOffer\\:\\:setDepartureSpot\\(\\) expects string, null given\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -117,17 +91,7 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\Reservation\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, object\\|null given\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Parameter \\#2 \\$destinationName of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Parameter \\#2 \\$offerTypeName of method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnOfferType\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\Reservation\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -137,12 +101,7 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Cannot access offset 'first' on mixed\\.$#"
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
-			message: "#^Cannot access offset 'password' on mixed\\.$#"
+			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php
 
@@ -153,11 +112,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method setRegistrationDate\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:login\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php
 
@@ -177,12 +131,23 @@ parameters:
 			path: src/Controller/SecurityController.php
 
 		-
-			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$user of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:checkCredentials\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php
 
 		-
-			message: "#^Parameter \\#2 \\$user of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:checkCredentials\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, object\\|null given\\.$#"
+			message: """
+				#^Parameter \\$guardHandler of method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\Security\\\\Guard\\\\GuardAuthenticatorHandler\\:
+				since Symfony 5\\.3, use the new authenticator system instead$#
+			"""
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: """
+				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
+				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
+			"""
 			count: 1
 			path: src/Controller/SecurityController.php
 
@@ -197,42 +162,42 @@ parameters:
 			path: src/Controller/UsersData/RateOfferController.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\CustomersRating\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, object\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\CustomersRating\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
 			count: 1
 			path: src/Controller/UsersData/RateOfferController.php
 
 		-
-			message: "#^Cannot call method getEmail\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method getEmail\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 2
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method getFirstName\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method getFirstName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 2
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method getLastName\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method getLastName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 2
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method setEmail\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method setEmail\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method setFirstName\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method setFirstName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method setLastName\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method setLastName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Cannot call method setPassword\\(\\) on object\\|null\\.$#"
+			message: "#^Cannot call method setPassword\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
@@ -247,7 +212,23 @@ parameters:
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, object\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: """
+				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:UpdateUserData\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
+				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
+			"""
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: """
+				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:editData\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
+				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
+			"""
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
@@ -527,6 +508,14 @@ parameters:
 			path: src/DataFixtures/UserFixture.php
 
 		-
+			message: """
+				#^Parameter \\$passwordEncoder of method App\\\\DataFixtures\\\\UserFixture\\:\\:__construct\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
+				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
+			"""
+			count: 1
+			path: src/DataFixtures/UserFixture.php
+
+		-
 			message: "#^Method App\\\\Entity\\\\BookingOffer\\:\\:getChildPrice\\(\\) should return float\\|null but returns string\\|null\\.$#"
 			count: 1
 			path: src/Entity/BookingOffer.php
@@ -627,14 +616,6 @@ parameters:
 			path: src/Entity/User.php
 
 		-
-			message: """
-				#^Return type of method App\\\\Entity\\\\User\\:\\:getRoles\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\Security\\\\Core\\\\Role\\\\Role\\:
-				since Symfony 4\\.3, to be removed in 5\\.0\\. Use strings as roles instead\\.$#
-			"""
-			count: 1
-			path: src/Entity/User.php
-
-		-
 			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/BookingOfferFiltersType.php
@@ -703,11 +684,6 @@ parameters:
 			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/SettingsType.php
-
-		-
-			message: "#^Generator expects value type Symfony\\\\Component\\\\HttpKernel\\\\Bundle\\\\BundleInterface, object given\\.$#"
-			count: 1
-			path: src/Kernel.php
 
 		-
 			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
@@ -950,19 +926,58 @@ parameters:
 			path: src/Repository/UserRepository.php
 
 		-
+			message: "#^Cannot access offset 'email' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
 			message: "#^Cannot access offset 'email' on mixed\\.$#"
-			count: 2
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
 			path: src/Security/LoginFormAuthenticator.php
 
 		-
 			message: "#^Cannot access offset 'password' on mixed\\.$#"
-			count: 2
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: """
+				#^Class App\\\\Security\\\\LoginFormAuthenticator extends deprecated class Symfony\\\\Component\\\\Security\\\\Guard\\\\Authenticator\\\\AbstractFormLoginAuthenticator\\:
+				since Symfony 5\\.3, use the new authenticator system instead$#
+			"""
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: "#^Method App\\\\Security\\\\LoginFormAuthenticator\\:\\:onAuthenticationSuccess\\(\\) has parameter \\$providerKey with no type specified\\.$#"
+			count: 1
 			path: src/Security/LoginFormAuthenticator.php
 
 		-
 			message: "#^Parameter \\#2 \\$raw of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:isPasswordValid\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: """
+				#^Parameter \\$passwordEncoder of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:__construct\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
+				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
+			"""
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
+
+		-
+			message: """
+				#^Class App\\\\Security\\\\LogoutSuccessHandler implements deprecated interface Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\LogoutSuccessHandlerInterface\\:
+				since Symfony 5\\.1$#
+			"""
+			count: 1
+			path: src/Security/LogoutSuccessHandler.php
 
 		-
 			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has no return type specified\\.$#"
@@ -1003,13 +1018,3 @@ parameters:
 			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$priceMin with no type specified\\.$#"
 			count: 1
 			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Dotenv\\\\Dotenv\\:\\:bootEnv\\(\\)\\.$#"
-			count: 1
-			path: tests/bootstrap.php
-
-		-
-			message: "#^Call to function method_exists\\(\\) with 'Symfony\\\\\\\\Component\\\\\\\\Dotenv\\\\\\\\Dotenv' and 'bootEnv' will always evaluate to false\\.$#"
-			count: 1
-			path: tests/bootstrap.php

@@ -7,6 +7,7 @@ use App\Form\AuthType;
 use App\Form\LoginType;
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,15 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -63,7 +69,6 @@ class SecurityController extends AbstractController
         $errors = $validator->validate($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $formUser = $form->getData();
-            $em = $this->getDoctrine()->getManager();
             $registrationFields = $request->request->get('registration');
 
             $formUser->setPassword($passwordEncoder->encodePassword(
@@ -72,8 +77,8 @@ class SecurityController extends AbstractController
             ));
             $formUser->setRegistrationDate(new \DateTime('now'));
 
-            $em->persist($formUser);
-            $em->flush();
+            $this->entityManager->persist($formUser);
+            $this->entityManager->flush();
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
@@ -94,7 +99,7 @@ class SecurityController extends AbstractController
      *
      * @return Response
      */
-    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator, AuthenticationUtils $authenticationUtils)
+    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(AuthType::class);

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\BookingOffer;
 use App\Form\BookingOfferSearchType;
+use App\Repository\BookingOfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    public function __construct(
+        private readonly BookingOfferRepository $bookingOfferRepository,
+    ) {
+    }
+
     /**
      * @Route("/", name="home")
      *
@@ -19,7 +25,7 @@ class HomeController extends AbstractController
     public function index(Request $request): Response
     {
         $bookingOffer = new BookingOffer();
-        $offers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        $offers = $this->bookingOfferRepository->findAll();
         foreach ($offers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
@@ -40,10 +46,10 @@ class HomeController extends AbstractController
                'comebackDate' => $bookingOffer->getComebackDate(),
             ]);
         }
-        $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy(['isFeatured' => 1]);
+        $featuredOffers = $this->bookingOfferRepository->findBy(['isFeatured' => 1]);
         $featuredWithRating = [];
         foreach ($featuredOffers as $featuredOffer) {
-            $featuredWithRating[] = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($featuredOffer->getId());
+            $featuredWithRating[] = $this->bookingOfferRepository->findOffer($featuredOffer->getId());
         }
 
         return $this->render('index/index.html.twig', [

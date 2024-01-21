@@ -2,21 +2,27 @@
 
 namespace App\Controller\UsersData;
 
-use App\Entity\CustomersRating;
-use App\Entity\Reservation;
+use App\Repository\CustomersRatingRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
+    public function __construct(
+        private readonly CustomersRatingRepository $customersRatingRepository,
+        private readonly ReservationRepository $reservationRepository,
+    ) {
+    }
+
     /**
      * @Route("/reservations", name="reservations")
      */
-    public function index(): \Symfony\Component\HttpFoundation\Response
+    public function index(): Response
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
+        $reservations = $this->reservationRepository->findReservationsByUser($user);
 
         $session_array = [];
         $isRatingAvailable = [];
@@ -24,7 +30,7 @@ class ReservationController extends AbstractController
             $offer = $reservation->getBookingOffer();
             $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
             $packageId = $offer->getPackageId();
-            $isOfferRated = $em->getRepository(CustomersRating::class)->findIfOfferIsRated($user, $packageId);
+            $isOfferRated = $this->customersRatingRepository->findIfOfferIsRated($user, $packageId);
             if (!$isOfferRated and $offerComebackDate < date('Y-m-d')) {
                 $isRatingAvailable[] = true;
                 $session_array[$reservation->getId()] = true;
