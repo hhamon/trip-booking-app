@@ -670,5 +670,46 @@ $ symfony php vendor/bin/deptrac
  -------------------- -----
 ```
 
+## Automating Static Code Analysis
 
+```json
+{
+    "scripts": {
+        "lint": [
+            "@php vendor/bin/ecs",
+            "@php bin/console lint:yaml config/ translations/",
+            "@php bin/console lint:container",
+            "@php bin/console lint:xliff translations/",
+            "@php bin/console lint:twig",
+            "@php vendor/bin/phpstan"
+        ],
+        "lint:fix": "@php vendor/bin/ecs --fix",
+        "analyze": [
+            "@php vendor/bin/phpstan",
+            "@php vendor/bin/deptrac"
+        ],
+        "phpstan": "@php vendor/bin/phpstan",
+        "phpstan:baseline": "@php vendor/bin/phpstan --generate-baseline",
+        "rebuild-db": [
+            "@php bin/console doctrine:database:drop --force --no-interaction",
+            "@php bin/console doctrine:database:create --no-interaction",
+            "@php bin/console doctrine:migration:migrate --no-interaction",
+            "@php bin/console doctrine:fixtures:load --no-interaction"
+        ],
+        "rectify": [
+            "@php vendor/bin/rector",
+            "@lint:fix"
+        ]
+    }
+}
+```
+
+```bash
+$ (symfony) composer lint
+$ (symfony) composer lint:fix
+$ (symfony) composer analyze
+
+$ (symfony) composer rectify
+
+```
 
