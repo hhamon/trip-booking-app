@@ -563,7 +563,7 @@ Run Rector.
 $ (symfony) composer require --dev rector/rector
 ```
 
-### Upgrade Code to PHP 8.3
+### Upgrade PHP Code to PHP 8.3
 
 ```php
 // ...
@@ -576,3 +576,30 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 };
 ```
+
+### Upgrade Symfony Code
+
+```php
+<?php
+
+// ...
+
+use Rector\Config\RectorConfig;
+use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\Set\ValueObject\LevelSetList;
+use Rector\Symfony\Set\SymfonySetList;
+
+return static function (RectorConfig $rectorConfig): void {
+    // ...
+
+    $rectorConfig->sets([
+        // ...
+        //DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        DoctrineSetList::DOCTRINE_CODE_QUALITY,
+        //DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::SYMFONY_50_TYPES,
+        SymfonySetList::SYMFONY_CODE_QUALITY,
+    ]);
+};
+```
+
