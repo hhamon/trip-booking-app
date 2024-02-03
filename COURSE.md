@@ -836,9 +836,11 @@ twig:
 
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `config/routes/dev/twig.yaml` file
+- Move `DATABASE_URL` environment variable to the `.env.local` file
 - Update Composer Flex recipe for `symfony/flex` component
 - Update Composer Flex recipe for `symfony/console` component
 - Update Composer Flex recipe for `doctrine/annotations` component
+- Update Composer Flex recipe for `doctrine/doctrine-bundle` bundle
 - Update Composer Flex recipe for `symfony/framework-bundle` bundle
 
 ## Upgrading Symfony to 6.x
