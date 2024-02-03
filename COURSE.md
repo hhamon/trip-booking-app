@@ -844,6 +844,7 @@ twig:
 - Update Composer Flex recipe for `doctrine/doctrine-fixtures-bundle` bundle
 - Update Composer Flex recipe for `doctrine/doctrine-migrations-bundle` bundle
 - Update Composer Flex recipe for `phpunit/phpunit` library
+- Update Composer Flex recipe for `symfony/apache-pack` library
 - Update Composer Flex recipe for `symfony/framework-bundle` bundle
 
 ## Upgrading Symfony to 6.x
