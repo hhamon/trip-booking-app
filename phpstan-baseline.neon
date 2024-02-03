@@ -233,11 +233,6 @@ parameters:
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\AppFixtures\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/AppFixtures.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$bookingEndDate with no type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/BookingOfferFixture.php
@@ -552,7 +547,7 @@ parameters:
 
 		-
 			message: "#^Class App\\\\Entity\\\\User referenced with incorrect case\\: App\\\\Entity\\\\user\\.$#"
-			count: 1
+			count: 2
 			path: src/Entity/CustomersRating.php
 
 		-
@@ -594,26 +589,6 @@ parameters:
 			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$totalCost has no type specified\\.$#"
 			count: 1
 			path: src/Entity/Reservation.php
-
-		-
-			message: "#^Method App\\\\Entity\\\\User\\:\\:eraseCredentials\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: "#^Method App\\\\Entity\\\\User\\:\\:getSalt\\(\\) should return string\\|null but return statement is missing\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: "#^Method App\\\\Entity\\\\User\\:\\:setRoles\\(\\) has parameter \\$roles with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$roles has no type specified\\.$#"
-			count: 1
-			path: src/Entity/User.php
 
 		-
 			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:buildForm\\(\\) has no return type specified\\.$#"

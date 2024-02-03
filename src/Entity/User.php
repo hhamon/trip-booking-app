@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,14 +21,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON)]
-    private $roles = [];
-
     /**
-     * @var string The hashed password
+     * @var string[]
      */
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON)]
+    private array $roles = [];
+
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING)]
-    private ?string $password = null;
+    private string $password = '';
 
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     private ?string $firstName = null;
@@ -67,29 +68,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @deprecated to be removed when upgrading to Symfony 6.x
      */
-    #[\Override]
     public function getUsername(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
     /**
-     * @see UserInterface
+     * @return string[]
      */
-    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return \array_unique($roles);
     }
 
+    /**
+     * @param string[] $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -99,30 +104,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
     {
+        if ($password === '') {
+            throw new RuntimeException('User password must not be empty.');
+        }
+
         $this->password = $password;
 
         return $this;
     }
 
     /**
-     * @see UserInterface
+     * @deprecated to be removed when upgrading to Symfony 6.x
      */
-    #[\Override]
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
-    /**
-     * @see UserInterface
-     */
-    #[\Override]
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
