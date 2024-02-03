@@ -848,6 +848,7 @@ twig:
 - Remove `symfony/apache-pack` Composer package
 - Update Composer Flex recipe for `symfony/debug-bundle` bundle
 - Update Composer Flex recipe for `symfony/framework-bundle` bundle
+- Update Composer Flex recipe for `symfony/monolog-bundle` bundle
 
 ## Upgrading Symfony to 6.x
 
