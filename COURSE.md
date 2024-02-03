@@ -841,6 +841,7 @@ twig:
 - Update Composer Flex recipe for `symfony/console` component
 - Update Composer Flex recipe for `doctrine/annotations` component
 - Update Composer Flex recipe for `doctrine/doctrine-bundle` bundle
+- Update Composer Flex recipe for `doctrine/doctrine-fixtures-bundle` bundle
 - Update Composer Flex recipe for `symfony/framework-bundle` bundle
 
 ## Upgrading Symfony to 6.x
