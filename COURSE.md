@@ -850,6 +850,7 @@ twig:
 - Update Composer Flex recipe for `symfony/framework-bundle` bundle
 - Update Composer Flex recipe for `symfony/monolog-bundle` bundle
 - Update Composer Flex recipe for `symfony/phpunit-bridge` component
+- Update Composer Flex recipe for `symfony/routing` component
 
 ## Upgrading Symfony to 6.x
 
