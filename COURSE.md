@@ -858,6 +858,8 @@ twig:
 - Update Composer Flex recipe for `symfony/web-profiler-bundle` bundle
 - Prepare `User` entity class for Symfony 6.x Security upgrade
 - Convert password encoder usages to password hasher usages
+- Enable `security.enable_authenticator_manager` Security parameter in `config/packages/security.yaml` file
+- Remove `anonymous` listener from Security `main` firewall in `config/packages/security.yaml` file
 
 ## Upgrading Symfony to 6.x
 

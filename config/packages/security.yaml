@@ -1,4 +1,6 @@
 security:
+    enable_authenticator_manager: true
+
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
             algorithm: auto
@@ -15,7 +17,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
