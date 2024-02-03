@@ -836,7 +836,8 @@ twig:
 
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `config/routes/dev/twig.yaml` file
-- Update Composer recipe for `symfony/framework-bundle` bundle
+- Update Composer Flex recipe for `symfony/flex` component
+- Update Composer Flex recipe for `symfony/framework-bundle` bundle
 
 ## Upgrading Symfony to 6.x
 
