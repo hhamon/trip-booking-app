@@ -851,6 +851,7 @@ twig:
 - Update Composer Flex recipe for `symfony/monolog-bundle` bundle
 - Update Composer Flex recipe for `symfony/phpunit-bridge` component
 - Update Composer Flex recipe for `symfony/routing` component
+- Update Composer Flex recipe for `symfony/swiftmailer-bundle` bundle
 
 ## Upgrading Symfony to 6.x
 
