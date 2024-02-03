@@ -560,7 +560,7 @@ return static function (RectorConfig $rectorConfig): void {
 Run Rector.
 
 ```bash
-$ (symfony) composer require --dev rector/rector
+$ (symfony) php vendor/bin/rector
 ```
 
 ### Upgrade PHP Code to PHP 8.3
@@ -578,6 +578,8 @@ return static function (RectorConfig $rectorConfig): void {
 ```
 
 ### Upgrade Symfony Code
+
+* See https://github.com/rectorphp/rector-symfony/blob/main/docs/rector_rules_overview.md
 
 ```php
 <?php
