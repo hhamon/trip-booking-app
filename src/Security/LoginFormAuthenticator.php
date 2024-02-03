@@ -5,10 +5,11 @@ namespace App\Security;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
@@ -18,8 +19,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    public function __construct(private readonly UserRepository $userRepository, private readonly RouterInterface $router, private readonly UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly RouterInterface $router,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
     }
 
     #[\Override]
@@ -55,10 +59,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $this->userRepository->findOneBy(['email' => $credentials['email']]);
     }
 
-    #[\Override]
-    public function checkCredentials($credentials, UserInterface $user)
+    /**
+     * @param array{email: string, password: string} $credentials
+     */
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        \assert($user instanceof PasswordAuthenticatedUserInterface);
+
+        return $this->passwordHasher->isPasswordValid($user, $credentials['password']);
     }
 
     #[\Override]

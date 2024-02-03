@@ -11,8 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -65,10 +65,7 @@ class SecurityController extends AbstractController
             $formUser = $form->getData();
             $registrationFields = $request->request->get('registration');
 
-            $formUser->setPassword($passwordEncoder->encodePassword(
-                $formUser,
-                $registrationFields['password']['first']
-            ));
+            $formUser->setPassword($passwordHasher->hashPassword($formUser, $registrationFields['password']['first']));
             $formUser->setRegistrationDate(new \DateTime('now'));
 
             $this->entityManager->persist($formUser);

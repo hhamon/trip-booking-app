@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use RuntimeException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -109,8 +108,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): self
     {
-        if ($password === '') {
-            throw new RuntimeException('User password must not be empty.');
+        if ('' === $password) {
+            throw new \RuntimeException('User password must not be empty.');
         }
 
         $this->password = $password;

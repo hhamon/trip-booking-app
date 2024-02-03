@@ -857,6 +857,7 @@ twig:
 - Update Composer Flex recipe for `symfony/validator` component
 - Update Composer Flex recipe for `symfony/web-profiler-bundle` bundle
 - Prepare `User` entity class for Symfony 6.x Security upgrade
+- Convert password encoder usages to password hasher usages
 
 ## Upgrading Symfony to 6.x
 

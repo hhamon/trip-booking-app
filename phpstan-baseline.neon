@@ -121,12 +121,17 @@ parameters:
 			path: src/Controller/SecurityController.php
 
 		-
+			message: "#^Parameter \\#1 \\$credentials of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:checkCredentials\\(\\) expects array\\{email\\: string, password\\: string\\}, bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
 			message: "#^Parameter \\#1 \\$object of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:persist\\(\\) expects object, mixed given\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface, mixed given\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php
 
@@ -139,14 +144,6 @@ parameters:
 			message: """
 				#^Parameter \\$guardHandler of method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\Security\\\\Guard\\\\GuardAuthenticatorHandler\\:
 				since Symfony 5\\.3, use the new authenticator system instead$#
-			"""
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
-			message: """
-				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
-				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
 			"""
 			count: 1
 			path: src/Controller/SecurityController.php
@@ -168,36 +165,16 @@ parameters:
 
 		-
 			message: "#^Cannot call method getEmail\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 2
+			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
 		-
 			message: "#^Cannot call method getFirstName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 2
+			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
 		-
 			message: "#^Cannot call method getLastName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 2
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method setEmail\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method setFirstName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method setLastName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method setPassword\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
@@ -208,27 +185,6 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:UpdateUserData\\(\\) has parameter \\$fields with no type specified\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:encodePassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: """
-				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:UpdateUserData\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
-				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
-			"""
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: """
-				#^Parameter \\$passwordEncoder of method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:editData\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
-				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
-			"""
 			count: 1
 			path: src/Controller/UsersData/SettingController.php
 
@@ -499,14 +455,6 @@ parameters:
 
 		-
 			message: "#^Method App\\\\DataFixtures\\\\UserFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/UserFixture.php
-
-		-
-			message: """
-				#^Parameter \\$passwordEncoder of method App\\\\DataFixtures\\\\UserFixture\\:\\:__construct\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
-				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
-			"""
 			count: 1
 			path: src/DataFixtures/UserFixture.php
 
@@ -916,11 +864,6 @@ parameters:
 			path: src/Security/LoginFormAuthenticator.php
 
 		-
-			message: "#^Cannot access offset 'password' on mixed\\.$#"
-			count: 1
-			path: src/Security/LoginFormAuthenticator.php
-
-		-
 			message: """
 				#^Class App\\\\Security\\\\LoginFormAuthenticator extends deprecated class Symfony\\\\Component\\\\Security\\\\Guard\\\\Authenticator\\\\AbstractFormLoginAuthenticator\\:
 				since Symfony 5\\.3, use the new authenticator system instead$#
@@ -930,19 +873,6 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Security\\\\LoginFormAuthenticator\\:\\:onAuthenticationSuccess\\(\\) has parameter \\$providerKey with no type specified\\.$#"
-			count: 1
-			path: src/Security/LoginFormAuthenticator.php
-
-		-
-			message: "#^Parameter \\#2 \\$raw of method Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:\\:isPasswordValid\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Security/LoginFormAuthenticator.php
-
-		-
-			message: """
-				#^Parameter \\$passwordEncoder of method App\\\\Security\\\\LoginFormAuthenticator\\:\\:__construct\\(\\) has typehint with deprecated interface Symfony\\\\Component\\\\Security\\\\Core\\\\Encoder\\\\UserPasswordEncoderInterface\\:
-				since Symfony 5\\.3, use \\{@link UserPasswordHasherInterface\\} instead$#
-			"""
 			count: 1
 			path: src/Security/LoginFormAuthenticator.php
 

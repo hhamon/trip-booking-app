@@ -2,23 +2,25 @@
 
 namespace App\Controller\UsersData;
 
+use App\Entity\User;
 use App\Form\SettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SettingController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
     #[Route(path: '/settings', name: 'settings')]
-    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function editData(Request $request): Response
     {
         $session = $request->getSession();
 
@@ -33,7 +35,7 @@ class SettingController extends AbstractController
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
                 $settingsFields = $request->request->get('settings');
-                $user = $this->UpdateUserData($settingsFields, $passwordEncoder);
+                $user = $this->UpdateUserData($settingsFields);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -52,9 +54,11 @@ class SettingController extends AbstractController
         }
     }
 
-    private function UpdateUserData($fields, UserPasswordEncoderInterface $passwordEncoder)
+    private function UpdateUserData($fields)
     {
         $user = $this->getUser();
+        \assert($user instanceof User);
+
         $firstNameField = $fields['firstName'];
         if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
@@ -68,10 +72,7 @@ class SettingController extends AbstractController
             $user->setEmail($emailField);
         }
         if (null != $fields['password']['first']) {
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $fields['password']['first']
-            ));
+            $user->setPassword($this->passwordHasher->hashPassword($user, $fields['password']['first']));
         }
 
         return $user;
