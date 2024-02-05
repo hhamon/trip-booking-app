@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
@@ -23,23 +23,28 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public function __construct(
-        private readonly UserRepository $userRepository,
         private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
+        \assert(\is_string($email));
+
+        $password = $request->request->get('password', '');
+        \assert(\is_string($password));
+
+        $csrfToken = $request->request->get('_csrf_token');
+        \assert(\is_string($csrfToken));
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
             new UserBadge($email),
-            new PasswordCredentials($request->request->get('password', '')),
+            new PasswordCredentials($password),
             [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+                new CsrfTokenBadge('authenticate', $csrfToken),
                 new RememberMeBadge(),
             ]
         );
