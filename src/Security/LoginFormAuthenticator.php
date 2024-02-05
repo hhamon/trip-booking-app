@@ -5,83 +5,57 @@ namespace App\Security;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
     public function __construct(
         private readonly UserRepository $userRepository,
-        private readonly RouterInterface $router,
+        private readonly UrlGeneratorInterface $urlGenerator,
         private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
-    #[\Override]
-    public function supports(Request $request)
+    public function authenticate(Request $request): Passport
     {
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
-    }
+        $email = $request->request->get('email', '');
 
-    #[\Override]
-    public function getCredentials(Request $request)
-    {
-        // this is called immediately when supports returns true
-        // dump($request->request->all());die;
-        $postData = $request->request->get('login');
-        $email = $postData['email'];
-        $pass = $postData['password'];
-        $credentials = [
-            'email' => $email,
-            'password' => $pass,
-        ];
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
 
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['email']
+        return new Passport(
+            new UserBadge($email),
+            new PasswordCredentials($request->request->get('password', '')),
+            [
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+                new RememberMeBadge(),
+            ]
         );
-
-        return $credentials;
     }
 
-    #[\Override]
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return $this->userRepository->findOneBy(['email' => $credentials['email']]);
-    }
-
-    /**
-     * @param array{email: string, password: string} $credentials
-     */
-    public function checkCredentials($credentials, UserInterface $user): bool
-    {
-        \assert($user instanceof PasswordAuthenticatedUserInterface);
-
-        return $this->passwordHasher->isPasswordValid($user, $credentials['password']);
-    }
-
-    #[\Override]
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->router->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
-    #[\Override]
-    protected function getLoginUrl()
+    protected function getLoginUrl(Request $request): string
     {
-        return $this->router->generate('app_login');
+        return $this->urlGenerator->generate('app_login');
     }
 }

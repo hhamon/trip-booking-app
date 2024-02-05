@@ -35,7 +35,7 @@ class SettingController extends AbstractController
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
                 $settingsFields = $request->request->get('settings');
-                $user = $this->UpdateUserData($settingsFields);
+                $user = $this->updateUserData($settingsFields);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -54,7 +54,7 @@ class SettingController extends AbstractController
         }
     }
 
-    private function UpdateUserData($fields)
+    private function updateUserData($fields)
     {
         $user = $this->getUser();
         \assert($user instanceof User);

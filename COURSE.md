@@ -860,6 +860,7 @@ twig:
 - Convert password encoder usages to password hasher usages
 - Enable `security.enable_authenticator_manager` Security parameter in `config/packages/security.yaml` file
 - Remove `anonymous` listener from Security `main` firewall in `config/packages/security.yaml` file
+- Use new Symfony Security system with the help of Symfony `make:auth` and `make:registration` console commands
 
 ## Upgrading Symfony to 6.x
 
