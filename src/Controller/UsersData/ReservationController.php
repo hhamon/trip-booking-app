@@ -2,12 +2,14 @@
 
 namespace App\Controller\UsersData;
 
+use App\Entity\User;
 use App\Repository\CustomersRatingRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ReservationController extends AbstractController
 {
@@ -18,9 +20,8 @@ class ReservationController extends AbstractController
     }
 
     #[Route(path: '/reservations', name: 'reservations')]
-    public function index(Request $request): Response
+    public function index(Request $request, #[CurrentUser] User $user): Response
     {
-        $user = $this->getUser();
         $reservations = $this->reservationRepository->findReservationsByUser($user);
 
         $session_array = [];

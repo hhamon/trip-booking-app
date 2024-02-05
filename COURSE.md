@@ -868,10 +868,10 @@ twig:
 - Remove `sensio/framework-extra-bundle` third party bundle
 - Remove `easycorp/easyadmin-bundle` third party bundle
 - Simplify `symfony/switfmailer-bundle` third party bundle configuration
+- Leverage `#[CurrentUser]` PHP attribute in controller classes
 
 ## TODO
 
 * Update config files (routes, packages, services, etc)
-* Leverage `#[CurrentUser]` PHP attribute in controllers
 * Use Symfony `Mailer` component instead of `Swift_Mailer`
 * Remove `symfony/swiftmailer-bundle` dependency

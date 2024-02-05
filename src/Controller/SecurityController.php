@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -86,10 +87,8 @@ class SecurityController extends AbstractController
     public function authenticate(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
+        #[CurrentUser] User $user,
     ): Response {
-        $user = $this->getUser();
-        \assert($user instanceof User);
-
         $form = $this->createForm(AuthType::class);
         $form->handleRequest($request);
 

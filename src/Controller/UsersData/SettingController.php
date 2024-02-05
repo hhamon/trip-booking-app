@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class SettingController extends AbstractController
 {
@@ -20,7 +21,7 @@ class SettingController extends AbstractController
     }
 
     #[Route(path: '/settings', name: 'settings')]
-    public function editData(Request $request): Response
+    public function editData(Request $request, #[CurrentUser] User $user): Response
     {
         $session = $request->getSession();
 
@@ -29,13 +30,12 @@ class SettingController extends AbstractController
 
         if ($displaySettings || \count($request->request->all()) > 0) {
             $session->remove('display_settings');
-            $user = $this->getUser();
             $settingsForm = $this->createForm(SettingsType::class);
             $settingsForm->createView();
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
                 $settingsFields = $request->request->get('settings');
-                $user = $this->updateUserData($settingsFields);
+                $this->updateUserData($settingsFields, $user);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -49,16 +49,13 @@ class SettingController extends AbstractController
                 'email' => $user->getEmail(),
                 'settingsForm' => $settingsForm,
             ]);
-        } else {
-            return $this->redirectToRoute('auth');
         }
+
+        return $this->redirectToRoute('auth');
     }
 
-    private function updateUserData($fields)
+    private function updateUserData($fields, User $user): void
     {
-        $user = $this->getUser();
-        \assert($user instanceof User);
-
         $firstNameField = $fields['firstName'];
         if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
@@ -74,7 +71,5 @@ class SettingController extends AbstractController
         if (null != $fields['password']['first']) {
             $user->setPassword($this->passwordHasher->hashPassword($user, $fields['password']['first']));
         }
-
-        return $user;
     }
 }

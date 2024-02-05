@@ -4,6 +4,7 @@ namespace App\Controller\Offer;
 
 use App\Entity\BookingOffer;
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Form\BookingOfferFiltersType;
 use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
@@ -18,6 +19,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route(path: '/offer', name: 'offer_')]
 class OfferController extends AbstractController
@@ -75,12 +77,14 @@ class OfferController extends AbstractController
         ]);
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}', name: 'reservationSummary')]
-    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber)
-    {
+    public function displayReservationSummary(
+        Request $request,
+        #[CurrentUser] User $user,
+        int $offerId,
+        int $adultNumber,
+        int $childNumber,
+    ): Response {
         $offer = $this->bookingOfferRepository->find($offerId);
 
         $reservation = new Reservation();
@@ -89,9 +93,11 @@ class OfferController extends AbstractController
         $reservation->setChildNumber($childNumber);
         $reservation->setBankTransferTitle();
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
-        $reservation->setUser($this->getUser());
+        $reservation->setUser($user);
+
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation->setDateOfBooking(new \DateTime('NOW'));
             $reservation->setIsPaidFor(false);

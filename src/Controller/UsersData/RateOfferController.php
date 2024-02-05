@@ -3,6 +3,7 @@
 namespace App\Controller\UsersData;
 
 use App\Entity\CustomersRating;
+use App\Entity\User;
 use App\Form\RateOfferType;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class RateOfferController extends AbstractController
 {
@@ -19,12 +21,12 @@ class RateOfferController extends AbstractController
     ) {
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: 'rateOffer/{reservationId}', name: 'rateOffer')]
-    public function displayRateOfferForm(Request $request, int $reservationId)
-    {
+    public function displayRateOfferForm(
+        Request $request,
+        int $reservationId,
+        #[CurrentUser] User $user,
+    ): Response {
         $session = $request->getSession();
 
         /** @var array<int, bool> $displayRateOffers */
@@ -39,7 +41,6 @@ class RateOfferController extends AbstractController
             $packageId = $offer->getPackageId();
             $customersRating = new CustomersRating();
             $customersRating->setPackage($packageId);
-            $user = $this->getUser();
             $customersRating->setUser($user);
             $rateOfferForm = $this->createForm(RateOfferType::class, $customersRating);
             $rateOfferForm->handleRequest($request);
@@ -54,8 +55,8 @@ class RateOfferController extends AbstractController
                 'offer' => $offer,
                 'rateOfferForm' => $rateOfferForm,
             ]);
-        } else {
-            return $this->redirectToRoute('reservations');
         }
+
+        return $this->redirectToRoute('reservations');
     }
 }
