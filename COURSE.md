@@ -867,6 +867,7 @@ twig:
 - Update Composer Flex recipe for `symfony/security-bundle` bundle
 - Remove `sensio/framework-extra-bundle` third party bundle
 - Remove `easycorp/easyadmin-bundle` third party bundle
+- Simplify `symfony/switfmailer-bundle` third party bundle configuration
 
 ## TODO
 
