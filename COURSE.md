@@ -862,6 +862,7 @@ twig:
 - Remove `anonymous` listener from Security `main` firewall in `config/packages/security.yaml` file
 - Use new Symfony Security system with the help of Symfony `make:auth` and `make:registration` console commands
 - Remove `symfony/security-guard` third party dependency
+- Update Composer Flex recipe for `symfony/security-bundle` bundle
 
 ## Upgrading Symfony to 6.x
 
