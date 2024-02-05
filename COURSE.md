@@ -866,6 +866,7 @@ twig:
 - Remove `symfony/security-guard` third party dependency
 - Update Composer Flex recipe for `symfony/security-bundle` bundle
 - Remove `sensio/framework-extra-bundle` third party bundle
+- Remove `easycorp/easyadmin-bundle` third party bundle
 
 ## TODO
 
