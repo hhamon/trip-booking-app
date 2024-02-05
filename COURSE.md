@@ -836,6 +836,8 @@ twig:
 
 ## Upgrading Symfony to 6.x
 
+### Prerequisites
+
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `config/routes/dev/twig.yaml` file
 - Move `DATABASE_URL` environment variable to the `.env.local` file
@@ -870,8 +872,70 @@ twig:
 - Simplify `symfony/switfmailer-bundle` third party bundle configuration
 - Leverage `#[CurrentUser]` PHP attribute in controller classes
 
-## TODO
+### Upgrade Composer & Dependencies
 
-* Update config files (routes, packages, services, etc)
-* Use Symfony `Mailer` component instead of `Swift_Mailer`
-* Remove `symfony/swiftmailer-bundle` dependency
+- Run `composer outdated` command to check for third party PHP dependencies that may be upgraded before Symfony.
+
+```bash
+$ (symfony) composer outdated
+
+Color legend:
+- patch or minor release available - update recommended
+- major release available - update possible
+
+Direct dependencies required in composer.json:
+doctrine/annotations                1.14.3  2.0.1   Docblock Annotations Parser
+doctrine/doctrine-bundle            2.7.2   2.11.1  Symfony DoctrineBundle
+doctrine/doctrine-fixtures-bundle   3.4.5   3.5.1   Symfony DoctrineFixturesBundle
+doctrine/doctrine-migrations-bundle 2.2.3   3.3.0   Symfony DoctrineMigrationsBundle
+doctrine/orm                        2.17.3  3.0.0   Object-Relational-Mapper for PHP
+phpstan/phpstan                     1.10.56 1.10.57 PHPStan - PHP Static Analysis Tool
+phpunit/phpunit                     10.5.8  11.0.2  The PHP Unit Testing framework.
+rector/rector                       0.19.2  0.19.8  Instant Upgrade and Automated Refactoring of any PHP code
+symfony/asset                       v5.4.31 v7.0.3  Manages URL generation and versioning of web assets such as CSS stylesheets, Java...
+symfony/browser-kit                 v5.4.31 v7.0.3  Simulates the behavior of a web browser, allowing you to make requests, click on ...
+symfony/console                     v5.4.34 v7.0.3  Eases the creation of beautiful and testable command line interfaces
+symfony/css-selector                v5.4.26 v7.0.3  Converts CSS selectors to XPath expressions
+...
+```
+
+- Update `composer.json` file to support higher Doctrine 2 ORM version.
+
+```diff
+diff --git a/composer.json b/composer.json
+index 5b561a1..0e1c66e 100644
+--- a/composer.json
++++ b/composer.json
+@@ -9,9 +9,9 @@
+         "ext-ctype": "*",
+         "ext-iconv": "*",
+         "composer/package-versions-deprecated": "^1.11.99.5",
+-        "doctrine/annotations": "^1.14.3",
+-        "doctrine/doctrine-bundle": "^2.7.2",
+-        "doctrine/doctrine-migrations-bundle": "^2.2.3",
++        "doctrine/annotations": "^2.0.1",
++        "doctrine/doctrine-bundle": "^2.11.1",
++        "doctrine/doctrine-migrations-bundle": "^3.3.0",
+         "doctrine/orm": "^2.17.3",
+         "phpdocumentor/reflection-docblock": "^5.3.0",
+         "symfony/asset": "5.4.*",
+@@ -37,7 +37,7 @@
+         "symfony/yaml": "5.4.*"
+     },
+     "require-dev": {
+-        "doctrine/doctrine-fixtures-bundle": "^3.4.5",
++        "doctrine/doctrine-fixtures-bundle": "^3.5.1",
+         "phpstan/extension-installer": "^1.3.1",
+         "phpstan/phpstan": "^1.10.56",
+         "phpstan/phpstan-deprecation-rules": "^1.1.4",
+```
+
+- Update `composer.json` file to support higher Doctrine 2 ORM version.
+
+Run `composer update "doctrine/*"` command to update Doctrine third party dependencies.
+
+### Post Upgrade Code Improvements
+
+- Update config files (routes, packages, services, etc)
+- Use Symfony `Mailer` component instead of `Swift_Mailer`
+- Remove `symfony/swiftmailer-bundle` dependency
