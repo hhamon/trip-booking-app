@@ -107,9 +107,6 @@
             "./config/packages/dev/easy_log_handler.yaml"
         ]
     },
-    "egulias/email-validator": {
-        "version": "2.1.x-dev"
-    },
     "fig/link-util": {
         "version": "1.0.x-dev"
     },
@@ -192,9 +189,6 @@
         "files": [
             "deptrac.yaml"
         ]
-    },
-    "swiftmailer/swiftmailer": {
-        "version": "6.2-dev"
     },
     "symfony/asset": {
         "version": "4.3.x-dev"
@@ -359,9 +353,6 @@
     "symfony/polyfill-intl-icu": {
         "version": "1.12-dev"
     },
-    "symfony/polyfill-intl-idn": {
-        "version": "1.12-dev"
-    },
     "symfony/polyfill-intl-normalizer": {
         "version": "1.21-dev"
     },
@@ -434,20 +425,6 @@
     },
     "symfony/stopwatch": {
         "version": "4.3.x-dev"
-    },
-    "symfony/swiftmailer-bundle": {
-        "version": "3.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.5",
-            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
-        },
-        "files": [
-            "config/packages/dev/swiftmailer.yaml",
-            "config/packages/swiftmailer.yaml",
-            "config/packages/test/swiftmailer.yaml"
-        ]
     },
     "symfony/test-pack": {
         "version": "dev-master"

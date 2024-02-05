@@ -871,6 +871,7 @@ twig:
 - Remove `easycorp/easyadmin-bundle` third party bundle
 - Simplify `symfony/switfmailer-bundle` third party bundle configuration
 - Leverage `#[CurrentUser]` PHP attribute in controller classes
+- Remove `symfony/swiftmailer-bundle` third party bundle
 
 ### Upgrade Composer & Dependencies
 
@@ -937,5 +938,3 @@ Run `composer update "doctrine/*"` command to update Doctrine third party depend
 ### Post Upgrade Code Improvements
 
 - Update config files (routes, packages, services, etc)
-- Use Symfony `Mailer` component instead of `Swift_Mailer`
-- Remove `symfony/swiftmailer-bundle` dependency
