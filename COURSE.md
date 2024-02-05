@@ -834,6 +834,8 @@ twig:
 }
 ```
 
+## Upgrading Symfony to 6.x
+
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `config/routes/dev/twig.yaml` file
 - Move `DATABASE_URL` environment variable to the `.env.local` file
@@ -863,16 +865,11 @@ twig:
 - Use new Symfony Security system with the help of Symfony `make:auth` and `make:registration` console commands
 - Remove `symfony/security-guard` third party dependency
 - Update Composer Flex recipe for `symfony/security-bundle` bundle
+- Remove `sensio/framework-extra-bundle` third party bundle
 
-## Upgrading Symfony to 6.x
+## TODO
 
-* Update Composer Flex recipes
 * Update config files (routes, packages, services, etc)
-* Use new Security system
-* Convert annotations to PHP attributes
 * Leverage `#[CurrentUser]` PHP attribute in controllers
-* Remove `$this->getDoctrine()` usage in controllers
 * Use Symfony `Mailer` component instead of `Swift_Mailer`
-* Remove `sensio/framework-extra-bundle` dependency
 * Remove `symfony/swiftmailer-bundle` dependency
-* Fix session usage
