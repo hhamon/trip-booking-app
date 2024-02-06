@@ -1034,4 +1034,5 @@ $ (symfony) composer update "symfony/*"
 - Remove `security.enable_authenticator_manager` configuration parameter from `config/packages/security.yaml` file
 - Remove `User::getUsername()` & `User::getSalt()` methods
 - Update Composer Flex recipe for `doctrine/annotations` third party library
+- Update Composer Flex recipe for `doctrine/doctrine-bundle` third party bundle
 - Update config files (routes, packages, services, etc)
