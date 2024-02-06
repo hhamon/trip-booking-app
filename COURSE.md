@@ -1039,4 +1039,5 @@ $ (symfony) composer update "symfony/*"
 - Update Composer Flex recipe for `symfony/framework-bundle` third party bundle
 - Update Composer Flex recipe for `symfony/phpunit-bridge` third party library
 - Update Composer Flex recipe for `symfony/routing` third party library
+- Update Composer Flex recipe for `symfony/security-bundle` third party bundle
 - Update config files (routes, packages, services, etc)
