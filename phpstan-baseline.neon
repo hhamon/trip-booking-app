@@ -91,11 +91,6 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\Reservation\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Variable \\$departureSpots might not be defined\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
@@ -134,31 +129,6 @@ parameters:
 			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
 			count: 1
 			path: src/Controller/UsersData/RateOfferController.php
-
-		-
-			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\CustomersRating\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
-			count: 1
-			path: src/Controller/UsersData/RateOfferController.php
-
-		-
-			message: "#^Cannot call method getEmail\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method getFirstName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Cannot call method getLastName\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:updateUserData\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/UsersData/SettingController.php
 
 		-
 			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:updateUserData\\(\\) has parameter \\$fields with no type specified\\.$#"
