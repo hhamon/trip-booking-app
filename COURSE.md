@@ -1032,5 +1032,6 @@ $ (symfony) composer update "symfony/*"
 ### Post Upgrade Code Improvements
 
 - Remove `security.enable_authenticator_manager` configuration parameter from `config/packages/security.yaml` file
+- Remove `User::getUsername()` & `User::getSalt()` methods
 - Sync Composer Flex recipes
 - Update config files (routes, packages, services, etc)
