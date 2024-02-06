@@ -491,17 +491,7 @@ parameters:
 			path: src/Form/BookingOfferFiltersType.php
 
 		-
-			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferFiltersType.php
-
-		-
 			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferSearchType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/BookingOfferSearchType.php
 
@@ -511,17 +501,7 @@ parameters:
 			path: src/Form/NewsletterType.php
 
 		-
-			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/NewsletterType.php
-
-		-
 			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RateOfferType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/RateOfferType.php
 
@@ -531,27 +511,12 @@ parameters:
 			path: src/Form/RegistrationType.php
 
 		-
-			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RegistrationType.php
-
-		-
 			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/ReservationStartType.php
 
 		-
-			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/ReservationStartType.php
-
-		-
 			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/SettingsType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Form/SettingsType.php
 
@@ -794,6 +759,14 @@ parameters:
 			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/UserRepository.php
+
+		-
+			message: """
+				#^Fetching class constant LAST_USERNAME of deprecated class Symfony\\\\Component\\\\Security\\\\Core\\\\Security\\:
+				since Symfony 6\\.2, use \\\\Symfony\\\\Bundle\\\\SecurityBundle\\\\Security instead$#
+			"""
+			count: 1
+			path: src/Security/LoginFormAuthenticator.php
 
 		-
 			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has no return type specified\\.$#"

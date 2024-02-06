@@ -876,7 +876,7 @@ twig:
 
 ### Upgrade Composer & Dependencies
 
-- Run `composer outdated` command to check for third party PHP dependencies that may be upgraded before Symfony.
+Run `composer outdated` command to check for third party PHP dependencies that may be upgraded before Symfony.
 
 ```bash
 $ (symfony) composer outdated
@@ -901,7 +901,7 @@ symfony/css-selector                v5.4.26 v7.0.3  Converts CSS selectors to XP
 ...
 ```
 
-- Update `composer.json` file to support higher Doctrine 2 ORM version.
+Update `composer.json` file to support higher Doctrine 2 ORM version.
 
 ```diff
 diff --git a/composer.json b/composer.json
@@ -932,10 +932,105 @@ index 5b561a1..0e1c66e 100644
          "phpstan/phpstan-deprecation-rules": "^1.1.4",
 ```
 
-- Update `composer.json` file to support higher Doctrine 2 ORM version.
+Update `composer.json` file to support higher Doctrine 2 ORM version.
 
 Run `composer update "doctrine/*"` command to update Doctrine third party dependencies.
 
+```bash
+$ (symfony) composer update "doctrine/*"
+```
+
+Update `composer.json` file to support higher Symfony 6.4 version.
+
+```diff
+diff --git a/composer.json b/composer.json
+index 146d1cf..a299dfd 100644
+--- a/composer.json
++++ b/composer.json
+@@ -14,26 +14,26 @@
+         "doctrine/doctrine-migrations-bundle": "^3.3.0",
+         "doctrine/orm": "^2.17.3",
+         "phpdocumentor/reflection-docblock": "^5.3.0",
+-        "symfony/asset": "5.4.*",
+-        "symfony/console": "5.4.*",
+-        "symfony/dotenv": "5.4.*",
+-        "symfony/expression-language": "5.4.*",
+-        "symfony/finder": "5.4.*",
++        "symfony/asset": "6.4.*",
++        "symfony/console": "6.4.*",
++        "symfony/dotenv": "6.4.*",
++        "symfony/expression-language": "6.4.*",
++        "symfony/finder": "6.4.*",
+         "symfony/flex": "^2.4.3",
+-        "symfony/form": "5.4.*",
+-        "symfony/framework-bundle": "5.4.*",
++        "symfony/form": "6.4.*",
++        "symfony/framework-bundle": "6.4.*",
+         "symfony/monolog-bundle": "^3.10",
+-        "symfony/process": "5.4.*",
+-        "symfony/property-access": "5.4.*",
+-        "symfony/property-info": "5.4.*",
+-        "symfony/runtime": "5.4.*",
+-        "symfony/security-bundle": "5.4.*",
+-        "symfony/serializer": "5.4.*",
+-        "symfony/translation": "5.4.*",
+-        "symfony/twig-bundle": "5.4.*",
+-        "symfony/validator": "5.4.*",
+-        "symfony/web-link": "5.4.*",
+-        "symfony/yaml": "5.4.*"
++        "symfony/process": "6.4.*",
++        "symfony/property-access": "6.4.*",
++        "symfony/property-info": "6.4.*",
++        "symfony/runtime": "6.4.*",
++        "symfony/security-bundle": "6.4.*",
++        "symfony/serializer": "6.4.*",
++        "symfony/translation": "6.4.*",
++        "symfony/twig-bundle": "6.4.*",
++        "symfony/validator": "6.4.*",
++        "symfony/web-link": "6.4.*",
++        "symfony/yaml": "6.4.*"
+     },
+     "require-dev": {
+         "doctrine/doctrine-fixtures-bundle": "^3.5.1",
+@@ -46,13 +46,13 @@
+         "phpunit/phpunit": "^10.5.8",
+         "qossmic/deptrac-shim": "^1.0.2",
+         "rector/rector": "^0.19.2",
+-        "symfony/browser-kit": "5.4.*",
+-        "symfony/css-selector": "5.4.*",
+-        "symfony/debug-bundle": "5.4.*",
++        "symfony/browser-kit": "6.4.*",
++        "symfony/css-selector": "6.4.*",
++        "symfony/debug-bundle": "6.4.*",
+         "symfony/maker-bundle": "^1.50.0",
+-        "symfony/phpunit-bridge": "5.4.*",
+-        "symfony/stopwatch": "5.4.*",
+-        "symfony/web-profiler-bundle": "5.4.*",
++        "symfony/phpunit-bridge": "6.4.*",
++        "symfony/stopwatch": "6.4.*",
++        "symfony/web-profiler-bundle": "6.4.*",
+         "symplify/easy-coding-standard": "^12.1.8"
+     },
+     "config": {
+@@ -130,7 +130,7 @@
+     "extra": {
+         "symfony": {
+             "allow-contrib": false,
+-            "require": "5.4.*"
++            "require": "6.4.*"
+         }
+     }
+ }
+```
+
+Run `composer update "symfony/*"` command to update Doctrine third party dependencies.
+
+```bash
+$ (symfony) composer update "symfony/*"
+```
+
 ### Post Upgrade Code Improvements
 
+- Remove `security.enable_authenticator_manager` configuration parameter from `config/packages/security.yaml` file
+- Sync Composer Flex recipes
 - Update config files (routes, packages, services, etc)
