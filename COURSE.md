@@ -872,6 +872,7 @@ twig:
 - Simplify `symfony/switfmailer-bundle` third party bundle configuration
 - Leverage `#[CurrentUser]` PHP attribute in controller classes
 - Remove `symfony/swiftmailer-bundle` third party bundle
+- Ensure Twig templates always receive `FormView` objects instead of `Form` objects
 
 ### Upgrade Composer & Dependencies
 

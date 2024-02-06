@@ -73,7 +73,7 @@ class OfferController extends AbstractController
         return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
             'parameters' => $request->attributes->all(),
-            'filtersForm' => $filtersForm,
+            'offer_filters_form' => $filtersForm->createView(),
         ]);
     }
 
@@ -109,7 +109,7 @@ class OfferController extends AbstractController
 
         return $this->render('offer/reservation_summary.html.twig', [
             'reservation' => $reservation,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -119,7 +119,7 @@ class OfferController extends AbstractController
      * @return Response
      */
     #[Route(path: '/{id}', name: 'single')]
-    public function displayOffer(Request $request, $id)
+    public function displayOffer(Request $request, int $id): Response
     {
         $offer = $this->bookingOfferRepository->findOffer($id);
 
@@ -145,7 +145,7 @@ class OfferController extends AbstractController
 
         return $this->render('offer/single_offer.html.twig', [
             'offer' => $offer,
-            'reservationForm' => $reservationForm,
+            'init_reservation_form' => $reservationForm->createView(),
             'photosCount' => $photosCount,
         ]);
     }

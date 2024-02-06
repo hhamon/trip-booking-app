@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Rate Offer - Dream Holiday{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/rate_offer.css') }}">
 {% endblock %}
+
 {% block page_content %}
     <div class="container-fluid my-5">
         <div class="row justify-content-center">
@@ -10,11 +13,10 @@
                 <h1>Rate offer</h1>
                 <h2><i class="fas fa-map-marker-alt"></i> {{ offer.destination }}</h2>
                 <p><i class="fas fa-calendar-check"></i> {{ offer.departureDate|date("d.m.Y") }}-{{ offer.comebackDate|date("d.m.Y") }}</p>
-                {% set form_desktop = rateOfferForm.createView %}
-                {{ form_start(form_desktop) }}
+                {{ form_start(rate_offer_form) }}
                 <div class="form-group" id="stars-container">
-                    {{ form_label(form_desktop.rating) }}
-                    {{ form_widget(form_desktop.rating) }}
+                    {{ form_label(rate_offer_form.rating) }}
+                    {{ form_widget(rate_offer_form.rating) }}
                     <i class="fas fa-star" data-starnum="1" id="star1"></i>
                     <i class="fas fa-star" data-starnum="2" id="star2"></i>
                     <i class="fas fa-star" data-starnum="3" id="star3"></i>
@@ -22,13 +24,13 @@
                     <i class="far fa-star" data-starnum="5" id="star5"></i>
                 </div>
                 <div class="form-group">
-                    {{ form_label(form_desktop.comment) }}
-                    {{ form_widget(form_desktop.comment) }}
+                    {{ form_label(rate_offer_form.comment) }}
+                    {{ form_widget(rate_offer_form.comment) }}
                 </div>
                 <div id="submit-btn-container" class="text-center">
-                    {{ form_widget(form_desktop.submit) }}
+                    {{ form_widget(rate_offer_form.submit) }}
                 </div>
-                {{ form_end(form_desktop) }}
+                {{ form_end(rate_offer_form) }}
             </div>
         </div>
     </div>

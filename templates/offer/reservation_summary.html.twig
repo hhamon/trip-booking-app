@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ reservation.bookingOffer.offerName }} - Confirm reservation{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/reservation-summary.css') }}">
 {% endblock %}
+
 {% block page_content %}
     <div class="container-fluid">
         <div class="row justify-content-center mt-4">
@@ -87,10 +89,9 @@
                 </div>
                 <div class="row" id="submit-row">
                     <div class="col-12 text-right">
-                        {% set desktop_form = form.createView %}
-                        {{ form_start(desktop_form) }}
-                            {{ form_widget(desktop_form.submit, {'attr': {'class': 'confirm-btn'}}) }}
-                        {{ form_end(desktop_form) }}
+                        {{ form_start(form) }}
+                            {{ form_widget(form.submit, {'attr': {'class': 'confirm-btn'}}) }}
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>

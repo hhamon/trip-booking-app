@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% set filter_form %}
+    {{ include('offer/filters_form.html.twig', {filtersForm: offer_filters_form}) }}
+{% endset %}
+
 {% block title %}Browse Offers - Dream Holiday{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/offer_card.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
@@ -8,13 +13,13 @@
     <link rel="stylesheet" href="{{ asset('css/booking_filters_form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/offer-browser-item.css') }}">
 {% endblock %}
+
 {% block page_content %}
     <div id="side-menu">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-3 d-none d-lg-block" id="filters-column">
-                    {% set filters_desktop=filtersForm.createView %}
-                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_desktop}%}
+                    {{ filter_form }}
                 </div>
                 <div class="col-11 col-sm-11 col-md-9 col-lg-9 col-xl-6" id="offers-column">
                     <div class="row justify-content-between" id="sorting-row">
@@ -113,8 +118,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {% set filters_mobile=filtersForm.createView %}
-                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_mobile}%}
+                    {{ filter_form }}
                 </div>
             </div>
         </div>

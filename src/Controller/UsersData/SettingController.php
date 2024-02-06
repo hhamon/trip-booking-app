@@ -47,7 +47,7 @@ class SettingController extends AbstractController
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
                 'email' => $user->getEmail(),
-                'settingsForm' => $settingsForm,
+                'form' => $settingsForm->createView(),
             ]);
         }
 

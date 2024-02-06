@@ -53,7 +53,7 @@ class RateOfferController extends AbstractController
 
             return $this->render('reservations/rateOffer.html.twig', [
                 'offer' => $offer,
-                'rateOfferForm' => $rateOfferForm,
+                'rate_offer_form' => $rateOfferForm->createView(),
             ]);
         }
 
