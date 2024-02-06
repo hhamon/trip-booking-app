@@ -10,9 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-#[\Symfony\Component\Routing\Attribute\Route(path: '/newsletter', name: 'newsletter_')]
+#[Route(path: '/newsletter', name: 'newsletter_')]
 class NewsletterController extends AbstractController
 {
     public function __construct(
@@ -37,7 +38,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/signup', name: 'signup')]
+    #[Route(path: '/signup', name: 'signup')]
     public function signUp(Request $request): RedirectResponse
     {
         if ($request->request->get('newsletter')) {

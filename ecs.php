@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\AttributeNotation\AttributeEmptyParenthesesFixer;
+use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
+use PhpCsFixer\Fixer\Import\GlobalNamespaceImportFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
@@ -14,6 +17,9 @@ return ECSConfig::configure()
     ])
     ->withRules([
         ArraySyntaxFixer::class,
+        AttributeEmptyParenthesesFixer::class,
+        FullyQualifiedStrictTypesFixer::class,
+        GlobalNamespaceImportFixer::class,
     ])
     ->withPhpCsFixerSets(
         doctrineAnnotation: true,
@@ -22,6 +28,7 @@ return ECSConfig::configure()
         php81Migration: true,
         php82Migration: true,
         php83Migration: true,
+        psr12: true,
         phpCsFixer: true,
         symfony: true,
     )

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CareerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CareerController extends AbstractController
 {
@@ -13,7 +14,7 @@ class CareerController extends AbstractController
     ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/careers', name: 'careers')]
+    #[Route(path: '/careers', name: 'careers')]
     public function index(): Response
     {
         return $this->render('careers/index.html.twig', [

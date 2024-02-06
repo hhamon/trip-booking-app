@@ -8,6 +8,7 @@ use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ReservationController extends AbstractController
@@ -18,7 +19,7 @@ class ReservationController extends AbstractController
     ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/reservations', name: 'reservations')]
+    #[Route(path: '/reservations', name: 'reservations')]
     public function index(Request $request, #[CurrentUser] User $user): Response
     {
         $reservations = $this->reservationRepository->findReservationsByUser($user);

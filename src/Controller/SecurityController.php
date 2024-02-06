@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -23,7 +24,7 @@ class SecurityController extends AbstractController
     ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -36,13 +37,13 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
         throw new \RuntimeException('Action forbidden');
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/register', name: 'app_register')]
+    #[Route(path: '/register', name: 'app_register')]
     public function register(
         Request $request,
         LoginFormAuthenticator $authenticator,
@@ -82,7 +83,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/auth', name: 'auth')]
+    #[Route(path: '/auth', name: 'auth')]
     public function authenticate(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,

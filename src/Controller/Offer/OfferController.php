@@ -18,9 +18,10 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[\Symfony\Component\Routing\Attribute\Route(path: '/offer', name: 'offer_')]
+#[Route(path: '/offer', name: 'offer_')]
 class OfferController extends AbstractController
 {
     public function __construct(
@@ -34,7 +35,7 @@ class OfferController extends AbstractController
     /**
      * @throws \Exception
      */
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/browse', name: 'browse')]
+    #[Route(path: '/browse', name: 'browse')]
     public function displayOfferList(Request $request, BookingOfferService $offerService): Response
     {
         $bookingOffer = new BookingOffer();
@@ -76,7 +77,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}', name: 'reservationSummary')]
+    #[Route(path: '/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}', name: 'reservationSummary')]
     public function displayReservationSummary(
         Request $request,
         #[CurrentUser] User $user,
@@ -112,7 +113,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/{id}', name: 'single')]
+    #[Route(path: '/{id}', name: 'single')]
     public function displayOffer(Request $request, int $id): Response
     {
         $offer = $this->bookingOfferRepository->findOffer($id);

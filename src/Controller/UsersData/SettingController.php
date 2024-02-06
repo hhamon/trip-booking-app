@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class SettingController extends AbstractController
@@ -19,7 +20,7 @@ class SettingController extends AbstractController
     ) {
     }
 
-    #[\Symfony\Component\Routing\Attribute\Route(path: '/settings', name: 'settings')]
+    #[Route(path: '/settings', name: 'settings')]
     public function editData(Request $request, #[CurrentUser] User $user): Response
     {
         $session = $request->getSession();
