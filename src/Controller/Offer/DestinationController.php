@@ -5,7 +5,6 @@ namespace App\Controller\Offer;
 use App\Repository\DestinationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class DestinationController extends AbstractController
 {
@@ -14,7 +13,7 @@ class DestinationController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/destinations', name: 'destinations')]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/destinations', name: 'destinations')]
     public function index(): Response
     {
         return $this->render('destination/index.html.twig', [

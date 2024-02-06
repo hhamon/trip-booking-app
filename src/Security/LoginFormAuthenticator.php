@@ -27,6 +27,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     ) {
     }
 
+    #[\Override]
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -50,6 +51,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    #[\Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
@@ -59,6 +61,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
+    #[\Override]
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate('app_login');

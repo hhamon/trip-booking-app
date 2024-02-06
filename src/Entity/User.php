@@ -66,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -74,6 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -93,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function getPassword(): string
     {
         return $this->password;
@@ -109,6 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
