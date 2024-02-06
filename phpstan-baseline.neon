@@ -726,14 +726,6 @@ parameters:
 			path: src/Repository/UserRepository.php
 
 		-
-			message: """
-				#^Fetching class constant LAST_USERNAME of deprecated class Symfony\\\\Component\\\\Security\\\\Core\\\\Security\\:
-				since Symfony 6\\.2, use \\\\Symfony\\\\Bundle\\\\SecurityBundle\\\\Security instead$#
-			"""
-			count: 1
-			path: src/Security/LoginFormAuthenticator.php
-
-		-
 			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Service/BookingOfferService.php

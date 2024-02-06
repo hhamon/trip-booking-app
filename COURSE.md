@@ -1043,3 +1043,4 @@ $ (symfony) composer update "symfony/*"
 - Update Composer Flex recipe for `symfony/twig-bundle` third party bundle
 - Update Composer Flex recipe for `symfony/web-profiler-bundle` third party bundle
 - Fix return type hints in Symfony Form type classes
+- Convert `Security::LAST_USERNAME` constant usage into `SecurityRequestAttributes::LAST_USERNAME` in `LoginFormAuthenticator` class
