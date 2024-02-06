@@ -1036,4 +1036,5 @@ $ (symfony) composer update "symfony/*"
 - Update Composer Flex recipe for `doctrine/annotations` third party library
 - Update Composer Flex recipe for `doctrine/doctrine-bundle` third party bundle
 - Update Composer Flex recipe for `doctrine/doctrine-migrations-bundle` third party bundle
+- Update Composer Flex recipe for `symfony/framework-bundle` third party bundle
 - Update config files (routes, packages, services, etc)
