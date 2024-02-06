@@ -27,7 +27,8 @@ class CustomersRatingRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->setParameter('packageId', $packageId)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
 
         return null != $rating;
     }
@@ -36,17 +37,17 @@ class CustomersRatingRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('rating')
             ->andWhere('rating.package = :val')
-            ->setParameter('val', $packageId);
+            ->setParameter('val', $packageId)
+        ;
         $result = $qb->getQuery()->getResult();
         if (0 == count($result)) {
             return null;
-        } else {
-            $avg = 0;
-            foreach ($result as $row) {
-                $avg += $row->getRating();
-            }
-
-            return round($avg / count($result));
         }
+        $avg = 0;
+        foreach ($result as $row) {
+            $avg += $row->getRating();
+        }
+
+        return round($avg / count($result));
     }
 }

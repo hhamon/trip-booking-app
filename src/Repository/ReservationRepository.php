@@ -25,7 +25,8 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.user = :val')
             ->setParameter('val', $user)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
         foreach ($reservations as $reservation) {
             $destination = $reservation->getBookingOffer()->getDestination();
             $offerPrice = $reservation->getBookingOffer()->getOfferPrice();

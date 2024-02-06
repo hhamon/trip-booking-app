@@ -61,7 +61,7 @@ class OfferController extends AbstractController
             $fetchedType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $request->query->get('offerType')]);
             if ($fetchedType) {
                 $typeId = $fetchedType->getId();
-                $filtersForm->get('offerTypes')->get("$typeId")->setData(true);
+                $filtersForm->get('offerTypes')->get("{$typeId}")->setData(true);
             }
         }
         $filtersForm->handleRequest($request);

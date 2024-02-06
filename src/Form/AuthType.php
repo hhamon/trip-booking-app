@@ -26,7 +26,8 @@ class AuthType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-login',
                 ],
-            ]);
+            ])
+        ;
     }
 
     #[\Override]

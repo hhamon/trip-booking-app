@@ -16,7 +16,8 @@ class ConfirmReservationType extends AbstractType
         $builder
             ->add('submit', SubmitType::class, [
                 'label' => 'Confirm reservation',
-            ]);
+            ])
+        ;
     }
 
     #[\Override]

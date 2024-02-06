@@ -38,10 +38,10 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->forward('App\Controller\Offer\OfferController::getOffers', [
-               'departureSpot' => null,
-               'destination' => $bookingOffer->getDestination(),
-               'departureDate' => $bookingOffer->getDepartureDate(),
-               'comebackDate' => $bookingOffer->getComebackDate(),
+                'departureSpot' => null,
+                'destination' => $bookingOffer->getDestination(),
+                'departureDate' => $bookingOffer->getDepartureDate(),
+                'comebackDate' => $bookingOffer->getComebackDate(),
             ]);
         }
         $featuredOffers = $this->bookingOfferRepository->findBy(['isFeatured' => 1]);

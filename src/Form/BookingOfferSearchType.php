@@ -65,7 +65,8 @@ class BookingOfferSearchType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => false,
-            ]);
+            ])
+        ;
 
         $builder->get('departureDate')->addModelTransformer(new CallbackTransformer(
             function ($date) {

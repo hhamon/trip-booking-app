@@ -63,7 +63,6 @@ class RegistrationType extends AbstractType
                     'class' => 'btn btn-register',
                 ],
             ])
-
         ;
     }
 

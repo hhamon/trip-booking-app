@@ -52,7 +52,8 @@ class SettingsType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-register',
                 ],
-            ]);
+            ])
+        ;
     }
 
     #[\Override]

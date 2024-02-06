@@ -16,12 +16,13 @@ return ECSConfig::configure()
         ArraySyntaxFixer::class,
     ])
     ->withPhpCsFixerSets(
+        doctrineAnnotation: true,
         php74Migration: true,
         php80Migration: true,
         php81Migration: true,
         php82Migration: true,
         php83Migration: true,
+        phpCsFixer: true,
         symfony: true,
-        doctrineAnnotation: true,
     )
 ;
