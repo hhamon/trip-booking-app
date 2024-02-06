@@ -1,62 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\CustomersRating;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class CustomersRatingFixture extends Fixture implements DependentFixtureInterface
+final class CustomersRatingFixture extends Fixture implements DependentFixtureInterface
 {
     #[\Override]
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $rating = $this->createRating(
-            $this->getReference(UserFixture::USER1_REFERENCE),
-            10,
-            5
-        );
-        $manager->persist($rating);
-        $rating = $this->createRatingWithComment(
-            $this->getReference(UserFixture::USER1_REFERENCE),
-            4,
-            4,
-            'Great tour'
-        );
-        $manager->persist($rating);
-        $rating = $this->createRatingWithComment(
-            $this->getReference(UserFixture::USER2_REFERENCE),
-            9,
-            3,
-            'Accommodation could have been better'
-        );
-        $manager->persist($rating);
+        $manager->persist($this->createCustomerRating(UserFixture::USER1_REFERENCE, 10, 5));
+        $manager->persist($this->createCustomerRating(UserFixture::USER1_REFERENCE, 4, 4, 'Great tour'));
+        $manager->persist($this->createCustomerRating(UserFixture::USER2_REFERENCE, 9, 3, 'Accommodation could have been better'));
 
         $manager->flush();
     }
 
-    private function createRating($user, $package_id, $rating): CustomersRating
-    {
-        $customersRating = new CustomersRating();
-        $customersRating->setUser($user);
-        $customersRating->setPackage($package_id);
-        $customersRating->setRating($rating);
-
-        return $customersRating;
-    }
-
-    private function createRatingWithComment($user, $package_id, $rating, $comment): CustomersRating
-    {
-        $customersRating = $this->createRating($user, $package_id, $rating);
-        $customersRating->setComment($comment);
-
-        return $customersRating;
-    }
-
+    /**
+     * @return class-string[]
+     */
     #[\Override]
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [UserFixture::class, BookingOfferFixture::class];
+    }
+
+    private function createCustomerRating(string $userKey, int $packageId, int $rating, ?string $comment = null): CustomersRating
+    {
+        return CustomersRating::authoredBy($this->getUser($userKey), $packageId, $rating, $comment);
+    }
+
+    private function getUser(string $referenceKey): User
+    {
+        $user = $this->getReference($referenceKey);
+        \assert($user instanceof User);
+
+        return $user;
     }
 }

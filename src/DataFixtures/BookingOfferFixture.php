@@ -1,87 +1,95 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\BookingOffer;
+use App\Entity\BookingOfferType;
+use App\Entity\Destination;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class BookingOfferFixture extends Fixture implements DependentFixtureInterface
+final class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 {
-    final public const SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
-    final public const FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
-    final public const MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
-    final public const MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
-    final public const AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
-    final public const SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
-    final public const MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
-    final public const MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
-    final public const BUDDHA_REFERENCE = 'H- Buddha\'s way';
-    final public const BEIJING_REFERENCE = 'H- Bei-JING';
-    final public const PATAGONIA_REFERENCE = 'H- Patagonia';
+    public const string SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
+    public const string FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
+    public const string MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
+    public const string MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
+    public const string AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
+    public const string SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
+    public const string MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
+    public const string MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
+    public const string BUDDHA_REFERENCE = 'H- Buddha\'s way';
+    public const string BEIJING_REFERENCE = 'H- Bei-JING';
+    public const string PATAGONIA_REFERENCE = 'H- Patagonia';
 
     #[\Override]
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::SPAIN_REFERENCE),
+            $this->getDestination(DestinationFixture::SPAIN_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
                       error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
-            $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Summer n\' Chill',
             1520.00,
             620.00,
             2,
-            new \DateTime('2022-11-23'),
-            new \DateTime('2023-03-05'),
-            new \DateTime('2023-03-06'),
-            new \DateTime('2023-03-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
         );
+
         $this->addReference(self::SUMMER_CHILL_REFERENCE, $bookingOffer);
+
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::TURKEY_REFERENCE),
+            $this->getDestination(DestinationFixture::TURKEY_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
                       error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
-            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Le famous Turk',
             1200.00,
             500.00,
             3,
-            new \DateTime('2022-07-05'),
-            new \DateTime('2023-02-05'),
-            new \DateTime('2023-02-06'),
-            new \DateTime('2023-02-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
         );
+
         $this->addReference(self::FAMOUS_TURK_REFERENCE, $bookingOffer);
+
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::INDIA_REFERENCE),
+            $this->getDestination(DestinationFixture::INDIA_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Maharaja\'s Rest',
             2100.00,
             1800.00,
             4,
-            new \DateTime('2022-04-15'),
-            new \DateTime('2023-05-15'),
-            new \DateTime('2023-11-16'),
-            new \DateTime('2023-11-30'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Balice Airport',
             'Balice Airport',
             false
@@ -90,19 +98,19 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::INDIA_REFERENCE),
+            $this->getDestination(DestinationFixture::INDIA_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Maharaja\'s Rest',
             2100.00,
             1800.00,
             4,
-            new \DateTime('2022-08-15'),
-            new \DateTime('2023-01-15'),
-            new \DateTime('2023-01-16'),
-            new \DateTime('2023-01-30'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -111,19 +119,19 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::JAPAN_REFERENCE),
+            $this->getDestination(DestinationFixture::JAPAN_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::ALL_INCLUSIVE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::ALL_INCLUSIVE_REFERENCE),
             'R- Akasaka Onsen Resort',
             3550.00,
             3350.00,
             5,
-            new \DateTime('2022-05-05'),
-            new \DateTime('2023-12-06'),
-            new \DateTime('2023-12-07'),
-            new \DateTime('2023-12-14'),
+            new \DateTime('-6 months'),
+            new \DateTime('-1 months'),
+            new \DateTime('-2 months'),
+            new \DateTime('-1 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -132,20 +140,20 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::AUSTRALIA_REFERENCE),
+            $this->getDestination(DestinationFixture::AUSTRALIA_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
                       error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
-            $this->getReference(BookingOfferTypeFixtures::CRUISES_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::CRUISES_REFERENCE),
             'Y- Sydney\'s prime',
             2700.00,
             1900.00,
             6,
-            new \DateTime('2022-04-10'),
-            new \DateTime('2023-12-10'),
-            new \DateTime('2023-12-11'),
-            new \DateTime('2023-12-18'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -154,19 +162,19 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::ITALY_REFERENCE),
+            $this->getDestination(DestinationFixture::ITALY_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Il Mafioso',
             1200.00,
             980.00,
             7,
-            new \DateTime('2022-05-05'),
-            new \DateTime('2023-12-05'),
-            new \DateTime('2023-12-06'),
-            new \DateTime('2023-12-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Modlin Airport',
             'Modlin Airport',
             false
@@ -175,19 +183,19 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::ITALY_REFERENCE),
+            $this->getDestination(DestinationFixture::ITALY_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Il Mafioso',
             1200.00,
             980.00,
             7,
-            new \DateTime('2023-05-05'),
-            new \DateTime('2023-12-05'),
-            new \DateTime('2023-12-06'),
-            new \DateTime('2023-12-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Modlin Airport',
             'Modlin Airport',
             false
@@ -196,20 +204,20 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::THAILAND_REFERENCE),
+            $this->getDestination(DestinationFixture::THAILAND_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
                       error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
-            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Buddha\'s way',
             1580.00,
             940.00,
             8,
-            new \DateTime('2022-09-05'),
-            new \DateTime('2023-02-05'),
-            new \DateTime('2023-02-06'),
-            new \DateTime('2023-02-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -218,20 +226,20 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::CHINA_REFERENCE),
+            $this->getDestination(DestinationFixture::CHINA_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
                       error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
-            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Bei-JING',
             1520.00,
             800.00,
             9,
-            new \DateTime('2022-11-10'),
-            new \DateTime('2023-01-05'),
-            new \DateTime('2023-06-06'),
-            new \DateTime('2023-06-20'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -240,19 +248,19 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
-            $this->getReference(DestinationFixture::ARGENTINA_REFERENCE),
+            $this->getDestination(DestinationFixture::ARGENTINA_REFERENCE),
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
-            $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
+            $this->getBookingOfferType(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Patagonia',
             2800.00,
             2400.00,
             10,
-            new \DateTime('2022-11-22'),
-            new \DateTime('2023-04-05'),
-            new \DateTime('2023-05-06'),
-            new \DateTime('2023-05-25'),
+            new \DateTime('-6 months'),
+            new \DateTime('+6 months'),
+            new \DateTime('+8 months'),
+            new \DateTime('+12 months'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -263,8 +271,22 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createBookingOffer($destination, $description, $offerType, $offerName, $offerPrice, $childPrice, $packageId, $bookingStartDate, $bookingEndDate, $departureDate, $comebackDate, $departureSpot, $comebackSpot, $isFeatured): BookingOffer
-    {
+    private function createBookingOffer(
+        Destination $destination,
+        string $description,
+        BookingOfferType $offerType,
+        string $offerName,
+        float $offerPrice,
+        float $childPrice,
+        int $packageId,
+        \DateTime $bookingStartDate,
+        \DateTime $bookingEndDate,
+        \DateTime $departureDate,
+        \DateTime $comebackDate,
+        string $departureSpot,
+        string $comebackSpot,
+        bool $isFeatured,
+    ): BookingOffer {
         $bookingOffer = new BookingOffer();
         $bookingOffer->setDestination($destination);
         $bookingOffer->setDescription($description);
@@ -285,9 +307,28 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         return $bookingOffer;
     }
 
+    /**
+     * @return class-string[]
+     */
     #[\Override]
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [DestinationFixture::class, BookingOfferTypeFixtures::class];
+    }
+
+    private function getDestination(string $referenceKey): Destination
+    {
+        $destination = $this->getReference($referenceKey);
+        \assert($destination instanceof Destination);
+
+        return $destination;
+    }
+
+    private function getBookingOfferType(string $referenceKey): BookingOfferType
+    {
+        $bookingOfferType = $this->getReference($referenceKey);
+        \assert($bookingOfferType instanceof BookingOfferType);
+
+        return $bookingOfferType;
     }
 }

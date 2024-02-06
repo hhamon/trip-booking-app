@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -7,11 +9,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixture extends Fixture
+final class UserFixture extends Fixture
 {
-    final public const USER1_REFERENCE = 'user1';
-    final public const USER2_REFERENCE = 'user2';
-    final public const ADMIN_REFERENCE = 'admin';
+    public const string USER1_REFERENCE = 'user1';
+    public const string USER2_REFERENCE = 'user2';
+    public const string ADMIN_REFERENCE = 'admin';
 
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
@@ -19,17 +21,17 @@ class UserFixture extends Fixture
     }
 
     #[\Override]
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $user1 = $this->createUser('Jan', 'Kowalski', 'jan_kowalski@dreamholiday.com');
+        $user1 = $this->createUser('John', 'Doe', 'john.doe@dreamholiday.com');
         $this->addReference(self::USER1_REFERENCE, $user1);
         $manager->persist($user1);
 
-        $user2 = $this->createUser('John', 'Cena', 'john_cena@holidaydream.com');
+        $user2 = $this->createUser('Alice', 'Smith', 'alice.smith@holidaydream.com');
         $this->addReference(self::USER2_REFERENCE, $user2);
         $manager->persist($user2);
 
-        $admin = $this->createAdmin('Jacob', 'Ćwikowski', 'kcwikowski007@gmail.com');
+        $admin = $this->createAdmin('Super', 'Admin', 'super.admin@holidaydream.com');
         $this->addReference(self::ADMIN_REFERENCE, $admin);
         $manager->persist($admin);
 

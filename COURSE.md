@@ -1045,3 +1045,4 @@ $ (symfony) composer update "symfony/*"
 - Fix return type hints in Symfony Form type classes
 - Convert `Security::LAST_USERNAME` constant usage into `SecurityRequestAttributes::LAST_USERNAME` in `LoginFormAuthenticator` class
 - Remove `doctrine/annotations` third party library
+- Refactor data fixtures classes

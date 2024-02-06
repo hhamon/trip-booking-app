@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRatingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomersRatingRepository::class)]
@@ -10,21 +11,38 @@ class CustomersRating
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: user::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $user = null;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $package = null;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $rating = null;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255, nullable: true)]
+    #[ORM\Column]
     private ?string $comment = null;
+
+    public static function authoredBy(
+        User $author,
+        int $packageId,
+        int $rating,
+        ?string $comment = null,
+    ): self {
+        $comment = null !== $comment ? \trim($comment) : null;
+
+        $instance = new self();
+        $instance->user = $author;
+        $instance->package = $packageId;
+        $instance->rating = $rating;
+        $instance->comment = $comment ?? null;
+
+        return $instance;
+    }
 
     public function getId(): ?int
     {
