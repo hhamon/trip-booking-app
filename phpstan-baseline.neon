@@ -486,41 +486,6 @@ parameters:
 			path: src/Entity/Reservation.php
 
 		-
-			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferFiltersType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferSearchType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/NewsletterType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RateOfferType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RegistrationType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/ReservationStartType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/SettingsType.php
-
-		-
 			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php

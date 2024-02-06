@@ -113,11 +113,6 @@ class OfferController extends AbstractController
         ]);
     }
 
-    /**
-     * @param int $id
-     *
-     * @return Response
-     */
     #[Route(path: '/{id}', name: 'single')]
     public function displayOffer(Request $request, int $id): Response
     {

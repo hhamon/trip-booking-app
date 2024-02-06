@@ -15,8 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingOfferSearchType extends AbstractType
 {
-    #[\Override]
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('departureDate', TextType::class, [
@@ -107,8 +106,7 @@ class BookingOfferSearchType extends AbstractType
         ));
     }
 
-    #[\Override]
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => BookingOffer::class,
