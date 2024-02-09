@@ -1150,4 +1150,4 @@ $ (symfony) composer update "symfony/*"
 
 - Update Composer Flex recipe for `symfony/framework-bundle` third party bundle
 - Update Composer Flex recipe for `symfony/routing` third party library
-- Update Composer Flex recipe for `symfony/validator` third party bundle
+- Update Composer Flex recipe for `symfony/validator` third party library
