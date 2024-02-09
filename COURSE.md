@@ -1151,3 +1151,64 @@ $ (symfony) composer update "symfony/*"
 - Update Composer Flex recipe for `symfony/framework-bundle` third party bundle
 - Update Composer Flex recipe for `symfony/routing` third party library
 - Update Composer Flex recipe for `symfony/validator` third party library
+
+## End-to-End Testing with Panther
+
+### Installation
+
+Install `ChromeDriver` & `geckodriver` on your local environment:
+
+```bash
+# On a Mac with Homebrew
+$ brew install chromedriver geckodriver
+
+# On Windows, using Chocolatey
+$ choco install chromedriver selenium-gecko-driver
+
+# On Linux Ubuntu
+$ apt install chromium-chromedriver firefox-geckodriver
+```
+
+Then, install Symfony Panther in your project:
+
+```bash
+$ (symfony) composer require --dev "symfony/panther"
+```
+
+Install `dbrekelmans/bdi` PHP library with Composer to detect installed drivers:
+
+```bash
+$ (symfony) composer require --dev dbrekelmans/bdi
+```
+
+Run the tool to detect your installed drivers:
+
+```bash
+$ (symfony) php vendor/bin/bdi detect drivers
+
+ [OK] chromedriver 121.0.6167.85 installed to drivers/chromedriver
+
+ [OK] geckodriver 0.34.0 installed to drivers/geckodriver
+
+```
+
+Register the PHPUnit Panther extension in `phpunit.xml.dist` file:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+         convertDeprecationsToExceptions="false"
+>
+    ...
+    <extensions>
+        <extension class="Symfony\Component\Panther\ServerExtension" />
+    </extensions>
+</phpunit>
+```
+
