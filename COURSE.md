@@ -1046,3 +1046,108 @@ $ (symfony) composer update "symfony/*"
 - Convert `Security::LAST_USERNAME` constant usage into `SecurityRequestAttributes::LAST_USERNAME` in `LoginFormAuthenticator` class
 - Remove `doctrine/annotations` third party library
 - Refactor data fixtures classes
+
+## Upgrading Symfony to 7.x
+
+### Prerequisites
+
+- None
+
+### Upgrade Composer & Dependencies
+
+Run `composer outdated` command to check for third party PHP dependencies that may be upgraded before Symfony.
+
+Update `composer.json` file to support Symfony 7.0 version.
+
+```diff
+diff --git a/composer.json b/composer.json
+index 146d1cf..a299dfd 100644
+--- a/composer.json
++++ b/composer.json
+@@ -14,26 +14,26 @@
+         "doctrine/doctrine-migrations-bundle": "^3.3.0",
+         "doctrine/orm": "^2.17.3",
+         "phpdocumentor/reflection-docblock": "^5.3.0",
+-        "symfony/asset": "6.4.*",
+-        "symfony/console": "6.4.*",
+-        "symfony/dotenv": "6.4.*",
+-        "symfony/expression-language": "6.4.*",
+-        "symfony/finder": "6.4.*",
++        "symfony/asset": "7.0.*",
++        "symfony/console": "7.0.*",
++        "symfony/dotenv": "7.0.*",
++        "symfony/expression-language": "7.0.*",
++        "symfony/finder": "7.0.*",
+         "symfony/flex": "^2.4.4",
+-        "symfony/form": "6.4.*",
+-        "symfony/framework-bundle": "6.4.*",
++        "symfony/form": "7.0.*",
++        "symfony/framework-bundle": "7.0.*",
+         "symfony/monolog-bundle": "^3.10",
+-        "symfony/process": "6.4.*",
+-        "symfony/property-access": "6.4.*",
+-        "symfony/property-info": "6.4.*",
+-        "symfony/runtime": "6.4.*",
+-        "symfony/security-bundle": "6.4.*",
+-        "symfony/serializer": "6.4.*",
+-        "symfony/translation": "6.4.*",
+-        "symfony/twig-bundle": "6.4.*",
+-        "symfony/validator": "6.4.*",
+-        "symfony/web-link": "6.4.*",
+-        "symfony/yaml": "6.4.*"
++        "symfony/process": "7.0.*",
++        "symfony/property-access": "7.0.*",
++        "symfony/property-info": "7.0.*",
++        "symfony/runtime": "7.0.*",
++        "symfony/security-bundle": "7.0.*",
++        "symfony/serializer": "7.0.*",
++        "symfony/translation": "7.0.*",
++        "symfony/twig-bundle": "7.0.*",
++        "symfony/validator": "7.0.*",
++        "symfony/web-link": "7.0.*",
++        "symfony/yaml": "7.0.*"
+     },
+     "require-dev": {
+         "doctrine/doctrine-fixtures-bundle": "^3.5.1",
+@@ -46,13 +46,13 @@
+         "phpunit/phpunit": "^10.5.8",
+         "qossmic/deptrac-shim": "^1.0.2",
+         "rector/rector": "^1.0.0",
+-        "symfony/browser-kit": "6.4.*",
+-        "symfony/css-selector": "6.4.*",
+-        "symfony/debug-bundle": "6.4.*",
++        "symfony/browser-kit": "7.0.*",
++        "symfony/css-selector": "7.0.*",
++        "symfony/debug-bundle": "7.0.*",
+         "symfony/maker-bundle": "^1.54.0",
+-        "symfony/phpunit-bridge": "6.4.*",
+-        "symfony/stopwatch": "6.4.*",
+-        "symfony/web-profiler-bundle": "6.4.*",
++        "symfony/phpunit-bridge": "7.0.*",
++        "symfony/stopwatch": "7.0.*",
++        "symfony/web-profiler-bundle": "7.0.*",
+         "symplify/easy-coding-standard": "^12.1.10"
+     },
+     "config": {
+@@ -130,7 +130,7 @@
+     "extra": {
+         "symfony": {
+             "allow-contrib": false,
+-            "require": "6.4.*"
++            "require": "7.0.*"
+         }
+     }
+ }
+```
+
+Run `composer update "symfony/*"` command to update Doctrine third party dependencies.
+
+```bash
+$ (symfony) composer update "symfony/*"
+```
+
+### Post Upgrade Code Improvements
+
+- Update Composer Flex recipe for `symfony/framework-bundle` third party bundle
+- Update Composer Flex recipe for `symfony/routing` third party library
+- Update Composer Flex recipe for `symfony/validator` third party bundle
