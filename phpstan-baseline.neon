@@ -16,42 +16,17 @@ parameters:
 			path: src/Controller/NewsletterController.php
 
 		-
+			message: "#^Cannot call method getChildPrice\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot call method getOfferPrice\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
 			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnFormSubmission\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnOfferType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnRequestQuery\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getReservationTotalCost\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getReservationTotalCost\\(\\) has parameter \\$reservation with no type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getWellFormattedDate\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -61,7 +36,17 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
+			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
 			message: "#^Parameter \\#1 \\$dirs of method Symfony\\\\Component\\\\Finder\\\\Finder\\:\\:in\\(\\) expects array\\<string\\>\\|string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\:\\:get\\(\\) expects string, int\\|null given\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -191,27 +176,12 @@ parameters:
 			path: src/Entity/Reservation.php
 
 		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
 			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
 		-
-			message: "#^Cannot call method getPackageId\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
 			message: "#^Cannot call method setRating\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Cannot call method setRating\\(\\) on mixed\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
@@ -266,52 +236,7 @@ parameters:
 			path: src/Repository/BookingOfferRepository.php
 
 		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$departureDate with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$destination with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$priceMax with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffers\\(\\) has parameter \\$priceMin with no type specified\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
 			message: "#^Parameter \\#1 \\$packageId of method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOfferRating\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Property App\\\\Repository\\\\BookingOfferRepository\\:\\:\\$registry has no type specified\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
@@ -429,43 +354,3 @@ parameters:
 			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/UserRepository.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$departureDate with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$destination with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$priceMax with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php
-
-		-
-			message: "#^Method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) has parameter \\$priceMin with no type specified\\.$#"
-			count: 1
-			path: src/Service/BookingOfferService.php

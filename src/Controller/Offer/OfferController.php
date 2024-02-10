@@ -3,6 +3,8 @@
 namespace App\Controller\Offer;
 
 use App\Entity\BookingOffer;
+use App\Entity\BookingOfferType;
+use App\Entity\Destination;
 use App\Entity\Reservation;
 use App\Entity\User;
 use App\Form\BookingOfferFiltersType;
@@ -58,8 +60,7 @@ class OfferController extends AbstractController
         if ($request->query->get('offerType')) {
             $fetchedType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $request->query->get('offerType')]);
             if ($fetchedType) {
-                $typeId = $fetchedType->getId();
-                $filtersForm->get('offerTypes')->get("{$typeId}")->setData(true);
+                $filtersForm->get('offerTypes')->get($fetchedType->getId())->setData(true);
             }
         }
         $filtersForm->handleRequest($request);
@@ -142,18 +143,29 @@ class OfferController extends AbstractController
         ]);
     }
 
-    private function getWellFormattedDate(string $date)
+    private function getWellFormattedDate(string $date): \DateTimeInterface
     {
-        $reformatted = explode('/', $date);
+        $reformatted = \explode('/', $date);
         $reformatted = $reformatted[2].'/'.$reformatted[1].'/'.$reformatted[0];
 
         return new \DateTime($reformatted);
     }
 
-    private function getOffersBasedOnFormSubmission(BookingOfferService $offerService, FormInterface $filtersForm, BookingOffer $bookingOffer)
-    {
+    /**
+     * @return iterable<int, BookingOffer>
+     */
+    private function getOffersBasedOnFormSubmission(
+        BookingOfferService $offerService,
+        FormInterface $filtersForm,
+        BookingOffer $bookingOffer,
+    ): iterable {
         $priceMin = $filtersForm->get('priceMin')->getData();
+        \assert(\is_numeric($priceMin) || $priceMin === null);
+
         $priceMax = $filtersForm->get('priceMax')->getData();
+        \assert(\is_numeric($priceMax) || $priceMax === null);
+
+        /** @var BookingOfferType[]|null $offerTypes */
         $offerTypes = $filtersForm->get('offerTypes')->getData();
 
         return $offerService->findOffers(
@@ -163,15 +175,18 @@ class OfferController extends AbstractController
             $bookingOffer->getComebackDate(),
             $priceMin,
             $priceMax,
-            $offerTypes
+            $offerTypes,
         );
     }
 
+    /**
+     * @return iterable<int, BookingOffer>
+     */
     private function getOffersBasedOnRequestQuery(
         BookingOfferService $offerService,
         Request $request,
         BookingOffer $bookingOffer,
-    ) {
+    ): iterable {
         $requestParams = $request->query->all('booking_offer_search');
         $departureSpot = $requestParams['departureSpot'] ?? null;
         $destination = $requestParams['destination'] ?? null;
@@ -192,37 +207,35 @@ class OfferController extends AbstractController
             $bookingOffer->getComebackDate());
     }
 
-    private function getOffersBasedOnOfferType(BookingOfferService $offerService, string $offerTypeName)
+    /**
+     * @return iterable<int, BookingOffer>
+     */
+    private function getOffersBasedOnOfferType(BookingOfferService $offerService, string $offerTypeName): iterable
     {
         $offerType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $offerTypeName]);
 
-        if (null != $offerType) {
-            $offers = $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
-        } else {
-            $offers = null;
-        }
-
-        return $offers;
+        return $offerType instanceof BookingOfferType
+            ? $offerService->findOffers(bookingOfferTypes: [$offerType])
+            : [];
     }
 
-    private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName)
+    /**
+     * @return iterable<int, BookingOffer>
+     */
+    private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName): iterable
     {
         $destination = $this->destinationRepository->findOneBy(['destinationName' => $destinationName]);
 
-        if (null != $destination) {
-            $offers = $offerService->findOffers(null, $destination, null, null, null, null, null);
-        } else {
-            $offers = null;
-        }
-
-        return $offers;
+        return $destination instanceof Destination
+            ? $offerService->findOffers(destination: $destination)
+            : [];
     }
 
-    private function getReservationTotalCost($reservation)
+    private function getReservationTotalCost(Reservation $reservation): float
     {
         $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
         $childPrice = $reservation->getBookingOffer()->getChildPrice();
 
-        return $reservation->getAdultNumber() * $adultPrice + $reservation->getChildNumber() * $childPrice;
+        return (int) $reservation->getAdultNumber() * $adultPrice + (int) $reservation->getChildNumber() * $childPrice;
     }
 }

@@ -17,12 +17,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookingOfferRepository extends ServiceEntityRepository
 {
-    private $registry;
-
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        private readonly ManagerRegistry $registry,
+    ) {
         parent::__construct($registry, BookingOffer::class);
-        $this->registry = $registry;
     }
 
     private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
@@ -83,8 +81,26 @@ class BookingOfferRepository extends ServiceEntityRepository
         return \array_combine($departureSpots, $departureSpots);
     }
 
-    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
-    {
+    /**
+     * @param mixed|null $departureSpot
+     * @param mixed|null $destination
+     * @param mixed|null $departureDate
+     * @param mixed|null $comebackDate
+     * @param mixed|null $priceMin
+     * @param mixed|null $priceMax
+     * @param mixed|null $bookingOfferTypes
+     *
+     * @return iterable<int, BookingOffer>
+     */
+    public function findOffers(
+        $departureSpot = null,
+        $destination = null,
+        $departureDate = null,
+        $comebackDate = null,
+        $priceMin = null,
+        $priceMax = null,
+        $bookingOfferTypes = null,
+    ): iterable {
         $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
             $departureSpot,
             $destination,
@@ -94,11 +110,13 @@ class BookingOfferRepository extends ServiceEntityRepository
             $priceMax,
             $bookingOfferTypes
         ));
+
         $result = $qb->getQuery()->getResult();
+        \assert(\is_array($result));
+
+        /** @var BookingOffer $row */
         foreach ($result as $row) {
-            $package_id = $row->getPackageId();
-            $rating = $this->findOfferRating($package_id);
-            $row->setRating($rating);
+            $row->setRating($this->findOfferRating((int) $row->getPackageId()));
         }
 
         return $result;
