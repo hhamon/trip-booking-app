@@ -120,9 +120,19 @@
             "@php bin/console doctrine:migration:migrate --no-interaction",
             "@php bin/console doctrine:fixtures:load --no-interaction"
         ],
+        "rebuild-db-test": [
+            "@php bin/console doctrine:database:drop --force --if-exists --no-interaction -e test",
+            "@php bin/console doctrine:database:create --no-interaction -e test",
+            "@php bin/console doctrine:migration:migrate --no-interaction -e test",
+            "@php bin/console doctrine:fixtures:load --no-interaction -e test"
+        ],
         "rectify": [
             "@php vendor/bin/rector",
             "@lint:fix"
+        ],
+        "test:e2e": [
+            "@rebuild-db-test",
+            "@php bin/phpunit tests/Controller"
         ]
     },
     "conflict": {

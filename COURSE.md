@@ -1212,3 +1212,56 @@ Register the PHPUnit Panther extension in `phpunit.xml.dist` file:
 </phpunit>
 ```
 
+### Database Setup
+
+Configure the test database DSN in your `.env.test.local` file:
+
+```dotenv
+DATABASE_URL=mysql://root:root@localhost:3306/trip_booking_app_test?serverVersion=11.2.2-MariaDB&charset=utf8mb4
+```
+
+Register a new `rebuild-db-test` Composer script:
+
+```json
+{
+    "scripts": {
+        "rebuild-db-test": [
+            "@php bin/console doctrine:database:drop --force --if-exists --no-interaction -e test",
+            "@php bin/console doctrine:database:create --no-interaction -e test",
+            "@php bin/console doctrine:migration:migrate --no-interaction -e test",
+            "@php bin/console doctrine:fixtures:load --no-interaction -e test"
+        ]
+    }
+}
+```
+
+### Create an End-to-End Tests Suite
+
+Generate a new end-to-end suite with the `make:test` Symfony console command.
+
+```bash
+$ (symfony) console make:test
+```
+
+Choose `PantherTestCase` option and type `\App\Tests\Controller\HomeControllerTest` for the tests suite class name.
+
+### Run End-to-End Tests
+
+Register a new `test:e2e` Composer script:
+
+```json
+{
+    "scripts": {
+        "test:e2e": [
+            "@rebuild-db-test",
+            "@php bin/phpunit tests/Controller"
+        ]
+    }
+}
+```
+
+Run the `test:e2e` Composer script:
+
+```bash
+$ (symfony) composer test:e2e
+```
