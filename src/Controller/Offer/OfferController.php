@@ -83,6 +83,7 @@ class OfferController extends AbstractController
         int $adultNumber,
         int $childNumber,
     ): Response {
+        // TODO: handle not found or expired offer
         $offer = $this->bookingOfferRepository->find($offerId);
 
         $reservation = new Reservation();
@@ -114,6 +115,7 @@ class OfferController extends AbstractController
     #[Route(path: '/{id}', name: 'single')]
     public function displayOffer(Request $request, int $id): Response
     {
+        // TODO: handle not found or expired offer
         $offer = $this->bookingOfferRepository->findOffer($id);
 
         $finder = new Finder();
@@ -143,6 +145,9 @@ class OfferController extends AbstractController
         ]);
     }
 
+    /**
+     * TODO: extract from controller code
+     */
     private function getWellFormattedDate(string $date): \DateTimeInterface
     {
         $reformatted = \explode('/', $date);
