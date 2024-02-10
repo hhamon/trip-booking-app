@@ -39,7 +39,7 @@ class OfferController extends AbstractController
     public function displayOfferList(Request $request, BookingOfferService $offerService): Response
     {
         $bookingOffer = new BookingOffer();
-        if ($request->query->get('booking_offer_search')) {
+        if ($request->query->has('booking_offer_search')) {
             $offers = $this->getOffersBasedOnRequestQuery($offerService, $request, $bookingOffer);
         } elseif ($request->query->get('offerType')) {
             $offers = $this->getOffersBasedOnOfferType($offerService, $request->query->get('offerType'));
@@ -170,9 +170,12 @@ class OfferController extends AbstractController
         );
     }
 
-    private function getOffersBasedOnRequestQuery(BookingOfferService $offerService, Request $request, BookingOffer $bookingOffer)
-    {
-        $requestParams = $request->query->get('booking_offer_search');
+    private function getOffersBasedOnRequestQuery(
+        BookingOfferService $offerService,
+        Request $request,
+        BookingOffer $bookingOffer,
+    ) {
+        $requestParams = $request->query->all('booking_offer_search');
         $departureSpot = $requestParams['departureSpot'] ?? null;
         $destination = $requestParams['destination'] ?? null;
         $departureDate = $requestParams['departureDate'] ?? null;
