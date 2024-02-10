@@ -66,11 +66,6 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Variable \\$departureSpots might not be defined\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php

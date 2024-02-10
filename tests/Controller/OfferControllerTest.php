@@ -8,11 +8,6 @@ use App\Entity\Destination;
 use App\Repository\DestinationRepository;
 use Symfony\Component\Panther\PantherTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
 final class OfferControllerTest extends PantherTestCase
 {
     public function testSearchTravelOffers(): void

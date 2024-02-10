@@ -50,14 +50,11 @@ class OfferController extends AbstractController
         } else {
             $offers = $offerService->findOffers();
         }
-        $allOffers = $this->bookingOfferRepository->findAll();
-        foreach ($allOffers as $offer) {
-            $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
-        }
+
         $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer, [
             'method' => 'GET',
-            'departureSpots' => $departureSpots,
         ]);
+
         if ($request->query->get('offerType')) {
             $fetchedType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $request->query->get('offerType')]);
             if ($fetchedType) {

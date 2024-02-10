@@ -6,11 +6,6 @@ namespace App\Tests\Controller;
 
 use Symfony\Component\Panther\PantherTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
 final class HomeControllerTest extends PantherTestCase
 {
     public function testBrowseHomepageAsGuest(): void

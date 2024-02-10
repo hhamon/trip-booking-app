@@ -6,6 +6,8 @@ use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\AttributeNotation\AttributeEmptyParenthesesFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\GlobalNamespaceImportFixer;
+use PhpCsFixer\Fixer\PhpUnit\PhpUnitInternalClassFixer;
+use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestClassRequiresCoversFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
@@ -32,4 +34,8 @@ return ECSConfig::configure()
         phpCsFixer: true,
         symfony: true,
     )
+    ->withSkip([
+        PhpUnitInternalClassFixer::class,
+        PhpUnitTestClassRequiresCoversFixer::class,
+    ])
 ;

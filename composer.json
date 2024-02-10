@@ -130,6 +130,14 @@
             "@php vendor/bin/rector",
             "@lint:fix"
         ],
+        "test": [
+            "@rebuild-db-test",
+            "@php bin/phpunit"
+        ],
+        "test:services": [
+            "@rebuild-db-test",
+            "@php bin/phpunit tests/Repository"
+        ],
         "test:e2e": [
             "@rebuild-db-test",
             "@php bin/phpunit tests/Controller"

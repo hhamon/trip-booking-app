@@ -61,6 +61,28 @@ class BookingOfferRepository extends ServiceEntityRepository
         return $criteria;
     }
 
+    /**
+     * @return array<string, string>
+     */
+    public function findDistinctDepartureSpots(): array
+    {
+        $qb = $this->createQueryBuilder('bookingOffer');
+
+        $query = $qb->select('bookingOffer.departureSpot')
+            ->distinct()
+            ->orderBy('bookingOffer.departureSpot', 'ASC')
+            ->groupBy('bookingOffer.departureSpot')
+            ->getQuery()
+        ;
+
+        /** @var array<int, array{departureSpot: string}> $results */
+        $results = $query->getResult();
+
+        $departureSpots = \array_column($results, 'departureSpot');
+
+        return \array_combine($departureSpots, $departureSpots);
+    }
+
     public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
         $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(

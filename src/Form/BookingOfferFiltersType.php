@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\BookingOffer;
 use App\Entity\BookingOfferType;
 use App\Entity\Destination;
+use App\Repository\BookingOfferRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -18,6 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingOfferFiltersType extends AbstractType
 {
+    public function __construct(
+        private readonly BookingOfferRepository $bookingOfferRepository,
+    ) {
+    }
+
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -69,7 +75,7 @@ class BookingOfferFiltersType extends AbstractType
                 'required' => false,
             ])
             ->add('departureSpot', ChoiceType::class, [
-                'choices' => $options['departureSpots'],
+                'choices' => $this->bookingOfferRepository->findDistinctDepartureSpots(),
                 'placeholder' => 'From',
                 'attr' => [
                     'class' => 'form-control',
@@ -153,7 +159,6 @@ class BookingOfferFiltersType extends AbstractType
             'data_class' => BookingOffer::class,
             'offer_types' => null,
             'destinations' => null,
-            'departureSpots' => null,
         ]);
     }
 }
