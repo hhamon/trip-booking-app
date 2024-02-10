@@ -22,6 +22,7 @@ final class HomeControllerTest extends PantherTestCase
         $this->assertPageTitleContains('Dream Holiday');
         $this->assertSelectorTextContains('h1', 'TRAVEL THE WORLD');
         $this->assertSelectorTextContains('h2#subtitle', 'Book Today with Dream Holiday');
+        $this->assertSelectorTextNotContains('#hero nav', 'SIGN OUT');
 
         // Check destinations cards
         $this->assertSelectorCount(3, '#featured-offers-presentation .f-offer-card-link');
@@ -40,5 +41,32 @@ final class HomeControllerTest extends PantherTestCase
         $this->assertSelectorTextContains('footer .col-md-3:nth-child(3) .footer-link:first-child', 'First Minute');
         $this->assertSelectorTextContains('footer .col-md-3:nth-child(3) .footer-link:nth-child(2)', 'Last Minute');
         $this->assertSelectorTextContains('footer .col-md-3:nth-child(3) .footer-link:last-child', 'Bargain Zone');
+    }
+
+    public function testBrowseHomepageAsMember(): void
+    {
+        $client = self::createPantherClient();
+        $client->followRedirects();
+
+        // Browse the homepage
+        $client->request('GET', '/');
+
+        // Go to sign-in page
+        $client->clickLink('Sign in');
+
+        // Check title
+        $this->assertPageTitleContains('Sign in - Dream Holiday');
+
+        // Submit form
+        $client->submitForm('Sign in', [
+            'email' => 'john.doe@dreamholiday.com',
+            'password' => 'password',
+        ]);
+
+        // Check title & subtitle
+        $this->assertPageTitleContains('Dream Holiday');
+        $this->assertSelectorTextContains('h1', 'TRAVEL THE WORLD');
+        $this->assertSelectorTextContains('h2#subtitle', 'Book Today with Dream Holiday');
+        $this->assertSelectorTextContains('#hero nav', 'SIGN OUT');
     }
 }

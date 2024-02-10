@@ -94,7 +94,7 @@ class SecurityController extends AbstractController
 
         $errors = [];
         if ($form->isSubmitted() && $form->isValid()) {
-            $authFields = $request->request->get('auth');
+            $authFields = $request->request->all('auth');
             if ($passwordHasher->isPasswordValid($user, $authFields['password'])) {
                 $request->getSession()->set('display_settings', true);
 
