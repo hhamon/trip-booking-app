@@ -839,6 +839,8 @@ twig:
 ### Prerequisites
 
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
+- Update `SecurityController` class to use `ParameterBag::all()` method instead of `ParameterBag::get()`
+- Update `OfferController` class to use `ParameterBag::all()` method instead of `ParameterBag::get()`
 - Update `config/routes/dev/twig.yaml` file
 - Move `DATABASE_URL` environment variable to the `.env.local` file
 - Update Composer Flex recipe for `symfony/flex` component
