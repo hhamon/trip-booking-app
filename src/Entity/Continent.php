@@ -16,12 +16,10 @@ class Continent implements \Stringable
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private readonly string $name;
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
+    public function __construct(
+        #[ORM\Column]
+        private readonly string $name,
+    ) {
     }
 
     #[\Override]

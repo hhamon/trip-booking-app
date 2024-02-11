@@ -9,11 +9,19 @@ use Rector\Symfony\CodeQuality\Rector\ClassMethod\ActionSuffixRemoverRector;
 use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->importNames();
+    $rectorConfig->importShortClasses(false);
+    $rectorConfig->removeUnusedImports();
+
     $rectorConfig->paths([
         __DIR__ . '/config',
         __DIR__ . '/public',
         __DIR__ . '/src',
         __DIR__ . '/tests',
+    ]);
+
+    $rectorConfig->skip([
+        __DIR__ . '/config/bundles.php',
     ]);
 
     $rectorConfig->symfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml');

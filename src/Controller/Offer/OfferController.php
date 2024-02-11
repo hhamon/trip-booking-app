@@ -146,7 +146,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * TODO: extract from controller code
+     * TODO: extract from controller code.
      */
     private function getWellFormattedDate(string $date): \DateTimeInterface
     {
@@ -165,10 +165,10 @@ class OfferController extends AbstractController
         BookingOffer $bookingOffer,
     ): iterable {
         $priceMin = $filtersForm->get('priceMin')->getData();
-        \assert(\is_numeric($priceMin) || $priceMin === null);
+        \assert(\is_numeric($priceMin) || null === $priceMin);
 
         $priceMax = $filtersForm->get('priceMax')->getData();
-        \assert(\is_numeric($priceMax) || $priceMax === null);
+        \assert(\is_numeric($priceMax) || null === $priceMax);
 
         /** @var BookingOfferType[]|null $offerTypes */
         $offerTypes = $filtersForm->get('offerTypes')->getData();

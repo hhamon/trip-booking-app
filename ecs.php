@@ -6,6 +6,7 @@ use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\AttributeNotation\AttributeEmptyParenthesesFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\GlobalNamespaceImportFixer;
+use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitInternalClassFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestClassRequiresCoversFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
@@ -22,6 +23,7 @@ return ECSConfig::configure()
         AttributeEmptyParenthesesFixer::class,
         FullyQualifiedStrictTypesFixer::class,
         GlobalNamespaceImportFixer::class,
+        NoUnusedImportsFixer::class,
     ])
     ->withPhpCsFixerSets(
         doctrineAnnotation: true,

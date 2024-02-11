@@ -16,18 +16,16 @@ class BookingOfferType implements \Stringable
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?string $typeName = null;
-
     /**
      * @var Collection<int, BookingOffer>
      */
     #[ORM\OneToMany(mappedBy: 'offerType', targetEntity: BookingOffer::class, orphanRemoval: true)]
     private Collection $bookingOffers;
 
-    public function __construct(string $name)
-    {
-        $this->typeName = $name;
+    public function __construct(
+        #[ORM\Column]
+        private ?string $typeName,
+    ) {
         $this->bookingOffers = new ArrayCollection();
     }
 
