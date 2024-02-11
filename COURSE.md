@@ -1163,6 +1163,50 @@ $ (symfony) composer update "symfony/*"
 - Update Composer Flex recipe for `symfony/routing` third party library
 - Update Composer Flex recipe for `symfony/validator` third party library
 
+## Application Testing
+
+### Database Setup
+
+Configure the test database DSN in your `.env.test.local` file:
+
+```dotenv
+DATABASE_URL=mysql://root:root@localhost:3306/trip_booking_app_test?serverVersion=11.2.2-MariaDB&charset=utf8mb4
+```
+
+Register a new `rebuild-db-test` Composer script:
+
+```json
+{
+    "scripts": {
+        "rebuild-db-test": [
+            "@php bin/console doctrine:database:drop --force --if-exists --no-interaction -e test",
+            "@php bin/console doctrine:database:create --no-interaction -e test",
+            "@php bin/console doctrine:migration:migrate --no-interaction -e test",
+            "@php bin/console doctrine:fixtures:load --no-interaction -e test"
+        ]
+    }
+}
+```
+
+### Install `DAMADoctrineTestBundle` Bundle
+
+Install the [`dama/doctrine-test-bundle`](https://github.com/dmaicher/doctrine-test-bundle) third party bundle:
+
+```bash
+$ (symfony) composer require --dev dama/doctrine-test-bundle
+```
+
+Make sure save points are enabled in the Doctrine DBAL configuration:
+
+```yaml
+# config/packages/doctrine.yaml
+doctrine:
+   dbal:
+       connections:
+           default:
+               use_savepoints: true
+```
+
 ## End-to-End Testing with Panther
 
 ### Installation
@@ -1221,29 +1265,6 @@ Register the PHPUnit Panther extension in `phpunit.xml.dist` file:
         <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
 </phpunit>
-```
-
-### Database Setup
-
-Configure the test database DSN in your `.env.test.local` file:
-
-```dotenv
-DATABASE_URL=mysql://root:root@localhost:3306/trip_booking_app_test?serverVersion=11.2.2-MariaDB&charset=utf8mb4
-```
-
-Register a new `rebuild-db-test` Composer script:
-
-```json
-{
-    "scripts": {
-        "rebuild-db-test": [
-            "@php bin/console doctrine:database:drop --force --if-exists --no-interaction -e test",
-            "@php bin/console doctrine:database:create --no-interaction -e test",
-            "@php bin/console doctrine:migration:migrate --no-interaction -e test",
-            "@php bin/console doctrine:fixtures:load --no-interaction -e test"
-        ]
-    }
-}
 ```
 
 ### Create an End-to-End Tests Suite
