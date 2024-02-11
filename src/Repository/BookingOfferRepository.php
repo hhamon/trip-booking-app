@@ -23,7 +23,7 @@ class BookingOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, BookingOffer::class);
     }
 
-    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
+    private function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null): Criteria
     {
         $currentDate = new \DateTime('now');
         $criteria = new Criteria();
@@ -31,27 +31,34 @@ class BookingOfferRepository extends ServiceEntityRepository
         if (null != $departureSpot) {
             $criteria->andWhere(Criteria::expr()->eq('departureSpot', $departureSpot));
         }
+
         if (null != $destination) {
             $criteria->andWhere(Criteria::expr()->eq('destination', $destination));
         }
+
         if (null != $departureDate) {
             $criteria->andWhere(Criteria::expr()->gte('departureDate', $departureDate));
         }
+
         if (null != $comebackDate) {
             $criteria->andWhere(Criteria::expr()->lte('comebackDate', $comebackDate));
         }
+
         if (null != $priceMin) {
             $criteria->andWhere(Criteria::expr()->gte('offerPrice', $priceMin));
         }
+
         if (null != $priceMax) {
             $criteria->andWhere(Criteria::expr()->lte('offerPrice', $priceMax));
         }
+
         if (null != $bookingOfferTypes) {
             $orStatements = [];
             foreach ($bookingOfferTypes as $type) {
                 $orStatements[] = Criteria::expr()->eq('offerType', $type);
             }
-            if (!empty($orStatements)) {
+
+            if ([] !== $orStatements) {
                 $criteria->andWhere(new CompositeExpression(CompositeExpression::TYPE_OR, $orStatements));
             }
         }
@@ -101,15 +108,7 @@ class BookingOfferRepository extends ServiceEntityRepository
         $priceMax = null,
         $bookingOfferTypes = null,
     ): iterable {
-        $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
-            $departureSpot,
-            $destination,
-            $departureDate,
-            $comebackDate,
-            $priceMin,
-            $priceMax,
-            $bookingOfferTypes
-        ));
+        $qb = $this->createQueryBuilder('offer')->addCriteria($this->createSearchCriteria($departureSpot, $destination, $departureDate, $comebackDate, $priceMin, $priceMax, $bookingOfferTypes));
 
         $result = $qb->getQuery()->getResult();
         \assert(\is_array($result));

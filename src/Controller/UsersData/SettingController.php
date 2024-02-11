@@ -28,7 +28,7 @@ class SettingController extends AbstractController
         $displaySettings = $session->get('display_settings', false);
         \assert(\is_bool($displaySettings));
 
-        if ($displaySettings || \count($request->request->all()) > 0) {
+        if ($displaySettings || [] !== $request->request->all()) {
             $session->remove('display_settings');
             $settingsForm = $this->createForm(SettingsType::class);
             $settingsForm->createView();
@@ -54,20 +54,23 @@ class SettingController extends AbstractController
         return $this->redirectToRoute('auth');
     }
 
-    private function updateUserData($fields, User $user): void
+    private function updateUserData(string|int|float|bool|null $fields, User $user): void
     {
         $firstNameField = $fields['firstName'];
         if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
         }
+
         $lastNameField = $fields['lastName'];
         if ($lastNameField != $user->getLastName()) {
             $user->setLastName($lastNameField);
         }
+
         $emailField = $fields['email'];
         if ($emailField != $user->getEmail()) {
             $user->setEmail($emailField);
         }
+
         if (null != $fields['password']['first']) {
             $user->setPassword($this->passwordHasher->hashPassword($user, $fields['password']['first']));
         }

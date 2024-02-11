@@ -33,7 +33,7 @@ class RateOfferController extends AbstractController
         $displayRateOffers = $session->get('display_rate_offer', []);
         $displayRateOffer = $displayRateOffers[$reservationId] ?? false;
 
-        if ($displayRateOffer || \count($request->request->all()) > 0) {
+        if ($displayRateOffer || [] !== $request->request->all()) {
             $session->set('display_rate_offer', \array_merge($displayRateOffers, [$reservationId => false]));
 
             $reservation = $this->reservationRepository->find($reservationId);

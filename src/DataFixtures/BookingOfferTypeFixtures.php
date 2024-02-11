@@ -11,10 +11,15 @@ use Doctrine\Persistence\ObjectManager;
 final class BookingOfferTypeFixtures extends Fixture
 {
     public const string FIRST_MINUTE_REFERENCE = 'first_minute';
+
     public const string LAST_MINUTE_REFERENCE = 'last_minute';
+
     public const string ALL_INCLUSIVE_REFERENCE = 'all_inclusive';
+
     public const string FOR_CHILDREN_REFERENCE = 'for_children';
+
     public const string GROUP_TOURS_REFERENCE = 'group_tours';
+
     public const string CRUISES_REFERENCE = 'cruises';
 
     /**

@@ -12,7 +12,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class UserFixture extends Fixture
 {
     public const string USER1_REFERENCE = 'user1';
+
     public const string USER2_REFERENCE = 'user2';
+
     public const string ADMIN_REFERENCE = 'admin';
 
     public function __construct(

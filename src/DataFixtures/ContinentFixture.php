@@ -11,11 +11,17 @@ use Doctrine\Persistence\ObjectManager;
 final class ContinentFixture extends Fixture
 {
     public const string AFRICA_REFERENCE = 'africa';
+
     public const string ANTARCTICA_REFERENCE = 'antarctica';
+
     public const string ASIA_REFERENCE = 'asia';
+
     public const string OCEANIA_REFERENCE = 'oceania';
+
     public const string EUROPE_REFERENCE = 'europe';
+
     public const string NORTH_AMERICA_REFERENCE = 'north america';
+
     public const string SOUTH_AMERICA_REFERENCE = 'south america';
 
     /**

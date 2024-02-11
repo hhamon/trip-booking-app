@@ -13,14 +13,23 @@ use Doctrine\Persistence\ObjectManager;
 final class DestinationFixture extends Fixture implements DependentFixtureInterface
 {
     public const string SPAIN_REFERENCE = 'spain';
+
     public const string TURKEY_REFERENCE = 'turkey';
+
     public const string INDIA_REFERENCE = 'india';
+
     public const string JAPAN_REFERENCE = 'japan';
+
     public const string AUSTRALIA_REFERENCE = 'australia';
+
     public const string NEW_ZEALAND_REFERENCE = 'new_zealand';
+
     public const string ITALY_REFERENCE = 'italy';
+
     public const string THAILAND_REFERENCE = 'thailand';
+
     public const string CHINA_REFERENCE = 'china';
+
     public const string ARGENTINA_REFERENCE = 'argentina';
 
     /**

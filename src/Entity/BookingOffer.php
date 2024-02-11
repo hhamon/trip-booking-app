@@ -63,10 +63,6 @@ class BookingOffer
 
     private $rating;
 
-    public function __construct()
-    {
-    }
-
     public function getRating(): ?int
     {
         return $this->rating;

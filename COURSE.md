@@ -539,22 +539,19 @@ Configure Rector.
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__ . '/config',
         __DIR__ . '/public',
         __DIR__ . '/src',
         __DIR__ . '/tests',
-    ]);
-
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_83,
-    ]);
-};
+    ])
+    ->withSkip([
+        __DIR__ . '/config/bundles.php',
+    ])
+;
 ```
 
 Run Rector.
@@ -566,43 +563,56 @@ $ (symfony) php vendor/bin/rector
 ### Upgrade PHP Code to PHP 8.3
 
 ```php
-// ...
+<?php
 
-return static function (RectorConfig $rectorConfig): void {
+// rector.php
+
+declare(strict_types=1);
+
+use Rector\Config\RectorConfig;
+
+return RectorConfig::configure()
     // ...
-
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_83,
-    ]);
-};
+    ->withPhpSets(php83: true)
+    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        strictBooleans: true,
+    )
+;
 ```
 
 ### Upgrade Symfony Code
 
 * See https://github.com/rectorphp/rector-symfony/blob/main/docs/rector_rules_overview.md
 
+
 ```php
 <?php
 
-// ...
+// rector.php
+
+declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Symfony\Set\SymfonySetList;
+use Rector\Symfony\CodeQuality\Rector\ClassMethod\ActionSuffixRemoverRector;
 
-return static function (RectorConfig $rectorConfig): void {
+return RectorConfig::configure()
     // ...
-
-    $rectorConfig->sets([
+    ->withSkip([
         // ...
-        //DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        DoctrineSetList::DOCTRINE_CODE_QUALITY,
-        //DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
-        SymfonySetList::SYMFONY_50_TYPES,
-        SymfonySetList::SYMFONY_CODE_QUALITY,
-    ]);
-};
+        ActionSuffixRemoverRector::class,
+    ])
+    ->withAttributesSets(symfony: true, doctrine: true)
+    ->withSymfonyContainerPhp(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.php')
+    ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml')
+;
 ```
 
 ### Update PHP Version Minimum Requirements
@@ -801,7 +811,7 @@ twig:
         "phpstan/phpstan-symfony": "^1.3.7",
         "phpunit/phpunit": "^10.5.8",
         "qossmic/deptrac-shim": "^1.0.2",
-        "rector/rector": "^0.19.2",
+        "rector/rector": "^1.0.0",
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
@@ -895,7 +905,6 @@ doctrine/doctrine-migrations-bundle 2.2.3   3.3.0   Symfony DoctrineMigrationsBu
 doctrine/orm                        2.17.3  3.0.0   Object-Relational-Mapper for PHP
 phpstan/phpstan                     1.10.56 1.10.57 PHPStan - PHP Static Analysis Tool
 phpunit/phpunit                     10.5.8  11.0.2  The PHP Unit Testing framework.
-rector/rector                       0.19.2  0.19.8  Instant Upgrade and Automated Refactoring of any PHP code
 symfony/asset                       v5.4.31 v7.0.3  Manages URL generation and versioning of web assets such as CSS stylesheets, Java...
 symfony/browser-kit                 v5.4.31 v7.0.3  Simulates the behavior of a web browser, allowing you to make requests, click on ...
 symfony/console                     v5.4.34 v7.0.3  Eases the creation of beautiful and testable command line interfaces
@@ -997,7 +1006,7 @@ index 146d1cf..a299dfd 100644
 @@ -46,13 +46,13 @@
          "phpunit/phpunit": "^10.5.8",
          "qossmic/deptrac-shim": "^1.0.2",
-         "rector/rector": "^0.19.2",
+         "rector/rector": "^1.0.0",
 -        "symfony/browser-kit": "5.4.*",
 -        "symfony/css-selector": "5.4.*",
 -        "symfony/debug-bundle": "5.4.*",

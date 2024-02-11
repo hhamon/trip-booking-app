@@ -27,10 +27,6 @@ class Destination implements \Stringable
     #[ORM\JoinColumn(nullable: false)]
     private ?Continent $continent = null;
 
-    public function __construct()
-    {
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -79,15 +75,13 @@ class Destination implements \Stringable
     }
 
     /**
-     * @return array
-     *
      * @throws \Exception
      */
-    public static function sortDestinationsByName(array $destinations)
+    public static function sortDestinationsByName(array $destinations): array
     {
         $doctrineDestinationCollection = new ArrayCollection($destinations);
         $iterator = $doctrineDestinationCollection->getIterator();
-        $iterator->uasort(fn ($d1, $d2) => (strtolower((string) $d1->getDestinationName()) < strtolower((string) $d2->getDestinationName())) ? -1 : 1);
+        $iterator->uasort(static fn ($d1, $d2): int => (strtolower((string) $d1->getDestinationName()) < strtolower((string) $d2->getDestinationName())) ? -1 : 1);
 
         return iterator_to_array($iterator);
     }

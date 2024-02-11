@@ -40,9 +40,9 @@ class Reservation
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $bankTransferTitle = null;
 
-    private $destination;
+    private ?string $destination = null;
 
-    private $totalCost;
+    private ?float $totalCost = null;
 
     public function getId(): ?int
     {
@@ -169,7 +169,7 @@ class Reservation
         return $this;
     }
 
-    public function generateRandomString($length = 15)
+    public function generateRandomString($length = 15): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }

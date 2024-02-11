@@ -31,7 +31,7 @@ class ReservationController extends AbstractController
             $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
             $packageId = $offer->getPackageId();
             $isOfferRated = $this->customersRatingRepository->findIfOfferIsRated($user, $packageId);
-            if (!$isOfferRated and $offerComebackDate < date('Y-m-d')) {
+            if (!$isOfferRated && $offerComebackDate < date('Y-m-d')) {
                 $isRatingAvailable[] = true;
                 $session_array[$reservation->getId()] = true;
             } else {

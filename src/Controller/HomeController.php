@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Offer\OfferController;
 use App\Entity\BookingOffer;
 use App\Form\BookingOfferSearchType;
 use App\Repository\BookingOfferRepository;
@@ -28,6 +29,7 @@ class HomeController extends AbstractController
         foreach ($offers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
+
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
                 'class' => 'form-inline',
@@ -38,13 +40,14 @@ class HomeController extends AbstractController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->forward('App\Controller\Offer\OfferController::getOffers', [
+            return $this->forward(OfferController::class.'::getOffers', [
                 'departureSpot' => null,
                 'destination' => $bookingOffer->getDestination(),
                 'departureDate' => $bookingOffer->getDepartureDate(),
                 'comebackDate' => $bookingOffer->getComebackDate(),
             ]);
         }
+
         $featuredOffers = $this->bookingOfferRepository->findBy(['isFeatured' => 1]);
         $featuredWithRating = [];
         foreach ($featuredOffers as $featuredOffer) {

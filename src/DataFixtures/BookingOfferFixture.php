@@ -13,16 +13,26 @@ use Doctrine\Persistence\ObjectManager;
 
 final class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 {
-    public const string SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
+    public const string SUMMER_CHILL_REFERENCE = "H- Summer n' Chill";
+
     public const string FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
-    public const string MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
-    public const string MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
+
+    public const string MAHARAJA_REFERENCE1 = "H- Maharaja's Rest1";
+
+    public const string MAHARAJA_REFERENCE2 = "H- Maharaja's Rest2";
+
     public const string AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
-    public const string SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
+
+    public const string SYDNEY_REFERENCE = "Y- Sydney's prime";
+
     public const string MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
+
     public const string MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
-    public const string BUDDHA_REFERENCE = 'H- Buddha\'s way';
+
+    public const string BUDDHA_REFERENCE = "H- Buddha's way";
+
     public const string BEIJING_REFERENCE = 'H- Bei-JING';
+
     public const string PATAGONIA_REFERENCE = 'H- Patagonia';
 
     #[\Override]
@@ -35,7 +45,7 @@ final class BookingOfferFixture extends Fixture implements DependentFixtureInter
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getBookingOfferType(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
-            'H- Summer n\' Chill',
+            "H- Summer n' Chill",
             1520.00,
             620.00,
             2,
@@ -82,7 +92,7 @@ final class BookingOfferFixture extends Fixture implements DependentFixtureInter
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
-            'H- Maharaja\'s Rest',
+            "H- Maharaja's Rest",
             2100.00,
             1800.00,
             4,
@@ -103,7 +113,7 @@ final class BookingOfferFixture extends Fixture implements DependentFixtureInter
                       Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
                       repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
-            'H- Maharaja\'s Rest',
+            "H- Maharaja's Rest",
             2100.00,
             1800.00,
             4,
@@ -146,7 +156,7 @@ final class BookingOfferFixture extends Fixture implements DependentFixtureInter
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getBookingOfferType(BookingOfferTypeFixtures::CRUISES_REFERENCE),
-            'Y- Sydney\'s prime',
+            "Y- Sydney's prime",
             2700.00,
             1900.00,
             6,
@@ -210,7 +220,7 @@ final class BookingOfferFixture extends Fixture implements DependentFixtureInter
                       Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
                       Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getBookingOfferType(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
-            'H- Buddha\'s way',
+            "H- Buddha's way",
             1580.00,
             940.00,
             8,

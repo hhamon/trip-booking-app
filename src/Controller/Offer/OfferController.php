@@ -59,10 +59,11 @@ class OfferController extends AbstractController
 
         if ($request->query->get('offerType')) {
             $fetchedType = $this->bookingOfferTypeRepository->findOneBy(['typeName' => $request->query->get('offerType')]);
-            if ($fetchedType) {
+            if (null !== $fetchedType) {
                 $filtersForm->get('offerTypes')->get($fetchedType->getId())->setData(true);
             }
         }
+
         $filtersForm->handleRequest($request);
         if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
             $offers = $this->getOffersBasedOnFormSubmission($offerService, $filtersForm, $bookingOffer);
@@ -128,6 +129,7 @@ class OfferController extends AbstractController
 
         $reservation = new Reservation();
         $reservation->setBookingOffer($offer);
+
         $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
         $reservationForm->handleRequest($request);
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
@@ -200,9 +202,11 @@ class OfferController extends AbstractController
         if (null != $departureDate) {
             $bookingOffer->setDepartureDate($this->getWellFormattedDate($departureDate));
         }
+
         if (null != $comebackDate) {
             $bookingOffer->setComebackDate($this->getWellFormattedDate($comebackDate));
         }
+
         $bookingOffer->setDepartureSpot($departureSpot);
         $bookingOffer->setDestination($this->destinationRepository->find($destination));
 

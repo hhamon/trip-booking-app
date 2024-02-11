@@ -3,40 +3,32 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Set\ValueObject\LevelSetList;
 use Rector\Symfony\CodeQuality\Rector\ClassMethod\ActionSuffixRemoverRector;
-use Rector\Symfony\Set\SymfonySetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->importNames();
-    $rectorConfig->importShortClasses(false);
-    $rectorConfig->removeUnusedImports();
-
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__ . '/config',
         __DIR__ . '/public',
         __DIR__ . '/src',
         __DIR__ . '/tests',
-    ]);
-
-    $rectorConfig->skip([
+    ])
+    ->withSkip([
         __DIR__ . '/config/bundles.php',
-    ]);
-
-    $rectorConfig->symfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml');
-
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_83,
-        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        DoctrineSetList::DOCTRINE_CODE_QUALITY,
-        DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
-        SymfonySetList::SYMFONY_64,
-        SymfonySetList::SYMFONY_CODE_QUALITY,
-        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
-    ]);
-
-    $rectorConfig->rules([
         ActionSuffixRemoverRector::class,
-    ]);
-};
+    ])
+    ->withPhpSets(php83: true)
+    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        strictBooleans: true,
+    )
+    ->withAttributesSets(symfony: true, doctrine: true)
+    ->withSymfonyContainerPhp(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.php')
+    ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml')
+;

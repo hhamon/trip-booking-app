@@ -43,6 +43,7 @@ class CustomersRatingRepository extends ServiceEntityRepository
         if (0 == count($result)) {
             return null;
         }
+
         $avg = 0;
         foreach ($result as $row) {
             $avg += $row->getRating();

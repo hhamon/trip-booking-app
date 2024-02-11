@@ -30,6 +30,7 @@ class NewsletterController extends AbstractController
             'method' => 'POST',
         ]);
         $news_form->handleRequest($request);
+
         $errors = $validator->validate($news_object);
 
         return $this->render('newsletter/form.html.twig', [
@@ -44,7 +45,7 @@ class NewsletterController extends AbstractController
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');
             $email = $formData['email'];
-            if (!$this->newsletterRepository->findOneBy(['email' => $email])) {
+            if (null === $this->newsletterRepository->findOneBy(['email' => $email])) {
                 $newsletterSubscription = new Newsletter();
                 $newsletterSubscription->setEmail($email);
                 $this->entityManager->persist($newsletterSubscription);
@@ -54,6 +55,7 @@ class NewsletterController extends AbstractController
                 $this->addFlash('notice', 'Thank you! You are already a newsletter subscriber.');
             }
         }
+
         $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
