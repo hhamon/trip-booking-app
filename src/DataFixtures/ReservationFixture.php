@@ -7,12 +7,18 @@ namespace App\DataFixtures;
 use App\Entity\BookingOffer;
 use App\Entity\Reservation;
 use App\Entity\User;
+use App\Reservation\ReservationFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class ReservationFixture extends Fixture implements DependentFixtureInterface
 {
+    public function __construct(
+        private readonly ReservationFactory $reservationFactory,
+    ) {
+    }
+
     #[\Override]
     public function load(ObjectManager $manager): void
     {
@@ -79,14 +85,14 @@ final class ReservationFixture extends Fixture implements DependentFixtureInterf
         \DateTime $dateOfBooking,
         bool $paid = false,
     ): Reservation {
-        $reservation = new Reservation();
-        $reservation->setUser($this->getUser($user));
-        $reservation->setBookingOffer($this->getBookingOffer($bookingOffer));
-        $reservation->setAdultNumber($adultNumber);
-        $reservation->setChildNumber($childNumber);
-        $reservation->setDateOfBooking($dateOfBooking);
-        $reservation->setIsPaidFor($paid);
-        $reservation->setBankTransferTitle();
+        $reservation = $this->reservationFactory->create(
+            customer: $this->getUser($user),
+            bookingOffer: $this->getBookingOffer($bookingOffer),
+            numberOfAdults: $adultNumber,
+            numberOfChildren: $childNumber,
+        );
+
+        $reservation->confirm($dateOfBooking, $paid ? $reservation->getTotalCost() : null);
 
         return $reservation;
     }

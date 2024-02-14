@@ -177,7 +177,7 @@ class Reservation
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }
 
-    public function confirm(?float $paidAmount = null, ?\DateTimeInterface $confirmedAt = null): void
+    public function confirm(?\DateTimeInterface $confirmedAt = null, ?float $paidAmount = null): void
     {
         if (!$confirmedAt instanceof \DateTimeInterface) {
             $confirmedAt = new \DateTime('now');
