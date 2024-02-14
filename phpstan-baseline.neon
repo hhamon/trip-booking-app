@@ -16,16 +16,6 @@ parameters:
 			path: src/Controller/NewsletterController.php
 
 		-
-			message: "#^Cannot call method getChildPrice\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Cannot call method getOfferPrice\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
@@ -91,8 +81,23 @@ parameters:
 			path: src/Controller/UsersData/RateOfferController.php
 
 		-
-			message: "#^Method App\\\\Controller\\\\UsersData\\\\SettingController\\:\\:updateUserData\\(\\) has parameter \\$fields with no type specified\\.$#"
+			message: "#^Cannot access offset 'email' on bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'firstName' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'lastName' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 2
 			path: src/Controller/UsersData/SettingController.php
 
 		-
@@ -151,27 +156,12 @@ parameters:
 			path: src/Entity/Destination.php
 
 		-
-			message: "#^Method App\\\\Entity\\\\Reservation\\:\\:generateRandomString\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Entity/Reservation.php
-
-		-
 			message: "#^Method App\\\\Entity\\\\Reservation\\:\\:generateRandomString\\(\\) has parameter \\$length with no type specified\\.$#"
 			count: 1
 			path: src/Entity/Reservation.php
 
 		-
 			message: "#^Parameter \\#2 \\$times of function str_repeat expects int, float given\\.$#"
-			count: 1
-			path: src/Entity/Reservation.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$destination has no type specified\\.$#"
-			count: 1
-			path: src/Entity/Reservation.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$totalCost has no type specified\\.$#"
 			count: 1
 			path: src/Entity/Reservation.php
 
@@ -187,11 +177,6 @@ parameters:
 
 		-
 			message: "#^Class App\\\\Repository\\\\BookingOfferRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 

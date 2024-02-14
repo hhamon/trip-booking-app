@@ -169,6 +169,9 @@ class Reservation
         return $this;
     }
 
+    /**
+     * TODO: extract to a third party service class
+     */
     public function generateRandomString($length = 15): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);

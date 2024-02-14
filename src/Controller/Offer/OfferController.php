@@ -13,6 +13,7 @@ use App\Form\ReservationStartType;
 use App\Repository\BookingOfferRepository;
 use App\Repository\BookingOfferTypeRepository;
 use App\Repository\DestinationRepository;
+use App\Reservation\ReservationPricer;
 use App\Service\BookingOfferService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,7 @@ class OfferController extends AbstractController
     public function __construct(
         private readonly BookingOfferRepository $bookingOfferRepository,
         private readonly BookingOfferTypeRepository $bookingOfferTypeRepository,
+        private readonly ReservationPricer $reservationTotalCostPricer,
         private readonly DestinationRepository $destinationRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {
@@ -84,15 +86,19 @@ class OfferController extends AbstractController
         int $adultNumber,
         int $childNumber,
     ): Response {
-        // TODO: handle not found or expired offer
+        // TODO: handle expired offers
         $offer = $this->bookingOfferRepository->find($offerId);
+
+        if (!$offer instanceof BookingOffer) {
+            throw $this->createNotFoundException(\sprintf('Unable to find booking offer identified by ID `%s`.', $offerId));
+        }
 
         $reservation = new Reservation();
         $reservation->setBookingOffer($offer);
         $reservation->setAdultNumber($adultNumber);
         $reservation->setChildNumber($childNumber);
         $reservation->setBankTransferTitle();
-        $reservation->setTotalCost($this->getReservationTotalCost($reservation));
+        $reservation->setTotalCost($this->reservationTotalCostPricer->price($offer, $adultNumber, $childNumber));
         $reservation->setUser($user);
 
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
@@ -238,13 +244,5 @@ class OfferController extends AbstractController
         return $destination instanceof Destination
             ? $offerService->findOffers(destination: $destination)
             : [];
-    }
-
-    private function getReservationTotalCost(Reservation $reservation): float
-    {
-        $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
-        $childPrice = $reservation->getBookingOffer()->getChildPrice();
-
-        return (int) $reservation->getAdultNumber() * $adultPrice + (int) $reservation->getChildNumber() * $childPrice;
     }
 }
