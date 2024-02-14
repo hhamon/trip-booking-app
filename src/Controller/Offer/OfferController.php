@@ -105,8 +105,7 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reservation->setDateOfBooking(new \DateTime('NOW'));
-            $reservation->setIsPaidFor(false);
+            $reservation->confirm();
             $this->entityManager->persist($reservation);
             $this->entityManager->flush();
 

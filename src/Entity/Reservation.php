@@ -170,10 +170,20 @@ class Reservation
     }
 
     /**
-     * TODO: extract to a third party service class
+     * TODO: extract to a third party service class.
      */
     public function generateRandomString($length = 15): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+    }
+
+    public function confirm(?float $paidAmount = null, ?\DateTimeInterface $confirmedAt = null): void
+    {
+        if (!$confirmedAt instanceof \DateTimeInterface) {
+            $confirmedAt = new \DateTime('now');
+        }
+
+        $this->setDateOfBooking(\DateTime::createFromInterface($confirmedAt));
+        $this->setIsPaidFor($paidAmount === $this->totalCost);
     }
 }
