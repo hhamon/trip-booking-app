@@ -13,7 +13,7 @@ use App\Form\ReservationStartType;
 use App\Repository\BookingOfferRepository;
 use App\Repository\BookingOfferTypeRepository;
 use App\Repository\DestinationRepository;
-use App\Reservation\ReservationPricer;
+use App\Reservation\ReservationFactory;
 use App\Service\BookingOfferService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +30,7 @@ class OfferController extends AbstractController
     public function __construct(
         private readonly BookingOfferRepository $bookingOfferRepository,
         private readonly BookingOfferTypeRepository $bookingOfferTypeRepository,
-        private readonly ReservationPricer $reservationTotalCostPricer,
+        private readonly ReservationFactory $reservationFactory,
         private readonly DestinationRepository $destinationRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {
@@ -93,13 +93,7 @@ class OfferController extends AbstractController
             throw $this->createNotFoundException(\sprintf('Unable to find booking offer identified by ID `%s`.', $offerId));
         }
 
-        $reservation = new Reservation();
-        $reservation->setBookingOffer($offer);
-        $reservation->setAdultNumber($adultNumber);
-        $reservation->setChildNumber($childNumber);
-        $reservation->setBankTransferTitle();
-        $reservation->setTotalCost($this->reservationTotalCostPricer->price($offer, $adultNumber, $childNumber));
-        $reservation->setUser($user);
+        $reservation = $this->reservationFactory->create($user, $offer, $adultNumber, $childNumber);
 
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
