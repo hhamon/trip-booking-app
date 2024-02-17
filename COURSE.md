@@ -848,6 +848,7 @@ twig:
 
 ### Prerequisites
 
+- Fix `User` class mispelling in `CustomersRating` entity class
 - Rename `NewsletterController::renderForm` method (conflicts with base controller)
 - Update `SecurityController` class to use `ParameterBag::all()` method instead of `ParameterBag::get()`
 - Update `OfferController` class to use `ParameterBag::all()` method instead of `ParameterBag::get()`
