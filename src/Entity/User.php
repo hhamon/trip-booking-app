@@ -9,10 +9,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
- * @UniqueEntity(fields={"email"}, message="Given e-mail is already taken.")
  *
  * @ORM\Table(name="app_user")
  */
+#[UniqueEntity(fields: ['email'], message: 'Given e-mail is already taken.')]
 class User implements UserInterface
 {
     /**

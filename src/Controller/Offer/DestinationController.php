@@ -8,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DestinationController extends AbstractController
 {
-    /**
-     * @Route("/destinations", name="destinations")
-     */
+    #[Route(path: '/destinations', name: 'destinations')]
     public function index()
     {
         $em = $this->getDoctrine()->getManager();

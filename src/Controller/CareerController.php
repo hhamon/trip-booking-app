@@ -8,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CareerController extends AbstractController
 {
-    /**
-     * @Route("/careers", name="careers")
-     */
+    #[Route(path: '/careers', name: 'careers')]
     public function index()
     {
         $em = $this->getDoctrine()->getManager();

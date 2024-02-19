@@ -27,10 +27,8 @@ class Destination
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png"},
-     *              maxSize = "1024k")
      */
+    #[Assert\File(mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'], maxSize: '1024k')]
     private $image;
 
     /**

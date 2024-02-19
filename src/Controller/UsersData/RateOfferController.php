@@ -13,10 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class RateOfferController extends AbstractController
 {
     /**
-     * @Route ("rateOffer/{reservationId}", name="rateOffer")
-     *
      * @return Response
      */
+    #[Route(path: 'rateOffer/{reservationId}', name: 'rateOffer')]
     public function displayRateOfferForm(Request $request, int $reservationId)
     {
         if ((isset($_SESSION['display_rate_offer'][$reservationId]) && $_SESSION['display_rate_offer'][$reservationId] === true) || ! empty($request->request->all())) {

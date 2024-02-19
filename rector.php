@@ -17,5 +17,5 @@ return RectorConfig::configure()
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
-    ->withAttributesSets()
+    ->withAttributesSets(symfony: true)
 ;
