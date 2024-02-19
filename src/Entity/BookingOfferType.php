@@ -18,8 +18,11 @@ class BookingOfferType implements \Stringable
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $typeName = null;
 
+    /**
+     * @var Collection<int, BookingOffer>
+     */
     #[ORM\OneToMany(targetEntity: BookingOffer::class, mappedBy: 'offerType', orphanRemoval: true)]
-    private ArrayCollection|array $bookingOffers;
+    private Collection $bookingOffers;
 
     public function __construct()
     {
@@ -44,7 +47,7 @@ class BookingOfferType implements \Stringable
     }
 
     /**
-     * @return Collection|BookingOffer[]
+     * @return Collection<int, BookingOffer>
      */
     public function getBookingOffers(): Collection
     {
