@@ -20,21 +20,21 @@ class LoginType extends AbstractType
                 'label' => 'Email Address',
                 'attr' => [
                     'class' => 'form-control',
-                    'autofocus' => true
-                ]
+                    'autofocus' => true,
+                ],
             ])
             ->add('password', PasswordType::class, [
                 'required' => true,
                 'label' => 'Password',
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Sign in',
                 'attr' => [
-                    'class' => 'btn btn-login'
-                ]
+                    'class' => 'btn btn-login',
+                ],
             ])
 
         ;

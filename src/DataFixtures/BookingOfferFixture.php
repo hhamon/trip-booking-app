@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\BookingOffer;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -35,10 +34,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1520.00,
             620.00,
             2,
-            new DateTime('2022-11-23'),
-            new DateTime('2023-03-05'),
-            new DateTime('2023-03-06'),
-            new DateTime('2023-03-20'),
+            new \DateTime('2022-11-23'),
+            new \DateTime('2023-03-05'),
+            new \DateTime('2023-03-06'),
+            new \DateTime('2023-03-20'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -57,10 +56,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1200.00,
             500.00,
             3,
-            new DateTime('2022-07-05'),
-            new DateTime('2023-02-05'),
-            new DateTime('2023-02-06'),
-            new DateTime('2023-02-20'),
+            new \DateTime('2022-07-05'),
+            new \DateTime('2023-02-05'),
+            new \DateTime('2023-02-06'),
+            new \DateTime('2023-02-20'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -78,10 +77,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             2100.00,
             1800.00,
             4,
-            new DateTime('2022-04-15'),
-            new DateTime('2023-05-15'),
-            new DateTime('2023-11-16'),
-            new DateTime('2023-11-30'),
+            new \DateTime('2022-04-15'),
+            new \DateTime('2023-05-15'),
+            new \DateTime('2023-11-16'),
+            new \DateTime('2023-11-30'),
             'Balice Airport',
             'Balice Airport',
             false
@@ -99,10 +98,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             2100.00,
             1800.00,
             4,
-            new DateTime('2022-08-15'),
-            new DateTime('2023-01-15'),
-            new DateTime('2023-01-16'),
-            new DateTime('2023-01-30'),
+            new \DateTime('2022-08-15'),
+            new \DateTime('2023-01-15'),
+            new \DateTime('2023-01-16'),
+            new \DateTime('2023-01-30'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -120,10 +119,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             3550.00,
             3350.00,
             5,
-            new DateTime('2022-05-05'),
-            new DateTime('2023-12-06'),
-            new DateTime('2023-12-07'),
-            new DateTime('2023-12-14'),
+            new \DateTime('2022-05-05'),
+            new \DateTime('2023-12-06'),
+            new \DateTime('2023-12-07'),
+            new \DateTime('2023-12-14'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -142,10 +141,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             2700.00,
             1900.00,
             6,
-            new DateTime('2022-04-10'),
-            new DateTime('2023-12-10'),
-            new DateTime('2023-12-11'),
-            new DateTime('2023-12-18'),
+            new \DateTime('2022-04-10'),
+            new \DateTime('2023-12-10'),
+            new \DateTime('2023-12-11'),
+            new \DateTime('2023-12-18'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -163,10 +162,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1200.00,
             980.00,
             7,
-            new DateTime('2022-05-05'),
-            new DateTime('2023-12-05'),
-            new DateTime('2023-12-06'),
-            new DateTime('2023-12-20'),
+            new \DateTime('2022-05-05'),
+            new \DateTime('2023-12-05'),
+            new \DateTime('2023-12-06'),
+            new \DateTime('2023-12-20'),
             'Modlin Airport',
             'Modlin Airport',
             false
@@ -184,10 +183,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1200.00,
             980.00,
             7,
-            new DateTime('2023-05-05'),
-            new DateTime('2023-12-05'),
-            new DateTime('2023-12-06'),
-            new DateTime('2023-12-20'),
+            new \DateTime('2023-05-05'),
+            new \DateTime('2023-12-05'),
+            new \DateTime('2023-12-06'),
+            new \DateTime('2023-12-20'),
             'Modlin Airport',
             'Modlin Airport',
             false
@@ -206,10 +205,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1580.00,
             940.00,
             8,
-            new DateTime('2022-09-05'),
-            new DateTime('2023-02-05'),
-            new DateTime('2023-02-06'),
-            new DateTime('2023-02-20'),
+            new \DateTime('2022-09-05'),
+            new \DateTime('2023-02-05'),
+            new \DateTime('2023-02-06'),
+            new \DateTime('2023-02-20'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             false
@@ -228,10 +227,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1520.00,
             800.00,
             9,
-            new DateTime('2022-11-10'),
-            new DateTime('2023-01-05'),
-            new DateTime('2023-06-06'),
-            new DateTime('2023-06-20'),
+            new \DateTime('2022-11-10'),
+            new \DateTime('2023-01-05'),
+            new \DateTime('2023-06-06'),
+            new \DateTime('2023-06-20'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -249,10 +248,10 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             2800.00,
             2400.00,
             10,
-            new DateTime('2022-11-22'),
-            new DateTime('2023-04-05'),
-            new DateTime('2023-05-06'),
-            new DateTime('2023-05-25'),
+            new \DateTime('2022-11-22'),
+            new \DateTime('2023-04-05'),
+            new \DateTime('2023-05-06'),
+            new \DateTime('2023-05-25'),
             'Warsaw Chopin Airport',
             'Warsaw Chopin Airport',
             true
@@ -281,6 +280,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $bookingOffer->setComebackSpot($comebackSpot);
         $bookingOffer->setIsFeatured($isFeatured);
         $bookingOffer->setPhotosDirectory('images/offers_cards/' . $packageId);
+
         return $bookingOffer;
     }
 

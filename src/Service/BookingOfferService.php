@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Repository\BookingOfferRepository;
 
@@ -10,10 +8,6 @@ final class BookingOfferService
 {
     private $itemRepository;
 
-    /**
-     * ItemService constructor.
-     * @param BookingOfferRepository $bookingOfferRepository
-     */
     public function __construct(BookingOfferRepository $bookingOfferRepository)
     {
         $this->itemRepository = $bookingOfferRepository;

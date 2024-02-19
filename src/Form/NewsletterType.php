@@ -17,15 +17,15 @@ class NewsletterType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'email@example.com'
-                ]
+                    'placeholder' => 'email@example.com',
+                ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Sign Up'
+                'label' => 'Sign Up',
             ])
         ;
     }

@@ -9,12 +9,12 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20221215103942 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Setup initial database schema';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE app_user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, registration_date DATE NOT NULL, UNIQUE INDEX UNIQ_88BDF3E9E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE booking_offer (id INT AUTO_INCREMENT NOT NULL, offer_type_id INT NOT NULL, destination_id INT NOT NULL, offer_name VARCHAR(255) NOT NULL, package_id INT NOT NULL, offer_price NUMERIC(6, 2) NOT NULL, child_price NUMERIC(6, 2) NOT NULL, description LONGTEXT NOT NULL, booking_start_date DATETIME NOT NULL, booking_end_date DATETIME NOT NULL, departure_date DATETIME NOT NULL, comeback_date DATETIME NOT NULL, departure_spot VARCHAR(255) NOT NULL, comeback_spot VARCHAR(255) NOT NULL, is_featured TINYINT(1) NOT NULL, photos_directory VARCHAR(255) NOT NULL, INDEX IDX_B8AA7A8B64444A9A (offer_type_id), INDEX IDX_B8AA7A8B816C6140 (destination_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -33,7 +33,7 @@ final class Version20221215103942 extends AbstractMigration
         $this->addSql('ALTER TABLE reservation ADD CONSTRAINT FK_42C8495568F2EA63 FOREIGN KEY (booking_offer_id) REFERENCES booking_offer (id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE customers_rating DROP FOREIGN KEY FK_93BE1206A76ED395');
         $this->addSql('ALTER TABLE reservation DROP FOREIGN KEY FK_42C84955A76ED395');

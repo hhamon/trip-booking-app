@@ -21,20 +21,20 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function findReservationsByUser($user)
     {
-        $reservations =  $this->createQueryBuilder('r')
+        $reservations = $this->createQueryBuilder('r')
             ->andWhere('r.user = :val')
             ->setParameter('val', $user)
             ->getQuery()
             ->getResult();
-        foreach ($reservations as $reservation){
+        foreach ($reservations as $reservation) {
             $destination = $reservation->getBookingOffer()->getDestination();
             $offerPrice = $reservation->getBookingOffer()->getOfferPrice();
             $childPrice = $reservation->getBookingOffer()->getChildPrice();
             $reservation->setDestination($destination);
-            $totalCost = $offerPrice*$reservation->getAdultNumber()+$childPrice*$reservation->getChildNumber();
+            $totalCost = $offerPrice * $reservation->getAdultNumber() + $childPrice * $reservation->getChildNumber();
             $reservation->setTotalCost($totalCost);
         }
-        return $reservations;
 
+        return $reservations;
     }
 }

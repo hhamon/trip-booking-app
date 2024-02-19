@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,7 +13,9 @@ class Destination
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -34,6 +35,7 @@ class Destination
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $continent;
@@ -89,8 +91,8 @@ class Destination
     }
 
     /**
-     * @param array $destinations
      * @return array
+     *
      * @throws \Exception
      */
     public static function sortDestinationsByName(array $destinations)
@@ -100,6 +102,7 @@ class Destination
         $iterator->uasort(function ($d1, $d2) {
             return (strtolower($d1->getDestinationName()) < strtolower($d2->getDestinationName())) ? -1 : 1;
         });
+
         return iterator_to_array($iterator);
     }
 }

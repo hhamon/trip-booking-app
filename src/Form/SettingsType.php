@@ -1,9 +1,7 @@
 <?php
 
-
 namespace App\Form;
 
-use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -12,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 
 class SettingsType extends AbstractType
 {
@@ -24,36 +21,44 @@ class SettingsType extends AbstractType
                 'label' => 'First Name',
                 'attr' => [
                     'class' => 'form-control',
-                    'autofocus' => true
-                ]
+                    'autofocus' => true,
+                ],
             ])
             ->add('lastName', TextType::class, [
                 'required' => true,
                 'label' => 'Last Name',
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
                 'label' => 'Email',
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Passwords do not match.',
-                'options' => ['attr' => ['class' => 'form-control']],
+                'options' => [
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
+                ],
                 'required' => false,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options' => [
+                    'label' => 'Password',
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password',
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Edit data',
                 'attr' => [
-                    'class' => 'btn btn-register'
-                ]
+                    'class' => 'btn btn-register',
+                ],
             ]);
     }
 
@@ -63,7 +68,4 @@ class SettingsType extends AbstractType
             'data_class' => null,
         ]);
     }
-}
-{
-
 }

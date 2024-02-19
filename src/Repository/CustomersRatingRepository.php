@@ -21,7 +21,6 @@ class CustomersRatingRepository extends ServiceEntityRepository
 
     public function findIfOfferIsRated($user, $packageId): bool
     {
-
         $rating = $this->createQueryBuilder('c')
             ->andWhere('c.user = :user')
             ->andWhere('c.package = :packageId')
@@ -29,21 +28,25 @@ class CustomersRatingRepository extends ServiceEntityRepository
             ->setParameter('packageId', $packageId)
             ->getQuery()
             ->getOneOrNullResult();
+
         return $rating != null;
     }
 
-    public function findAvgRatingForPackage($packageId): ?int{
+    public function findAvgRatingForPackage($packageId): ?int
+    {
         $qb = $this->createQueryBuilder('rating')
             ->andWhere('rating.package = :val')
             ->setParameter('val', $packageId);
         $result = $qb->getQuery()->getResult();
-        if(count($result) == 0)
+        if (count($result) == 0) {
             return null;
-        else {
-            $avg = 0;
-            foreach ($result as $row)
-                $avg += $row->getRating();
-            return round($avg / count($result));
         }
+
+        $avg = 0;
+        foreach ($result as $row) {
+            $avg += $row->getRating();
+        }
+
+        return round($avg / count($result));
     }
 }

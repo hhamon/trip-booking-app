@@ -21,22 +21,22 @@ class BookingOfferSearchType extends AbstractType
             ->add('departureDate', TextType::class, [
                 'attr' => [
                     'class' => 'form-control datepicker',
-                    'placeholder' => "Depart Date"
+                    'placeholder' => 'Depart Date',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('comebackDate', TextType::class, [
                 'attr' => [
                     'class' => 'form-control datepicker',
-                    'placeholder' => 'Return Date'
+                    'placeholder' => 'Return Date',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('departureSpot', ChoiceType::class, [
                 'choices' => $options['departureSpots'],
@@ -45,57 +45,65 @@ class BookingOfferSearchType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('destination', EntityType::class, [
                 'choices' => $options['destinations'],
                 'class' => Destination::class,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'placeholder' => 'To',
                 'label' => 'To',
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => false
+                'label' => false,
             ]);
 
-            $builder->get('departureDate')->addModelTransformer( new CallbackTransformer(
-                function ($date) {
-                    if($date!=null)
-                        return $date->format('d/m/Y');
-                    return null;
-                },
-                function ($date) {
-                    if($date!=null) {
-                        $date = explode('/',$date);
-                        $date = $date[2] . '/' . $date[1] . '/' . $date[0];
-                        return new \DateTime($date);
-                    }
-                    return null;
+        $builder->get('departureDate')->addModelTransformer(new CallbackTransformer(
+            function ($date) {
+                if ($date != null) {
+                    return $date->format('d/m/Y');
                 }
-            ));
-            $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
-                function ($date) {
-                    if($date!=null)
-                        return $date->format('d/m/Y');
-                    return null;
-                },
-                function ($date) {
-                    if($date!=null) {
-                        $date = explode('/',$date);
-                        $date = $date[2] . '/' . $date[1] . '/' . $date[0];
-                        return new \DateTime($date);
-                    }
-                    return null;
+
+                return null;
+            },
+            function ($date) {
+                if ($date != null) {
+                    $date = explode('/', $date);
+                    $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+
+                    return new \DateTime($date);
                 }
-            ));
+
+                return null;
+            }
+        ));
+        $builder->get('comebackDate')->addModelTransformer(new CallbackTransformer(
+            function ($date) {
+                if ($date != null) {
+                    return $date->format('d/m/Y');
+                }
+
+                return null;
+            },
+            function ($date) {
+                if ($date != null) {
+                    $date = explode('/', $date);
+                    $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+
+                    return new \DateTime($date);
+                }
+
+                return null;
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -103,7 +111,7 @@ class BookingOfferSearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => BookingOffer::class,
             'destinations' => null,
-            'departureSpots' => null
+            'departureSpots' => null,
         ]);
     }
 }

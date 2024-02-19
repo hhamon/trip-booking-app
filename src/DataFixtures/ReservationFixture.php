@@ -3,14 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Reservation;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class ReservationFixture extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         $reservation = $this->createReservation(
@@ -18,7 +16,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
             1,
             0,
-            new DateTime('2020-11-22')
+            new \DateTime('2020-11-22')
         );
         $manager->persist($reservation);
 
@@ -27,8 +25,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
             2,
             2,
-            new DateTime('2020-11-22'),
-            new DateTime('2020-11-24')
+            new \DateTime('2020-11-22'),
+            new \DateTime('2020-11-24')
         );
         $manager->persist($reservation);
 
@@ -37,8 +35,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::MAFIOSO_REFERENCE1),
             1,
             2,
-            new DateTime('2019-06-22'),
-            new DateTime('2019-06-24')
+            new \DateTime('2019-06-22'),
+            new \DateTime('2019-06-24')
         );
         $manager->persist($reservation);
 
@@ -47,7 +45,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
             5,
             0,
-            new DateTime('2020-11-23')
+            new \DateTime('2020-11-23')
         );
         $manager->persist($reservation);
 
@@ -56,8 +54,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
             3,
             2,
-            new DateTime('2020-11-22'),
-            new DateTime('2020-11-22')
+            new \DateTime('2020-11-22'),
+            new \DateTime('2020-11-22')
         );
         $manager->persist($reservation);
 
@@ -66,8 +64,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
             $this->getReference(BookingOfferFixture::MAHARAJA_REFERENCE1),
             2,
             0,
-            new DateTime('2020-04-22'),
-            new DateTime('2020-04-24')
+            new \DateTime('2020-04-22'),
+            new \DateTime('2020-04-24')
         );
         $manager->persist($reservation);
 
@@ -84,6 +82,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation->setDateOfBooking($dateOfBooking);
         $reservation->setIsPaidFor($paid);
         $reservation->setBankTransferTitle();
+
         return $reservation;
     }
 
@@ -91,6 +90,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
     {
         $reservation = $this->createReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, true);
         $reservation->setBankTransferDate($bankTransferDate);
+
         return $reservation;
     }
 

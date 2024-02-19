@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\DataFixtures;
 
 use App\Entity\CustomersRating;
@@ -36,19 +35,21 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
         $manager->flush();
     }
 
-    private function createRating($user, $package_id, $rating) :CustomersRating
+    private function createRating($user, $package_id, $rating): CustomersRating
     {
         $customersRating = new CustomersRating();
         $customersRating->setUser($user);
         $customersRating->setPackage($package_id);
         $customersRating->setRating($rating);
+
         return $customersRating;
     }
 
-    private function createRatingWithComment($user, $package_id, $rating, $comment) :CustomersRating
+    private function createRatingWithComment($user, $package_id, $rating, $comment): CustomersRating
     {
-        $customersRating= $this->createRating($user, $package_id, $rating);
+        $customersRating = $this->createRating($user, $package_id, $rating);
         $customersRating->setComment($comment);
+
         return $customersRating;
     }
 

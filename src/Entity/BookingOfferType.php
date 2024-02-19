@@ -13,7 +13,9 @@ class BookingOfferType
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -60,7 +62,7 @@ class BookingOfferType
 
     public function addBookingOffer(BookingOffer $bookingOffer): self
     {
-        if (!$this->bookingOffers->contains($bookingOffer)) {
+        if (! $this->bookingOffers->contains($bookingOffer)) {
             $this->bookingOffers[] = $bookingOffer;
             $bookingOffer->setOfferType($this);
         }
