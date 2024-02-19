@@ -67,6 +67,11 @@ class Reservation
 
     private $totalCost;
 
+    /**
+     * @ORM\Column(length=20, nullable=true, unique=true)
+     */
+    private ?string $invoiceNumber = null;
+
     public function getId(): ?int
     {
         return $this->id;
