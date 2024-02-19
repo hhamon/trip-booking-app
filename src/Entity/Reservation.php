@@ -51,6 +51,7 @@ class Reservation
         BookingOffer $offer,
         int $adultNumber = 2,
         int $childNumber = 0,
+        ?float $totalCost = null,
     ) {
         if ($adultNumber < 1) {
             throw new \DomainException('Reservation must have at least 1 adult.');
@@ -64,6 +65,7 @@ class Reservation
         $this->bookingOffer = $offer;
         $this->adultNumber = $adultNumber;
         $this->childNumber = $childNumber;
+        $this->totalCost = $totalCost;
     }
 
     public function getId(): ?int

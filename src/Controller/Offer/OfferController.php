@@ -11,6 +11,7 @@ use App\Form\BookingOfferFiltersType;
 use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
+use App\Service\Reservation\ReservationTotalCostPricer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormInterface;
@@ -82,8 +83,13 @@ class OfferController extends AbstractController
     /**
      * @Route ("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
      */
-    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber): RedirectResponse|Response
-    {
+    public function displayReservationSummary(
+        Request $request,
+        int $offerId,
+        int $adultNumber,
+        int $childNumber,
+        ReservationTotalCostPricer $reservationTotalCostPricer,
+    ): RedirectResponse|Response {
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
 
         if (!$offer instanceof BookingOffer) {
@@ -98,10 +104,10 @@ class OfferController extends AbstractController
             offer: $offer,
             adultNumber: $adultNumber,
             childNumber: $childNumber,
+            totalCost: $reservationTotalCostPricer->getTotalCost($offer, $adultNumber, $childNumber),
         );
 
         $reservation->setBankTransferTitle();
-        $reservation->setTotalCost($this->getReservationTotalCost($reservation));
 
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
@@ -231,13 +237,5 @@ class OfferController extends AbstractController
         }
 
         return null;
-    }
-
-    private function getReservationTotalCost(Reservation $reservation): int|float
-    {
-        $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
-        $childPrice = $reservation->getBookingOffer()->getChildPrice();
-
-        return $reservation->getAdultNumber() * $adultPrice + $reservation->getChildNumber() * $childPrice;
     }
 }
