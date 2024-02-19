@@ -48,7 +48,8 @@
         "symfony/phpunit-bridge": "4.4.*",
         "symfony/stopwatch": "4.4.*",
         "symfony/web-profiler-bundle": "4.4.*",
-        "symfony/web-server-bundle": "4.4.*"
+        "symfony/web-server-bundle": "4.4.*",
+        "symplify/easy-coding-standard": "^12.1"
     },
     "config": {
         "preferred-install": {
