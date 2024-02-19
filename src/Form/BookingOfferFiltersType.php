@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\BookingOffer;
 use App\Entity\BookingOfferType;
 use App\Entity\Destination;
+use App\Repository\BookingOfferRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -18,134 +19,146 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingOfferFiltersType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function __construct(
+        private readonly BookingOfferRepository $bookingOfferRepository,
+    ) {
+    }
+
+    #[\Override]
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('priceMin', NumberType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Min'
+                    'placeholder' => 'Min',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'label' => 'Minimum Price',
                 'mapped' => false,
-                'required' => false
+                'required' => false,
             ])
             ->add('priceMax', NumberType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Max'
+                    'placeholder' => 'Max',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'label' => 'Maximum Price',
                 'mapped' => false,
-                'required' => false
+                'required' => false,
             ])
             ->add('departureDate', TextType::class, [
                 'attr' => [
                     'class' => 'form-control datepicker',
-                    'placeholder' => "Depart"
+                    'placeholder' => 'Depart',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'empty_data' => null,
-                'required' => false
+                'required' => false,
             ])
             ->add('comebackDate', TextType::class, [
                 'attr' => [
                     'class' => 'form-control datepicker',
-                    'placeholder' => 'Return'
+                    'placeholder' => 'Return',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'empty_data' => null,
-                'required' => false
+                'required' => false,
             ])
             ->add('departureSpot', ChoiceType::class, [
-                'choices' => $options['departureSpots'],
+                'choices' => $this->bookingOfferRepository->findDistinctDepartureSpots(),
                 'placeholder' => 'From',
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('destination', EntityType::class, [
                 'choices' => $options['destinations'],
                 'class' => Destination::class,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'placeholder' => 'To',
                 'label' => 'To',
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('offerTypes', EntityType::class, [
                 'class' => BookingOfferType::class,
                 'choices' => $options['offer_types'],
-                'choice_attr' => function() {
-                    return ['class' => 'form-check-input'];
-                },
+                'choice_attr' => static fn (): array => ['class' => 'form-check-input'],
                 'label_attr' => [
-                    'class' => 'form-check-label'
+                    'class' => 'form-check-label',
                 ],
                 'expanded' => true,
                 'multiple' => true,
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
         ;
-        $builder->get('departureDate')->addModelTransformer( new CallbackTransformer(
-            function ($date) {
-                if($date!=null)
+        $builder->get('departureDate')->addModelTransformer(new CallbackTransformer(
+            static function ($date) {
+                if (null != $date) {
                     return $date->format('d/m/Y');
+                }
+
                 return null;
             },
-            function ($date) {
-                if($date!=null) {
-                    $date = explode('/',$date);
-                    $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+            static function ($date): ?\DateTime {
+                if (null != $date) {
+                    $date = explode('/', $date);
+                    $date = $date[2].'/'.$date[1].'/'.$date[0];
+
                     return new \DateTime($date);
                 }
+
                 return null;
             }
         ));
-        $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
-            function ($date) {
-                if($date!=null)
+        $builder->get('comebackDate')->addModelTransformer(new CallbackTransformer(
+            static function ($date) {
+                if (null != $date) {
                     return $date->format('d/m/Y');
+                }
+
                 return null;
             },
-            function ($date) {
-                if($date!=null) {
-                    $date = explode('/',$date);
-                    $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+            static function ($date): ?\DateTime {
+                if (null != $date) {
+                    $date = explode('/', $date);
+                    $date = $date[2].'/'.$date[1].'/'.$date[0];
+
                     return new \DateTime($date);
                 }
+
                 return null;
             }
         ));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    #[\Override]
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => BookingOffer::class,
             'offer_types' => null,
             'destinations' => null,
-            'departureSpots' => null
         ]);
     }
 }

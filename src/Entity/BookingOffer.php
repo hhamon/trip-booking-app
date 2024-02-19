@@ -2,104 +2,66 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
+use App\Repository\BookingOfferRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BookingOfferRepository")
- */
+#[ORM\Entity(repositoryClass: BookingOfferRepository::class)]
 class BookingOffer
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $offerName;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $offerName = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $offerType;
+    #[ORM\ManyToOne(targetEntity: BookingOfferType::class, inversedBy: 'bookingOffers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?BookingOfferType $offerType = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $packageId;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $packageId = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
-    private $offerPrice;
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $offerPrice = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
-    private $childPrice;
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $childPrice = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Destination")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $destination;
+    #[ORM\ManyToOne(targetEntity: Destination::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Destination $destination = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $bookingStartDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $bookingStartDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $bookingEndDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $bookingEndDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $departureDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $departureDate = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $comebackDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $comebackDate = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $departureSpot;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $departureSpot = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $comebackSpot;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $comebackSpot = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isFeatured;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $isFeatured = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photosDirectory;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $photosDirectory = null;
 
     private $rating;
-
-    public function __construct()
-    {
-
-    }
 
     public function getRating(): ?int
     {
@@ -176,7 +138,7 @@ class BookingOffer
         return $this;
     }
 
-    public function getDescription() :?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -184,51 +146,52 @@ class BookingOffer
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
-    public function getBookingStartDate(): ?DateTimeInterface
+    public function getBookingStartDate(): ?\DateTimeInterface
     {
         return $this->bookingStartDate;
     }
 
-    public function setBookingStartDate(DateTimeInterface $bookingStartDate): self
+    public function setBookingStartDate(\DateTimeInterface $bookingStartDate): self
     {
         $this->bookingStartDate = $bookingStartDate;
 
         return $this;
     }
 
-    public function getBookingEndDate(): ?DateTimeInterface
+    public function getBookingEndDate(): ?\DateTimeInterface
     {
         return $this->bookingEndDate;
     }
 
-    public function setBookingEndDate(DateTimeInterface $bookingEndDate): self
+    public function setBookingEndDate(\DateTimeInterface $bookingEndDate): self
     {
         $this->bookingEndDate = $bookingEndDate;
 
         return $this;
     }
 
-    public function getDepartureDate(): ?DateTimeInterface
+    public function getDepartureDate(): ?\DateTimeInterface
     {
         return $this->departureDate;
     }
 
-    public function setDepartureDate(?DateTimeInterface $departureDate): self
+    public function setDepartureDate(?\DateTimeInterface $departureDate): self
     {
         $this->departureDate = $departureDate;
 
         return $this;
     }
 
-    public function getComebackDate(): ?DateTimeInterface
+    public function getComebackDate(): ?\DateTimeInterface
     {
         return $this->comebackDate;
     }
 
-    public function setComebackDate(?DateTimeInterface $comebackDate): self
+    public function setComebackDate(?\DateTimeInterface $comebackDate): self
     {
         $this->comebackDate = $comebackDate;
 
@@ -290,7 +253,7 @@ class BookingOffer
 
     public function setPhotosDirectory(string $photosDirectory): self
     {
-        $this->photosDirectory = $photosDirectory;;
+        $this->photosDirectory = $photosDirectory;
 
         return $this;
     }

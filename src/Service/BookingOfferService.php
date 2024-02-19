@@ -1,26 +1,33 @@
 <?php
 
-
 namespace App\Service;
 
-
+use App\Entity\BookingOffer;
+use App\Entity\BookingOfferType;
+use App\Entity\Destination;
 use App\Repository\BookingOfferRepository;
 
-final class BookingOfferService
+final readonly class BookingOfferService
 {
-    private $itemRepository;
-
-    /**
-     * ItemService constructor.
-     * @param BookingOfferRepository $bookingOfferRepository
-     */
-    public function __construct(BookingOfferRepository $bookingOfferRepository)
-    {
-        $this->itemRepository = $bookingOfferRepository;
+    public function __construct(
+        private BookingOfferRepository $itemRepository,
+    ) {
     }
 
-    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
-    {
+    /**
+     * @param BookingOfferType[]|null $bookingOfferTypes
+     *
+     * @return iterable<int, BookingOffer>
+     */
+    public function findOffers(
+        ?string $departureSpot = null,
+        Destination|string|int|null $destination = null,
+        ?\DateTimeInterface $departureDate = null,
+        ?\DateTimeInterface $comebackDate = null,
+        float|int|string|null $priceMin = null,
+        float|int|string|null $priceMax = null,
+        ?array $bookingOfferTypes = null,
+    ): iterable {
         return $this->itemRepository->findOffers(
             $departureSpot,
             $destination,
@@ -28,7 +35,7 @@ final class BookingOfferService
             $comebackDate,
             $priceMin,
             $priceMax,
-            $bookingOfferTypes
+            $bookingOfferTypes,
         );
     }
 }

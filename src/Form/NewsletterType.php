@@ -11,26 +11,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NewsletterType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    #[\Override]
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'label_attr' => [
-                    'class' => 'sr-only'
+                    'class' => 'sr-only',
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'email@example.com'
-                ]
+                    'placeholder' => 'email@example.com',
+                ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Sign Up'
+                'label' => 'Sign Up',
             ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    #[\Override]
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Newsletter::class,

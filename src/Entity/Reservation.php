@@ -3,65 +3,46 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository", repositoryClass=ReservationRepository::class)
- */
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=BookingOffer::class, fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $bookingOffer;
+    #[ORM\ManyToOne(targetEntity: BookingOffer::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?BookingOffer $bookingOffer = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateOfBooking;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateOfBooking = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $adultNumber;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $adultNumber = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $childNumber;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $childNumber = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPaidFor;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $isPaidFor = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $bankTransferDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $bankTransferDate = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bankTransferTitle;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $bankTransferTitle = null;
 
-    private $destination;
+    private ?string $destination = null;
 
-    private $totalCost;
+    private ?float $totalCost = null;
 
     public function getId(): ?int
     {
@@ -128,7 +109,7 @@ class Reservation
         return $this;
     }
 
-    public function getChildNumber():?int
+    public function getChildNumber(): ?int
     {
         return $this->childNumber;
     }
@@ -136,6 +117,7 @@ class Reservation
     public function setChildNumber(?int $childNumber): self
     {
         $this->childNumber = $childNumber;
+
         return $this;
     }
 
@@ -147,10 +129,11 @@ class Reservation
     public function setAdultNumber(?int $adultNumber): self
     {
         $this->adultNumber = $adultNumber;
+
         return $this;
     }
 
-    public function getDestination():?string
+    public function getDestination(): ?string
     {
         return $this->destination;
     }
@@ -158,10 +141,11 @@ class Reservation
     public function setDestination(?string $destination): self
     {
         $this->destination = $destination;
+
         return $this;
     }
 
-    public function getTotalCost():?float
+    public function getTotalCost(): ?float
     {
         return $this->totalCost;
     }
@@ -169,6 +153,7 @@ class Reservation
     public function setTotalCost(?float $totalCost): self
     {
         $this->totalCost = $totalCost;
+
         return $this;
     }
 
@@ -180,11 +165,25 @@ class Reservation
     public function setBankTransferTitle(): self
     {
         $this->bankTransferTitle = $this->generateRandomString();
+
         return $this;
     }
 
-    function generateRandomString($length = 15) {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    /**
+     * TODO: extract to a third party service class.
+     */
+    public function generateRandomString($length = 15): string
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }
 
+    public function confirm(?\DateTimeInterface $confirmedAt = null, ?float $paidAmount = null): void
+    {
+        if (!$confirmedAt instanceof \DateTimeInterface) {
+            $confirmedAt = new \DateTime('now');
+        }
+
+        $this->setDateOfBooking(\DateTime::createFromInterface($confirmedAt));
+        $this->setIsPaidFor($paidAmount === $this->totalCost);
+    }
 }

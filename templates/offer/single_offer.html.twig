@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% set reservation_form %}
+    {{ include('offer/start_reservation_form.html.twig', {form: init_reservation_form}) }}
+{% endset %}
+
 {% block title %}
     {{ offer.offerName }} - Dream Holiday
 {% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/single_offer.css') }}">
 {% endblock %}
+
 {% block page_content %}
     <div class="container-fluid">
         <div class="row justify-content-center mt-2">
@@ -43,8 +49,7 @@
                         <div class="reservation-form-container">
                             <h2>Book now</h2>
                             <div id="reservation-form">
-                                {% set form_desktop = reservationForm.createView %}
-                                {% include 'offer/start_reservation_form.html.twig' with {'form': form_desktop, 'offer': offer}%}
+                                {{ reservation_form }}
                             </div>
                         </div>
                     </div>
@@ -77,8 +82,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {% set form_mobile=reservationForm.createView %}
-                    {% include 'offer/start_reservation_form.html.twig' with {'form': form_mobile}%}
+                    {{ reservation_form }}
                 </div>
             </div>
         </div>

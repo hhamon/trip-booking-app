@@ -11,7 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationStartType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    #[\Override]
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('adultNumber', NumberType::class, [
@@ -19,7 +20,7 @@ class ReservationStartType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Number of adults',
-                    'min' => 1
+                    'min' => 1,
                 ],
                 'html5' => true,
                 'label' => 'Number of adults',
@@ -29,7 +30,7 @@ class ReservationStartType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Number of children',
-                    'min' => 0
+                    'min' => 0,
                 ],
                 'html5' => true,
                 'label' => 'Number of children',
@@ -38,7 +39,8 @@ class ReservationStartType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    #[\Override]
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,

@@ -2,45 +2,30 @@
 
 namespace App\Entity;
 
+use App\Repository\DestinationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\DestinationRepository")
- */
-class Destination
+#[ORM\Entity(repositoryClass: DestinationRepository::class)]
+class Destination implements \Stringable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $destinationName;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $destinationName = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png"},
-     *              maxSize = "1024k")
-     */
-    private $image;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\File(mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'], maxSize: '1024k')]
+    private ?string $image = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $continent;
-
-    public function __construct()
-    {
-    }
+    #[ORM\ManyToOne(targetEntity: Continent::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Continent $continent = null;
 
     public function getId(): ?int
     {
@@ -83,23 +68,21 @@ class Destination
         return $this;
     }
 
-    public function __toString()
+    #[\Override]
+    public function __toString(): string
     {
-        return $this->destinationName;
+        return (string) $this->destinationName;
     }
 
     /**
-     * @param array $destinations
-     * @return array
      * @throws \Exception
      */
-    public static function sortDestinationsByName(array $destinations)
+    public static function sortDestinationsByName(array $destinations): array
     {
         $doctrineDestinationCollection = new ArrayCollection($destinations);
         $iterator = $doctrineDestinationCollection->getIterator();
-        $iterator->uasort(function ($d1, $d2) {
-            return (strtolower($d1->getDestinationName()) < strtolower($d2->getDestinationName())) ? -1 : 1;
-        });
+        $iterator->uasort(static fn ($d1, $d2): int => (strtolower((string) $d1->getDestinationName()) < strtolower((string) $d2->getDestinationName())) ? -1 : 1);
+
         return iterator_to_array($iterator);
     }
 }

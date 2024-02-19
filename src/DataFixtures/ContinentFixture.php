@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -7,55 +8,45 @@ use App\Entity\Continent;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ContinentFixture extends Fixture
+final class ContinentFixture extends Fixture
 {
-    public const AFRICA_REFERENCE = 'africa';
-    public const ANTARCTICA_REFERENCE = 'antarctica';
-    public const ASIA_REFERENCE = 'asia';
-    public const OCEANIA_REFERENCE = 'oceania';
-    public const EUROPE_REFERENCE = 'europe';
-    public const NORTH_AMERICA_REFERENCE = 'north america';
-    public const SOUTH_AMERICA_REFERENCE = 'south america';
-    public function load(ObjectManager $manager)
+    public const string AFRICA_REFERENCE = 'africa';
+
+    public const string ANTARCTICA_REFERENCE = 'antarctica';
+
+    public const string ASIA_REFERENCE = 'asia';
+
+    public const string OCEANIA_REFERENCE = 'oceania';
+
+    public const string EUROPE_REFERENCE = 'europe';
+
+    public const string NORTH_AMERICA_REFERENCE = 'north america';
+
+    public const string SOUTH_AMERICA_REFERENCE = 'south america';
+
+    /**
+     * @var array<string, string>
+     */
+    private const array NAME_MAP = [
+        self::AFRICA_REFERENCE => 'Africa',
+        self::ANTARCTICA_REFERENCE => 'Antarctica',
+        self::ASIA_REFERENCE => 'Asia',
+        self::OCEANIA_REFERENCE => 'Australia',
+        self::EUROPE_REFERENCE => 'Europe',
+        self::NORTH_AMERICA_REFERENCE => 'North America',
+        self::SOUTH_AMERICA_REFERENCE => 'South America',
+    ];
+
+    #[\Override]
+    public function load(ObjectManager $manager): void
     {
+        foreach (self::NAME_MAP as $referenceKey => $name) {
+            $continent = new Continent($name);
+            $manager->persist($continent);
 
-        $continent = $this->createContinent('Africa');
-        $this->addReference(self::AFRICA_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('Antarctica');
-        $this->addReference(self::ANTARCTICA_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('Asia');
-        $this->addReference(self::ASIA_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('Australia');
-        $this->addReference(self::OCEANIA_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('Europe');
-        $this->addReference(self::EUROPE_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('North America');
-        $this->addReference(self::NORTH_AMERICA_REFERENCE,$continent);
-        $manager->persist($continent);
-
-        $continent = $this->createContinent('South America');
-        $this->addReference(self::SOUTH_AMERICA_REFERENCE,$continent);
-        $manager->persist($continent);
-
+            $this->addReference($referenceKey, $continent);
+        }
 
         $manager->flush();
     }
-
-    private function createContinent($name) : Continent
-    {
-        $continent = new Continent();
-        $continent->setName($name);
-        return $continent;
-    }
-
 }

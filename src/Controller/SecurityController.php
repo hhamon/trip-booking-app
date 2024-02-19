@@ -4,122 +4,109 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AuthType;
-use App\Form\LoginType;
-
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
-use DateTime;
-use Exception;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="app_login")
-     */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
+    #[Route(path: '/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-        $user = new User();
-        $user->setRegistrationDate(new DateTime('now'));
-        $form = $this->createForm(LoginType::class, $user);
 
         return $this->render('security/login.html.twig', [
-            'form' => $form->createView(),
-            'last_username' => $lastUsername,
-            'error' => $error
+            'last_username' => $authenticationUtils->getLastUsername(),
+            'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
-    public function logout()
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
     {
-        throw new Exception('Action forbidden');
+        throw new \RuntimeException('Action forbidden');
     }
 
-    /**
-     * @Route("/register", name="app_register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
-    {
+    #[Route(path: '/register', name: 'app_register')]
+    public function register(
+        Request $request,
+        LoginFormAuthenticator $authenticator,
+        UserPasswordHasherInterface $passwordHasher,
+        UserAuthenticatorInterface $userAuthenticator,
+        ValidatorInterface $validator,
+    ): Response {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
+
         $user = new User();
+
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+
         $errors = $validator->validate($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $formUser = $form->getData();
-            $em = $this->getDoctrine()->getManager();
             $registrationFields = $request->request->get('registration');
 
-            $formUser->setPassword($passwordEncoder->encodePassword(
-                $formUser,
-                $registrationFields['password']['first']
-            ));
-            $formUser->setRegistrationDate(new DateTime('now'));
+            $formUser->setPassword($passwordHasher->hashPassword($formUser, $registrationFields['password']['first']));
+            $formUser->setRegistrationDate(new \DateTime('now'));
 
-            $em->persist($formUser);
-            $em->flush();
+            $this->entityManager->persist($formUser);
+            $this->entityManager->flush();
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $formAuthenticator,
-                'main'
-            );
+            $response = $userAuthenticator->authenticateUser($user, $authenticator, $request);
+            \assert($response instanceof Response);
 
+            return $response;
         }
 
         return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
-            'errors' => $errors
+            'errors' => $errors,
         ]);
     }
 
-    /**
-     * @Route("/auth", name="auth")
-     * @param Request $request
-     * @param LoginFormAuthenticator $formAuthenticator
-     * @return Response
-     */
-    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator, AuthenticationUtils $authenticationUtils)
-    {
-
-        $user = $this->getUser();
+    #[Route(path: '/auth', name: 'auth')]
+    public function authenticate(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        #[CurrentUser] User $user,
+    ): Response {
         $form = $this->createForm(AuthType::class);
-        $form->createView();
         $form->handleRequest($request);
+
         $errors = [];
         if ($form->isSubmitted() && $form->isValid()) {
-            $authFields = $request->request->get('auth');
-            if ($formAuthenticator->checkCredentials($authFields, $user)) {
-                $_SESSION['display_settings'] = TRUE;
+            $authFields = $request->request->all('auth');
+            if ($passwordHasher->isPasswordValid($user, $authFields['password'])) {
+                $request->getSession()->set('display_settings', true);
+
                 return $this->redirectToRoute('settings');
             }
-            else {
-                $errors [] = 'Incorrect password';
-            }
+
+            $errors[] = 'Incorrect password';
         }
+
         return $this->render('security/auth.html.twig', [
-            'form' => $form,
-            'errors' => $errors
+            'form' => $form->createView(),
+            'errors' => $errors,
         ]);
     }
 }

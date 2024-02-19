@@ -1,23 +1,28 @@
 <?php
 
-
 namespace App\Controller\UsersData;
 
-use App\Entity\CustomersRating;
-use App\Entity\Reservation;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+use App\Repository\CustomersRatingRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ReservationController extends AbstractController
 {
-    /**
-     * @Route("/reservations", name="reservations")
-     */
-    public function index()
+    public function __construct(
+        private readonly CustomersRatingRepository $customersRatingRepository,
+        private readonly ReservationRepository $reservationRepository,
+    ) {
+    }
+
+    #[Route(path: '/reservations', name: 'reservations')]
+    public function index(Request $request, #[CurrentUser] User $user): Response
     {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
+        $reservations = $this->reservationRepository->findReservationsByUser($user);
 
         $session_array = [];
         $isRatingAvailable = [];
@@ -25,23 +30,23 @@ class ReservationController extends AbstractController
             $offer = $reservation->getBookingOffer();
             $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
             $packageId = $offer->getPackageId();
-            $isOfferRated = $em->getRepository(CustomersRating::class)->findIfOfferIsRated($user, $packageId);
-            if(!$isOfferRated and $offerComebackDate < date("Y-m-d")){
+            $isOfferRated = $this->customersRatingRepository->findIfOfferIsRated($user, $packageId);
+            if (!$isOfferRated && $offerComebackDate < date('Y-m-d')) {
                 $isRatingAvailable[] = true;
-                $session_array[$reservation->getId()] = TRUE;
-            }
-            else{
+                $session_array[$reservation->getId()] = true;
+            } else {
                 $isRatingAvailable[] = false;
                 $session_array[$reservation->getId()] = false;
             }
         }
-        $_SESSION['display_rate_offer'] = $session_array;
+
+        $session = $request->getSession();
+        $session->set('display_rate_offer', $session_array);
+
         return $this->render('reservations/index.html.twig', [
             'controller_name' => 'ReservationController',
             'reservations' => $reservations,
-            'isRatingAvailable' => $isRatingAvailable
+            'isRatingAvailable' => $isRatingAvailable,
         ]);
     }
-
-
 }

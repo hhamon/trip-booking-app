@@ -1,101 +1,124 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
+use App\Entity\Continent;
 use App\Entity\Destination;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class DestinationFixture extends Fixture implements DependentFixtureInterface
+final class DestinationFixture extends Fixture implements DependentFixtureInterface
 {
-    public const SPAIN_REFERENCE = 'spain';
-    public const TURKEY_REFERENCE = 'turkey';
-    public const INDIA_REFERENCE = 'india';
-    public const JAPAN_REFERENCE = 'japan';
-    public const AUSTRALIA_REFERENCE = 'australia';
-    public const NEW_ZEALAND_REFERENCE = 'new_zealand';
-    public const ITALY_REFERENCE = 'italy';
-    public const THAILAND_REFERENCE = 'thailand';
-    public const CHINA_REFERENCE = 'china';
-    public const ARGENTINA_REFERENCE = 'argentina';
-    public function load(ObjectManager $manager)
+    public const string SPAIN_REFERENCE = 'spain';
+
+    public const string TURKEY_REFERENCE = 'turkey';
+
+    public const string INDIA_REFERENCE = 'india';
+
+    public const string JAPAN_REFERENCE = 'japan';
+
+    public const string AUSTRALIA_REFERENCE = 'australia';
+
+    public const string NEW_ZEALAND_REFERENCE = 'new_zealand';
+
+    public const string ITALY_REFERENCE = 'italy';
+
+    public const string THAILAND_REFERENCE = 'thailand';
+
+    public const string CHINA_REFERENCE = 'china';
+
+    public const string ARGENTINA_REFERENCE = 'argentina';
+
+    /**
+     * @var array<string, array{name: string, continent: string}>
+     */
+    private const array NAME_MAP = [
+        self::ITALY_REFERENCE => [
+            'name' => 'Italy',
+            'continent' => ContinentFixture::EUROPE_REFERENCE,
+        ],
+        self::SPAIN_REFERENCE => [
+            'name' => 'Spain',
+            'continent' => ContinentFixture::EUROPE_REFERENCE,
+        ],
+        self::CHINA_REFERENCE => [
+            'name' => 'China',
+            'continent' => ContinentFixture::ASIA_REFERENCE,
+        ],
+        self::INDIA_REFERENCE => [
+            'name' => 'India',
+            'continent' => ContinentFixture::ASIA_REFERENCE,
+        ],
+        self::JAPAN_REFERENCE => [
+            'name' => 'Japan',
+            'continent' => ContinentFixture::ASIA_REFERENCE,
+        ],
+        self::THAILAND_REFERENCE => [
+            'name' => 'Thailand',
+            'continent' => ContinentFixture::ASIA_REFERENCE,
+        ],
+        self::TURKEY_REFERENCE => [
+            'name' => 'Turkey',
+            'continent' => ContinentFixture::ASIA_REFERENCE,
+        ],
+        self::AUSTRALIA_REFERENCE => [
+            'name' => 'Australia',
+            'continent' => ContinentFixture::OCEANIA_REFERENCE,
+        ],
+        self::NEW_ZEALAND_REFERENCE => [
+            'name' => 'New Zealand',
+            'continent' => ContinentFixture::OCEANIA_REFERENCE,
+        ],
+        self::ARGENTINA_REFERENCE => [
+            'name' => 'Argentina',
+            'continent' => ContinentFixture::SOUTH_AMERICA_REFERENCE,
+        ],
+    ];
+
+    #[\Override]
+    public function load(ObjectManager $manager): void
     {
+        foreach (self::NAME_MAP as $referenceKey => $destination) {
+            $destination = $this->createDestination(
+                $destination['name'],
+                $destination['continent'],
+            );
 
-        $destination = $this->createDestination('Spain',
-            $this->getReference(ContinentFixture::EUROPE_REFERENCE));
-        $this->addReference(self::SPAIN_REFERENCE,$destination);
-        $manager->persist($destination);
+            $manager->persist($destination);
 
-
-        $destination = $this->createDestination('Turkey',
-            $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $this->addReference(self::TURKEY_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('India',
-            $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $this->addReference(self::INDIA_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('Japan',
-            $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $this->addReference(self::JAPAN_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('Australia',
-            $this->getReference(ContinentFixture::OCEANIA_REFERENCE));
-        $this->addReference(self::AUSTRALIA_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('New Zealand',
-            $this->getReference(ContinentFixture::OCEANIA_REFERENCE));
-        $this->addReference(self::NEW_ZEALAND_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('Italy',
-            $this->getReference(ContinentFixture::EUROPE_REFERENCE));
-        $this->addReference(self::ITALY_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('Thailand',
-            $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $this->addReference(self::THAILAND_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('China',
-            $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $this->addReference(self::CHINA_REFERENCE,$destination);
-        $manager->persist($destination);
-
-
-        $destination = $this->createDestination('Argentina',
-            $this->getReference(ContinentFixture::SOUTH_AMERICA_REFERENCE));
-        $this->addReference(self::ARGENTINA_REFERENCE,$destination);
-        $manager->persist($destination);
-
+            $this->addReference($referenceKey, $destination);
+        }
 
         $manager->flush();
     }
 
-    private function createDestination($name, $continent) :Destination
+    private function createDestination(string $name, string $continentKey): Destination
     {
         $destination = new Destination();
         $destination->setDestinationName($name);
-        $destination->setImage('images/country_cards/' . $destination->getDestinationName() . '_card.jpg');
-        $destination->setContinent($continent);
+        $destination->setImage('images/country_cards/'.$destination->getDestinationName().'_card.jpg');
+        $destination->setContinent($this->getContinent($continentKey));
+
         return $destination;
     }
 
-    public function getDependencies()
+    /**
+     * @return class-string[]
+     */
+    #[\Override]
+    public function getDependencies(): array
     {
         return [ContinentFixture::class];
+    }
+
+    public function getContinent(string $referenceKey): Continent
+    {
+        $continent = $this->getReference($referenceKey);
+        \assert($continent instanceof Continent);
+
+        return $continent;
     }
 }

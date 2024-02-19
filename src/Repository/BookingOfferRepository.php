@@ -17,71 +17,121 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookingOfferRepository extends ServiceEntityRepository
 {
-    private $registry;
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        private readonly ManagerRegistry $registry,
+    ) {
         parent::__construct($registry, BookingOffer::class);
-        $this->registry=$registry;
     }
 
-    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
+    private function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null): Criteria
     {
         $currentDate = new \DateTime('now');
         $criteria = new Criteria();
         $criteria->andWhere(Criteria::expr()->gt('bookingEndDate', $currentDate));
-        if($departureSpot != null)
+        if (null != $departureSpot) {
             $criteria->andWhere(Criteria::expr()->eq('departureSpot', $departureSpot));
-        if($destination != null)
+        }
+
+        if (null != $destination) {
             $criteria->andWhere(Criteria::expr()->eq('destination', $destination));
-        if($departureDate != null)
+        }
+
+        if (null != $departureDate) {
             $criteria->andWhere(Criteria::expr()->gte('departureDate', $departureDate));
-        if($comebackDate != null)
+        }
+
+        if (null != $comebackDate) {
             $criteria->andWhere(Criteria::expr()->lte('comebackDate', $comebackDate));
-        if($priceMin != null)
+        }
+
+        if (null != $priceMin) {
             $criteria->andWhere(Criteria::expr()->gte('offerPrice', $priceMin));
-        if($priceMax != null)
+        }
+
+        if (null != $priceMax) {
             $criteria->andWhere(Criteria::expr()->lte('offerPrice', $priceMax));
-        if($bookingOfferTypes != null) {
+        }
+
+        if (null != $bookingOfferTypes) {
             $orStatements = [];
             foreach ($bookingOfferTypes as $type) {
                 $orStatements[] = Criteria::expr()->eq('offerType', $type);
             }
-            if (!empty($orStatements)) {
+
+            if ([] !== $orStatements) {
                 $criteria->andWhere(new CompositeExpression(CompositeExpression::TYPE_OR, $orStatements));
             }
         }
+
         return $criteria;
     }
 
-    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
+    /**
+     * @return array<string, string>
+     */
+    public function findDistinctDepartureSpots(): array
     {
-        $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
-            $departureSpot,
-            $destination,
-            $departureDate,
-            $comebackDate,
-            $priceMin,
-            $priceMax,
-            $bookingOfferTypes
-        ));
-        $result=$qb->getQuery()->getResult();
-        foreach ($result as $row){
-            $package_id = $row->getPackageId();
-            $rating = $this->findOfferRating($package_id);
-            $row->setRating($rating);
+        $qb = $this->createQueryBuilder('bookingOffer');
+
+        $query = $qb->select('bookingOffer.departureSpot')
+            ->distinct()
+            ->orderBy('bookingOffer.departureSpot', 'ASC')
+            ->groupBy('bookingOffer.departureSpot')
+            ->getQuery()
+        ;
+
+        /** @var array<int, array{departureSpot: string}> $results */
+        $results = $query->getResult();
+
+        $departureSpots = \array_column($results, 'departureSpot');
+
+        return \array_combine($departureSpots, $departureSpots);
+    }
+
+    /**
+     * @param mixed|null $departureSpot
+     * @param mixed|null $destination
+     * @param mixed|null $departureDate
+     * @param mixed|null $comebackDate
+     * @param mixed|null $priceMin
+     * @param mixed|null $priceMax
+     * @param mixed|null $bookingOfferTypes
+     *
+     * @return iterable<int, BookingOffer>
+     */
+    public function findOffers(
+        $departureSpot = null,
+        $destination = null,
+        $departureDate = null,
+        $comebackDate = null,
+        $priceMin = null,
+        $priceMax = null,
+        $bookingOfferTypes = null,
+    ): iterable {
+        $qb = $this->createQueryBuilder('offer')->addCriteria($this->createSearchCriteria($departureSpot, $destination, $departureDate, $comebackDate, $priceMin, $priceMax, $bookingOfferTypes));
+
+        $result = $qb->getQuery()->getResult();
+        \assert(\is_array($result));
+
+        /** @var BookingOffer $row */
+        foreach ($result as $row) {
+            $row->setRating($this->findOfferRating((int) $row->getPackageId()));
         }
+
         return $result;
     }
 
-    public function findOffer($id) :?BookingOffer{
+    public function findOffer($id): ?BookingOffer
+    {
         $offer = $this->find($id);
         $rating = $this->findOfferRating($offer->getPackageId());
         $offer->setRating($rating);
+
         return $offer;
     }
 
-    private function findOfferRating(int $packageId): ?int{
+    private function findOfferRating(int $packageId): ?int
+    {
         return $this->registry->getRepository(CustomersRating::class)->findAvgRatingForPackage($packageId);
     }
-
 }

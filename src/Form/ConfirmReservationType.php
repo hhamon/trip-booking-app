@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Form;
-
 
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
@@ -12,14 +12,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfirmReservationType extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('submit', SubmitType::class, [
-                'label' => 'Confirm reservation'
-            ]);
+                'label' => 'Confirm reservation',
+            ])
+        ;
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

@@ -1,68 +1,78 @@
 <?php
 
-
 namespace App\Controller\UsersData;
 
+use App\Entity\User;
 use App\Form\SettingsType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class SettingController extends AbstractController
 {
-    /**
-     * @Route("/settings", name="settings")
-     * @param Request $request
-     * @return Response
-     */
-    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
+
+    #[Route(path: '/settings', name: 'settings')]
+    public function editData(Request $request, #[CurrentUser] User $user): Response
     {
-        if ((isset($_SESSION['display_settings']) && $_SESSION['display_settings'] === TRUE) || !empty($request->request->all())){
-            unset($_SESSION['display_settings']);
-            $user = $this->getUser();
+        $session = $request->getSession();
+
+        $displaySettings = $session->get('display_settings', false);
+        \assert(\is_bool($displaySettings));
+
+        if ($displaySettings || [] !== $request->request->all()) {
+            $session->remove('display_settings');
             $settingsForm = $this->createForm(SettingsType::class);
             $settingsForm->createView();
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 $settingsFields = $request->request->get('settings');
-                $user = $this->UpdateUserData($settingsFields, $passwordEncoder);
-                $em->persist($user);
-                $em->flush();
-                return $this->redirectToRoute("home");
+                $this->updateUserData($settingsFields, $user);
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('home');
             }
+
             return $this->render('settings/index.html.twig', [
                 'controller_name' => 'SettingController',
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
                 'email' => $user->getEmail(),
-                'settingsForm' => $settingsForm
+                'form' => $settingsForm->createView(),
             ]);
-        } else {
-            return $this->redirectToRoute("auth");
         }
+
+        return $this->redirectToRoute('auth');
     }
 
-    private function UpdateUserData($fields, UserPasswordEncoderInterface $passwordEncoder)
+    private function updateUserData(string|int|float|bool|null $fields, User $user): void
     {
-        $user = $this->getUser();
         $firstNameField = $fields['firstName'];
-        if ($firstNameField != $user->getFirstName())
+        if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
-        $lastNameField = $fields['lastName'];
-        if ($lastNameField != $user->getLastName())
-            $user->setLastName($lastNameField);
-        $emailField = $fields['email'];
-        if ($emailField != $user->getEmail())
-            $user->setEmail($emailField);
-        if ($fields['password']['first'] != null)
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $fields['password']['first']
-            ));
+        }
 
-        return $user;
+        $lastNameField = $fields['lastName'];
+        if ($lastNameField != $user->getLastName()) {
+            $user->setLastName($lastNameField);
+        }
+
+        $emailField = $fields['email'];
+        if ($emailField != $user->getEmail()) {
+            $user->setEmail($emailField);
+        }
+
+        if (null != $fields['password']['first']) {
+            $user->setPassword($this->passwordHasher->hashPassword($user, $fields['password']['first']));
+        }
     }
 }

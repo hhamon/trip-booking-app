@@ -1,0 +1,64 @@
+parameters:
+    paths:
+        - ./src
+    exclude_files:
+        - '#.*test.*#'
+    layers:
+        -
+            name: Controller
+            collectors:
+                -
+                    type: className
+                    regex: .*Controller.*
+        -
+            name: Entity
+            collectors:
+                -
+                    type: className
+                    regex: .*Entity.*
+
+        -
+            name: Form
+            collectors:
+                -
+                    type: className
+                    regex: .*Form.*
+
+        -
+            name: Repository
+            collectors:
+                -
+                    type: className
+                    regex: .*Repository.*
+        -
+            name: Service
+            collectors:
+                -
+                    type: className
+                    regex: .*Service.*
+    ruleset:
+        Controller:
+            - Service
+            - Entity
+            - Form
+        Service:
+            - Repository
+            - Entity
+        Entity:
+            - Controller
+            - Service
+            - Repository
+        Form:
+            - Entity
+        Repository:
+            - Entity
+
+    formatters:
+        graphviz:
+            groups:
+                Entrypoints:
+                    - Controllers
+                    - Commands
+                Persistence:
+                    - Repositories
+                    - Entities

@@ -1,0 +1,341 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Variable \\$departureSpots might not be defined\\.$#"
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: "#^Cannot access offset 'email' on float\\|int\\<min, \\-1\\>\\|int\\<1, max\\>\\|non\\-falsy\\-string\\|true\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of method Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController\\:\\:redirect\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/NewsletterController.php
+
+		-
+			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Entity\\\\BookingOffer\\:\\:setDepartureSpot\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Service\\\\BookingOfferService\\:\\:findOffers\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$dirs of method Symfony\\\\Component\\\\Finder\\\\Finder\\:\\:in\\(\\) expects array\\<string\\>\\|string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\:\\:get\\(\\) expects string, int\\|null given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method setPassword\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method setRegistrationDate\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:persist\\(\\) expects object, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:isPasswordValid\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/SecurityController.php
+
+		-
+			message: "#^Cannot call method getBookingOffer\\(\\) on App\\\\Entity\\\\Reservation\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/RateOfferController.php
+
+		-
+			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/RateOfferController.php
+
+		-
+			message: "#^Cannot access offset 'email' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'firstName' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'lastName' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Cannot access offset 'password' on bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 2
+			path: src/Controller/UsersData/SettingController.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOffer\\:\\:getChildPrice\\(\\) should return float\\|null but returns string\\|null\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOffer\\:\\:getOfferPrice\\(\\) should return float\\|null but returns string\\|null\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOffer\\:\\:setRating\\(\\) has parameter \\$rating with no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$childPrice \\(string\\|null\\) does not accept float\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$offerPrice \\(string\\|null\\) does not accept float\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$rating has no type specified\\.$#"
+			count: 1
+			path: src/Entity/BookingOffer.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\BookingOfferType\\:\\:getBookingOffers\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/BookingOfferType.php
+
+		-
+			message: "#^Class App\\\\Entity\\\\User referenced with incorrect case\\: App\\\\Entity\\\\user\\.$#"
+			count: 2
+			path: src/Entity/CustomersRating.php
+
+		-
+			message: "#^Call to an undefined method Traversable\\<\\(int\\|string\\), mixed\\>\\:\\:uasort\\(\\)\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Destination\\:\\:sortDestinationsByName\\(\\) has parameter \\$destinations with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Destination\\:\\:sortDestinationsByName\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/Destination.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Reservation\\:\\:generateRandomString\\(\\) has parameter \\$length with no type specified\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Parameter \\#2 \\$times of function str_repeat expects int, float given\\.$#"
+			count: 1
+			path: src/Entity/Reservation.php
+
+		-
+			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Cannot call method setRating\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\BookingOfferRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$bookingOfferTypes with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$comebackDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$departureDate with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$departureSpot with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$destination with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$priceMax with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:createSearchCriteria\\(\\) has parameter \\$priceMin with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOffer\\(\\) has parameter \\$id with no type specified\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$packageId of method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOfferRating\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Repository/BookingOfferRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\BookingOfferTypeRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/BookingOfferTypeRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\CareerRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/CareerRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\ContinentRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/ContinentRepository.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Cannot call method getRating\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\CustomersRatingRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findAvgRatingForPackage\\(\\) has parameter \\$packageId with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findAvgRatingForPackage\\(\\) should return int\\|null but returns float\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findIfOfferIsRated\\(\\) has parameter \\$packageId with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\CustomersRatingRepository\\:\\:findIfOfferIsRated\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, mixed given\\.$#"
+			count: 2
+			path: src/Repository/CustomersRatingRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\DestinationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/DestinationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\NewsletterRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/NewsletterRepository.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getAdultNumber\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getBookingOffer\\(\\) on mixed\\.$#"
+			count: 3
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method getChildNumber\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method setDestination\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Cannot call method setTotalCost\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\ReservationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ReservationRepository\\:\\:findReservationsByUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Method App\\\\Repository\\\\ReservationRepository\\:\\:findReservationsByUser\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Repository/ReservationRepository.php
+
+		-
+			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Repository/UserRepository.php

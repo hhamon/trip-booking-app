@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit data - Dream Holiday{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 {% endblock %}
+
 {% block body %}
     <div id="hero">
         <div class="container-fluid">
             <div class="row register-form-row justify-content-center">
                 <div class="col-10 col-sm-8 col-md-6 col-lg-9 col-xl-6" id="main-column">
-                    {% set form = settingsForm.createView %}
                     {{ form_start(form) }}
                     <div class="row justify-content-center">
                         <div class="col-lg-6 form-space">
