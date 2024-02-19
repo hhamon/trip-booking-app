@@ -84,9 +84,6 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/auth', name: 'auth')]
     public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {

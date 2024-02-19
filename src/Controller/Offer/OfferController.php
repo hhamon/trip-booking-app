@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     /**
-     *
      * @return Response
+     *
      * @throws \Exception
      */
     #[Route(path: '/browse', name: 'browse')]
@@ -110,7 +110,7 @@ class OfferController extends AbstractController
     {
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($id);
 
-        if (!$offer instanceof BookingOffer) {
+        if (! $offer instanceof BookingOffer) {
             throw $this->createNotFoundException(\sprintf('Unable to find booking offer identified by ID `%s`.', $id));
         }
 

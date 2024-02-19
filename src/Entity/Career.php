@@ -5,48 +5,30 @@ namespace App\Entity;
 use App\Repository\CareerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CareerRepository::class)
- */
+#[ORM\Entity(repositoryClass: CareerRepository::class)]
 class Career
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $jobTitle;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $requirements;
 
-    /**
-     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 7, scale: 2, nullable: true)]
     private $salary;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $recruitmentStartDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $recruitmentEndDate;
 
     public function getId(): ?int

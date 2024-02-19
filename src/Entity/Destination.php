@@ -6,36 +6,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\DestinationRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\DestinationRepository::class)]
 class Destination
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $destinationName;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\File(mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'], maxSize: '1024k')]
+    #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Continent::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $continent;
 
     public function __construct()

@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     *
      * @return Response
+     *
      * @throws \Exception
      */
     #[Route(path: '/', name: 'home')]

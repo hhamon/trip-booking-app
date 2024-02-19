@@ -6,28 +6,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BookingOfferTypeRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferTypeRepository::class)]
 class BookingOfferType
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $typeName;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BookingOffer", mappedBy="offerType", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: BookingOffer::class, mappedBy: 'offerType', orphanRemoval: true)]
     private $bookingOffers;
 
     public function __construct()

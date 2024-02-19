@@ -4,97 +4,59 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BookingOfferRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferRepository::class)]
 class BookingOffer
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $offerName;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: BookingOfferType::class, inversedBy: 'bookingOffers')]
+    #[ORM\JoinColumn(nullable: false)]
     private $offerType;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private $packageId;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
+    #[ORM\Column(type: 'decimal', precision: 6, scale: 2)]
     private $offerPrice;
 
-    /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     */
+    #[ORM\Column(type: 'decimal', precision: 6, scale: 2)]
     private $childPrice;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Destination")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Destination::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $destination;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $description;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $bookingStartDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $bookingEndDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $departureDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $comebackDate;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $departureSpot;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $comebackSpot;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isFeatured;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $photosDirectory;
 
     private $rating;
