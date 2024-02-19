@@ -26,12 +26,14 @@ class SecurityController extends AbstractController
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
         $user->setRegistrationDate(new \DateTime('now'));
+
         $form = $this->createForm(LoginType::class, $user);
 
         return $this->render('security/login.html.twig', [
@@ -57,9 +59,11 @@ class SecurityController extends AbstractController
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
+
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+
         $errors = $validator->validate($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $formUser = $form->getData();
@@ -92,8 +96,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/auth", name="auth")
-     *
-     * @return Response
      */
     public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {
@@ -101,6 +103,7 @@ class SecurityController extends AbstractController
         $form = $this->createForm(AuthType::class);
         $form->createView();
         $form->handleRequest($request);
+
         $errors = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $authFields = $request->request->get('auth');

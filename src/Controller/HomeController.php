@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Offer\OfferController;
 use App\Entity\BookingOffer;
 use App\Form\BookingOfferSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,17 +15,16 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      *
-     * @return Response
-     *
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $bookingOffer = new BookingOffer();
         $offers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
         foreach ($offers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
+
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
                 'class' => 'form-inline',
@@ -35,13 +35,14 @@ class HomeController extends AbstractController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->forward('App\Controller\Offer\OfferController::getOffers', [
+            return $this->forward(OfferController::class . '::getOffers', [
                 'departureSpot' => null,
                 'destination' => $bookingOffer->getDestination(),
                 'departureDate' => $bookingOffer->getDepartureDate(),
                 'comebackDate' => $bookingOffer->getComebackDate(),
             ]);
         }
+
         $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy([
             'isFeatured' => 1,
         ]);

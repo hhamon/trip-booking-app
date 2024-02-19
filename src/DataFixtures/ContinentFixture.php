@@ -9,11 +9,17 @@ use Doctrine\Persistence\ObjectManager;
 class ContinentFixture extends Fixture
 {
     public const AFRICA_REFERENCE = 'africa';
+
     public const ANTARCTICA_REFERENCE = 'antarctica';
+
     public const ASIA_REFERENCE = 'asia';
+
     public const OCEANIA_REFERENCE = 'oceania';
+
     public const EUROPE_REFERENCE = 'europe';
+
     public const NORTH_AMERICA_REFERENCE = 'north america';
+
     public const SOUTH_AMERICA_REFERENCE = 'south america';
 
     public function load(ObjectManager $manager): void
@@ -49,7 +55,7 @@ class ContinentFixture extends Fixture
         $manager->flush();
     }
 
-    private function createContinent($name): Continent
+    private function createContinent(string $name): Continent
     {
         $continent = new Continent();
         $continent->setName($name);

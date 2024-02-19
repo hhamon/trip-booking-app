@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\BookingOfferTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferTypeRepository::class)]
-class BookingOfferType
+#[ORM\Entity(repositoryClass: BookingOfferTypeRepository::class)]
+class BookingOfferType implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,10 +16,10 @@ class BookingOfferType
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $typeName;
+    private ?string $typeName = null;
 
     #[ORM\OneToMany(targetEntity: BookingOffer::class, mappedBy: 'offerType', orphanRemoval: true)]
-    private $bookingOffers;
+    private ArrayCollection|array $bookingOffers;
 
     public function __construct()
     {
@@ -73,8 +74,8 @@ class BookingOfferType
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->typeName;
+        return (string) $this->typeName;
     }
 }

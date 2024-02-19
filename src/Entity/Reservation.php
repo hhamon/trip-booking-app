@@ -15,33 +15,33 @@ class Reservation
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(targetEntity: BookingOffer::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
-    private $bookingOffer;
+    private ?BookingOffer $bookingOffer = null;
 
     #[ORM\Column(type: 'datetime')]
-    private $dateOfBooking;
+    private ?\DateTimeInterface $dateOfBooking = null;
 
     #[ORM\Column(type: 'integer')]
-    private $adultNumber;
+    private ?int $adultNumber = null;
 
     #[ORM\Column(type: 'integer')]
-    private $childNumber;
+    private ?int $childNumber = null;
 
     #[ORM\Column(type: 'boolean')]
-    private $isPaidFor;
+    private ?bool $isPaidFor = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private $bankTransferDate;
+    private ?\DateTimeInterface $bankTransferDate = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $bankTransferTitle;
 
-    private $destination;
+    private ?string $destination = null;
 
-    private $totalCost;
+    private ?float $totalCost = null;
 
     #[ORM\Column(length: 20, nullable: true, unique: true)]
     private ?string $invoiceNumber = null;
@@ -171,7 +171,7 @@ class Reservation
         return $this;
     }
 
-    public function generateRandomString($length = 15)
+    public function generateRandomString($length = 15): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }

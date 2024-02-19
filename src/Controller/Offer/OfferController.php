@@ -13,6 +13,7 @@ use App\Service\BookingOfferService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,11 +26,9 @@ class OfferController extends AbstractController
     /**
      * @Route("/browse", name="browse")
      *
-     * @return Response
-     *
      * @throws \Exception
      */
-    public function displayOfferList(Request $request, BookingOfferService $offerService)
+    public function displayOfferList(Request $request, BookingOfferService $offerService): Response
     {
         $bookingOffer = new BookingOffer();
         if ($request->query->get('booking_offer_search')) {
@@ -46,10 +45,12 @@ class OfferController extends AbstractController
         } else {
             $offers = $offerService->findOffers();
         }
+
         $allOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
         foreach ($allOffers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
+
         $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer, [
             'method' => 'GET',
             'departureSpots' => $departureSpots,
@@ -61,9 +62,10 @@ class OfferController extends AbstractController
                 ]);
             if ($fetchedType) {
                 $typeId = $fetchedType->getId();
-                $filtersForm->get('offerTypes')->get("{$typeId}")->setData(true);
+                $filtersForm->get('offerTypes')->get($typeId)->setData(true);
             }
         }
+
         $filtersForm->handleRequest($request);
         if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
             $offers = $this->getOffersBasedOnFormSubmission($offerService, $filtersForm, $bookingOffer);
@@ -81,7 +83,7 @@ class OfferController extends AbstractController
      *
      * @return Response
      */
-    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber)
+    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber): RedirectResponse|Response
     {
         $reservation = new Reservation();
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
@@ -91,6 +93,7 @@ class OfferController extends AbstractController
         $reservation->setBankTransferTitle();
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
         $reservation->setUser($this->getUser());
+
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -126,8 +129,10 @@ class OfferController extends AbstractController
         if ($finder->hasResults()) {
             $photosCount = $finder->count();
         }
+
         $reservation = new Reservation();
         $reservation->setBookingOffer($offer);
+
         $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
         $reservationForm->handleRequest($request);
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
@@ -145,7 +150,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    private function getWellFormattedDate(string $date)
+    private function getWellFormattedDate(string $date): \DateTime
     {
         $reformatted = explode('/', $date);
         $reformatted = $reformatted[2] . '/' . $reformatted[1] . '/' . $reformatted[0];
@@ -180,9 +185,11 @@ class OfferController extends AbstractController
         if ($departureDate != null) {
             $bookingOffer->setDepartureDate($this->getWellFormattedDate($departureDate));
         }
+
         if ($comebackDate != null) {
             $bookingOffer->setComebackDate($this->getWellFormattedDate($comebackDate));
         }
+
         $bookingOffer->setDepartureSpot($departureSpot);
         $bookingOffer->setDestination($this->getDoctrine()->getRepository(Destination::class)->find($destination));
 
@@ -198,12 +205,10 @@ class OfferController extends AbstractController
             'typeName' => $offerTypeName,
         ]);
         if ($offerType != null) {
-            $offers = $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
-        } else {
-            $offers = null;
+            return $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
         }
 
-        return $offers;
+        return null;
     }
 
     private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName)
@@ -212,15 +217,13 @@ class OfferController extends AbstractController
             'destinationName' => $destinationName,
         ]);
         if ($destination != null) {
-            $offers = $offerService->findOffers(null, $destination, null, null, null, null, null);
-        } else {
-            $offers = null;
+            return $offerService->findOffers(null, $destination, null, null, null, null, null);
         }
 
-        return $offers;
+        return null;
     }
 
-    private function getReservationTotalCost($reservation)
+    private function getReservationTotalCost(Reservation $reservation): int|float
     {
         $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
         $childPrice = $reservation->getBookingOffer()->getChildPrice();

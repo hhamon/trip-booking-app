@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Career;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CareerController extends AbstractController
@@ -11,7 +12,7 @@ class CareerController extends AbstractController
     /**
      * @Route("/careers", name="careers")
      */
-    public function index()
+    public function index(): Response
     {
         $em = $this->getDoctrine()->getManager();
         $careers = $em->getRepository(Career::class)->findAll();

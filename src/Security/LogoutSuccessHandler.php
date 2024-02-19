@@ -9,11 +9,9 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
-    private $router;
-
-    public function __construct(RouterInterface $router)
-    {
-        $this->router = $router;
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function onLogoutSuccess(Request $request)

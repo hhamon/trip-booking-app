@@ -6,7 +6,7 @@ use App\Repository\ContinentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContinentRepository::class)]
-class Continent
+class Continent implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,7 +14,7 @@ class Continent
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
@@ -35,6 +35,6 @@ class Continent
 
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

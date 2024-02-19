@@ -5,6 +5,7 @@ namespace App\Controller\UsersData;
 use App\Entity\CustomersRating;
 use App\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
@@ -12,7 +13,7 @@ class ReservationController extends AbstractController
     /**
      * @Route("/reservations", name="reservations")
      */
-    public function index()
+    public function index(): Response
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -25,7 +26,7 @@ class ReservationController extends AbstractController
             $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
             $packageId = $offer->getPackageId();
             $isOfferRated = $em->getRepository(CustomersRating::class)->findIfOfferIsRated($user, $packageId);
-            if (! $isOfferRated and $offerComebackDate < date('Y-m-d')) {
+            if (! $isOfferRated && $offerComebackDate < date('Y-m-d')) {
                 $isRatingAvailable[] = true;
                 $session_array[$reservation->getId()] = true;
             } else {
@@ -33,6 +34,7 @@ class ReservationController extends AbstractController
                 $session_array[$reservation->getId()] = false;
             }
         }
+
         $_SESSION['display_rate_offer'] = $session_array;
 
         return $this->render('reservations/index.html.twig', [

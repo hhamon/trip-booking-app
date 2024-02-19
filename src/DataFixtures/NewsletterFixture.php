@@ -16,7 +16,7 @@ class NewsletterFixture extends Fixture
         $manager->flush();
     }
 
-    private function createNewsletter($email)
+    private function createNewsletter(string $email): Newsletter
     {
         $newsletter = new Newsletter();
         $newsletter->setEmail($email);

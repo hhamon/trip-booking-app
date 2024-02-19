@@ -4,6 +4,7 @@ namespace App\Controller\Offer;
 
 use App\Entity\Destination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DestinationController extends AbstractController
@@ -11,7 +12,7 @@ class DestinationController extends AbstractController
     /**
      * @Route("/destinations", name="destinations")
      */
-    public function index()
+    public function index(): Response
     {
         $em = $this->getDoctrine()->getManager();
         $destinations = $em->getRepository(Destination::class)->findAll();

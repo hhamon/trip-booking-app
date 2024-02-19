@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Repository\BookingOfferRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: \App\Repository\BookingOfferRepository::class)]
+#[ORM\Entity(repositoryClass: BookingOfferRepository::class)]
 class BookingOffer
 {
     #[ORM\Id]
@@ -13,57 +14,53 @@ class BookingOffer
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $offerName;
+    private ?string $offerName = null;
 
     #[ORM\ManyToOne(targetEntity: BookingOfferType::class, inversedBy: 'bookingOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    private $offerType;
+    private ?BookingOfferType $offerType = null;
 
     #[ORM\Column(type: 'integer')]
-    private $packageId;
+    private ?int $packageId = null;
 
     #[ORM\Column(type: 'decimal', precision: 6, scale: 2)]
-    private $offerPrice;
+    private ?float $offerPrice = null;
 
     #[ORM\Column(type: 'decimal', precision: 6, scale: 2)]
-    private $childPrice;
+    private ?float $childPrice = null;
 
     #[ORM\ManyToOne(targetEntity: Destination::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $destination;
+    private ?Destination $destination = null;
 
     #[ORM\Column(type: 'text')]
-    private $description;
+    private ?string $description = null;
 
     #[ORM\Column(type: 'datetime')]
-    private $bookingStartDate;
+    private ?\DateTimeInterface $bookingStartDate = null;
 
     #[ORM\Column(type: 'datetime')]
-    private $bookingEndDate;
+    private ?\DateTimeInterface $bookingEndDate = null;
 
     #[ORM\Column(type: 'datetime')]
-    private $departureDate;
+    private ?\DateTimeInterface $departureDate = null;
 
     #[ORM\Column(type: 'datetime')]
-    private $comebackDate;
+    private ?\DateTimeInterface $comebackDate = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $departureSpot;
+    private ?string $departureSpot = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $comebackSpot;
+    private ?string $comebackSpot = null;
 
     #[ORM\Column(type: 'boolean')]
-    private $isFeatured;
+    private ?bool $isFeatured = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $photosDirectory;
+    private ?string $photosDirectory = null;
 
     private $rating;
-
-    public function __construct()
-    {
-    }
 
     public function getRating(): ?int
     {

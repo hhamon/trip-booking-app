@@ -17,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookingOfferRepository extends ServiceEntityRepository
 {
-    private ManagerRegistry $registry;
+    private readonly ManagerRegistry $registry;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -26,7 +26,7 @@ class BookingOfferRepository extends ServiceEntityRepository
         $this->registry = $registry;
     }
 
-    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
+    private function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null): Criteria
     {
         $currentDate = new \DateTime('now');
         $criteria = new Criteria();
@@ -34,27 +34,34 @@ class BookingOfferRepository extends ServiceEntityRepository
         if ($departureSpot != null) {
             $criteria->andWhere(Criteria::expr()->eq('departureSpot', $departureSpot));
         }
+
         if ($destination != null) {
             $criteria->andWhere(Criteria::expr()->eq('destination', $destination));
         }
+
         if ($departureDate != null) {
             $criteria->andWhere(Criteria::expr()->gte('departureDate', $departureDate));
         }
+
         if ($comebackDate != null) {
             $criteria->andWhere(Criteria::expr()->lte('comebackDate', $comebackDate));
         }
+
         if ($priceMin != null) {
             $criteria->andWhere(Criteria::expr()->gte('offerPrice', $priceMin));
         }
+
         if ($priceMax != null) {
             $criteria->andWhere(Criteria::expr()->lte('offerPrice', $priceMax));
         }
+
         if ($bookingOfferTypes != null) {
             $orStatements = [];
             foreach ($bookingOfferTypes as $type) {
                 $orStatements[] = Criteria::expr()->eq('offerType', $type);
             }
-            if (! empty($orStatements)) {
+
+            if ($orStatements !== []) {
                 $criteria->andWhere(new CompositeExpression(CompositeExpression::TYPE_OR, $orStatements));
             }
         }
@@ -64,15 +71,7 @@ class BookingOfferRepository extends ServiceEntityRepository
 
     public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
-        $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
-            $departureSpot,
-            $destination,
-            $departureDate,
-            $comebackDate,
-            $priceMin,
-            $priceMax,
-            $bookingOfferTypes
-        ));
+        $qb = $this->createQueryBuilder('offer')->addCriteria($this->createSearchCriteria($departureSpot, $destination, $departureDate, $comebackDate, $priceMin, $priceMax, $bookingOfferTypes));
 
         /** @var BookingOffer[] $result */
         $result = $qb->getQuery()->getResult();

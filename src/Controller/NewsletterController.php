@@ -7,6 +7,7 @@ use App\Form\NewsletterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class NewsletterController extends AbstractController
 {
-    public function renderForm(Request $request, ValidatorInterface $validator)
+    public function renderForm(Request $request, ValidatorInterface $validator): Response
     {
         $news_object = new Newsletter();
         $news_form = $this->createForm(NewsletterType::class, $news_object, [
@@ -23,6 +24,7 @@ class NewsletterController extends AbstractController
             'method' => 'POST',
         ]);
         $news_form->handleRequest($request);
+
         $errors = $validator->validate($news_object);
 
         return $this->render('newsletter/form.html.twig', [
@@ -33,10 +35,8 @@ class NewsletterController extends AbstractController
 
     /**
      * @Route("/signup", name="signup")
-     *
-     * @return RedirectResponse
      */
-    public function signUp(Request $request)
+    public function signUp(Request $request): RedirectResponse
     {
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');
@@ -54,6 +54,7 @@ class NewsletterController extends AbstractController
                 $this->addFlash('notice', 'Thank you! You are already a newsletter subscriber.');
             }
         }
+
         $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);

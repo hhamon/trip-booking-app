@@ -2,7 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\BookingOffer;
 use App\Entity\Reservation;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -72,7 +74,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, $paid = false): Reservation
+    private function createReservation(?User $user, ?BookingOffer $bookingOffer, ?int $adultNumber, ?int $childNumber, ?\DateTimeInterface $dateOfBooking, bool $paid = false): Reservation
     {
         $reservation = new Reservation();
         $reservation->setUser($user);
@@ -86,7 +88,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         return $reservation;
     }
 
-    private function createPaidReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, $bankTransferDate): Reservation
+    private function createPaidReservation($user, $bookingOffer, int $adultNumber, int $childNumber, \DateTime $dateOfBooking, \DateTime $bankTransferDate): Reservation
     {
         $reservation = $this->createReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, true);
         $reservation->setBankTransferDate($bankTransferDate);

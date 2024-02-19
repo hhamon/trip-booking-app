@@ -94,11 +94,9 @@ class BookingOfferFiltersType extends AbstractType
             ->add('offerTypes', EntityType::class, [
                 'class' => BookingOfferType::class,
                 'choices' => $options['offer_types'],
-                'choice_attr' => function () {
-                    return [
-                        'class' => 'form-check-input',
-                    ];
-                },
+                'choice_attr' => static fn (): array => [
+                    'class' => 'form-check-input',
+                ],
                 'label_attr' => [
                     'class' => 'form-check-label',
                 ],
@@ -110,14 +108,14 @@ class BookingOfferFiltersType extends AbstractType
             ->add('reset', ResetType::class)
         ;
         $builder->get('departureDate')->addModelTransformer(new CallbackTransformer(
-            function ($date) {
+            static function ($date) {
                 if ($date != null) {
                     return $date->format('d/m/Y');
                 }
 
                 return null;
             },
-            function ($date) {
+            static function ($date): ?\DateTime {
                 if ($date != null) {
                     $date = explode('/', $date);
                     $date = $date[2] . '/' . $date[1] . '/' . $date[0];
@@ -129,14 +127,14 @@ class BookingOfferFiltersType extends AbstractType
             }
         ));
         $builder->get('comebackDate')->addModelTransformer(new CallbackTransformer(
-            function ($date) {
+            static function ($date) {
                 if ($date != null) {
                     return $date->format('d/m/Y');
                 }
 
                 return null;
             },
-            function ($date) {
+            static function ($date): ?\DateTime {
                 if ($date != null) {
                     $date = explode('/', $date);
                     $date = $date[2] . '/' . $date[1] . '/' . $date[0];

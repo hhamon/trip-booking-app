@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Continent;
 use App\Entity\Destination;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -10,14 +11,23 @@ use Doctrine\Persistence\ObjectManager;
 class DestinationFixture extends Fixture implements DependentFixtureInterface
 {
     public const SPAIN_REFERENCE = 'spain';
+
     public const TURKEY_REFERENCE = 'turkey';
+
     public const INDIA_REFERENCE = 'india';
+
     public const JAPAN_REFERENCE = 'japan';
+
     public const AUSTRALIA_REFERENCE = 'australia';
+
     public const NEW_ZEALAND_REFERENCE = 'new_zealand';
+
     public const ITALY_REFERENCE = 'italy';
+
     public const THAILAND_REFERENCE = 'thailand';
+
     public const CHINA_REFERENCE = 'china';
+
     public const ARGENTINA_REFERENCE = 'argentina';
 
     public function load(ObjectManager $manager): void
@@ -75,7 +85,7 @@ class DestinationFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createDestination($name, $continent): Destination
+    private function createDestination(string $name, ?Continent $continent): Destination
     {
         $destination = new Destination();
         $destination->setDestinationName($name);

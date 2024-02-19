@@ -17,15 +17,12 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
-    private $userRepository;
-    private $router;
-    private $passwordEncoder;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->userRepository = $userRepository;
-        $this->router = $router;
-        $this->passwordEncoder = $passwordEncoder;
+    public function __construct(
+        private UserRepository $userRepository,
+        private RouterInterface $router,
+        private UserPasswordEncoderInterface $passwordEncoder
+    ) {
     }
 
     public function supports(Request $request)
@@ -67,7 +64,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if (($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) !== null && ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) !== '' && ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) !== '0') {
             return new RedirectResponse($targetPath);
         }
 

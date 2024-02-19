@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CustomersRating;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -35,7 +36,7 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
         $manager->flush();
     }
 
-    private function createRating($user, $package_id, $rating): CustomersRating
+    private function createRating(?User $user, ?int $package_id, int $rating): CustomersRating
     {
         $customersRating = new CustomersRating();
         $customersRating->setUser($user);
@@ -45,7 +46,7 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
         return $customersRating;
     }
 
-    private function createRatingWithComment($user, $package_id, $rating, $comment): CustomersRating
+    private function createRatingWithComment($user, int $package_id, int $rating, string $comment): CustomersRating
     {
         $customersRating = $this->createRating($user, $package_id, $rating);
         $customersRating->setComment($comment);

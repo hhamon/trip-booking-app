@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -9,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @UniqueEntity(fields={"email"}, message="Given e-mail is already taken.")
  */
-#[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'app_user')]
 class User implements UserInterface
 {
@@ -19,7 +20,7 @@ class User implements UserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    private ?string $email = null;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
@@ -28,23 +29,19 @@ class User implements UserInterface
      * @var string The hashed password
      */
     #[ORM\Column(type: 'string')]
-    private $password;
+    private ?string $password = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $firstName;
+    private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $lastName;
+    private ?string $lastName = null;
 
     #[ORM\Column(type: 'date')]
-    private $registrationDate;
+    private ?\DateTimeInterface $registrationDate = null;
 
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'user')]
     private $reservations;
-
-    public function __construct()
-    {
-    }
 
     public function getId(): ?int
     {

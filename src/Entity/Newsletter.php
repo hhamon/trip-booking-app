@@ -14,7 +14,7 @@ class Newsletter
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $email;
+    private ?string $email = null;
 
     public function getId(): ?int
     {

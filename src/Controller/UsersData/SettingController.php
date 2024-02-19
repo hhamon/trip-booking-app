@@ -4,6 +4,7 @@ namespace App\Controller\UsersData;
 
 use App\Form\SettingsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ class SettingController extends AbstractController
      *
      * @return Response
      */
-    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder): RedirectResponse|Response
     {
         if ((isset($_SESSION['display_settings']) && $_SESSION['display_settings'] === true) || ! empty($request->request->all())) {
             unset($_SESSION['display_settings']);
@@ -46,21 +47,24 @@ class SettingController extends AbstractController
         return $this->redirectToRoute('auth');
     }
 
-    private function UpdateUserData($fields, UserPasswordEncoderInterface $passwordEncoder)
+    private function UpdateUserData(array $fields, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->getUser();
         $firstNameField = $fields['firstName'];
         if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
         }
+
         $lastNameField = $fields['lastName'];
         if ($lastNameField != $user->getLastName()) {
             $user->setLastName($lastNameField);
         }
+
         $emailField = $fields['email'];
         if ($emailField != $user->getEmail()) {
             $user->setEmail($emailField);
         }
+
         if ($fields['password']['first'] != null) {
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,

@@ -31,7 +31,7 @@ class CareerFixture extends Fixture
         $manager->flush();
     }
 
-    private function createCareer($jobTitle, $description, $requirements, $salary, $startDate, $endDate)
+    private function createCareer(string $jobTitle, string $description, string $requirements, float $salary, \DateTime $startDate, \DateTime $endDate): Career
     {
         $career = new Career();
         $career->setJobTitle($jobTitle);
