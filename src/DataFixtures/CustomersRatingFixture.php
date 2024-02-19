@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class CustomersRatingFixture extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $rating = $this->createRating(
             $this->getReference(UserFixture::USER1_REFERENCE),

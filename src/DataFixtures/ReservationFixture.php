@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class ReservationFixture extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER1_REFERENCE),

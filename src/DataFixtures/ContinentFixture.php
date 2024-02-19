@@ -16,7 +16,7 @@ class ContinentFixture extends Fixture
     public const NORTH_AMERICA_REFERENCE = 'north america';
     public const SOUTH_AMERICA_REFERENCE = 'south america';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $continent = $this->createContinent('Africa');
         $this->addReference(self::AFRICA_REFERENCE, $continent);

@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class CareerFixture extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $career = $this->createCareer(
             'manager',

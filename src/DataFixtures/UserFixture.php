@@ -20,7 +20,7 @@ class UserFixture extends Fixture
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user1 = $this->createUser('Jan', 'Kowalski', 'jan_kowalski@dreamholiday.com');
         $this->addReference(self::USER1_REFERENCE, $user1);

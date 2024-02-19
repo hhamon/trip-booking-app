@@ -21,7 +21,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
     public const BEIJING_REFERENCE = 'H- Bei-JING';
     public const PATAGONIA_REFERENCE = 'H- Patagonia';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::SPAIN_REFERENCE),

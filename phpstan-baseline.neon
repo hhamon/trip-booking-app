@@ -252,11 +252,6 @@ parameters:
 			path: src/Controller/UsersData/SettingController.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\AppFixtures\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/AppFixtures.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:createBookingOffer\\(\\) has parameter \\$bookingEndDate with no type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/BookingOfferFixture.php
@@ -327,16 +322,6 @@ parameters:
 			path: src/DataFixtures/BookingOfferFixture.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\BookingOfferFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/BookingOfferFixture.php
-
-		-
-			message: "#^Method App\\\\DataFixtures\\\\BookingOfferTypeFixtures\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/BookingOfferTypeFixtures.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:createCareer\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/CareerFixture.php
@@ -372,17 +357,7 @@ parameters:
 			path: src/DataFixtures/CareerFixture.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\CareerFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/CareerFixture.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\ContinentFixture\\:\\:createContinent\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/ContinentFixture.php
-
-		-
-			message: "#^Method App\\\\DataFixtures\\\\ContinentFixture\\:\\:load\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/ContinentFixture.php
 
@@ -422,11 +397,6 @@ parameters:
 			path: src/DataFixtures/CustomersRatingFixture.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\CustomersRatingFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/CustomersRatingFixture.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\DestinationFixture\\:\\:createDestination\\(\\) has parameter \\$continent with no type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/DestinationFixture.php
@@ -437,22 +407,12 @@ parameters:
 			path: src/DataFixtures/DestinationFixture.php
 
 		-
-			message: "#^Method App\\\\DataFixtures\\\\DestinationFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/DestinationFixture.php
-
-		-
 			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:createNewsletter\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/NewsletterFixture.php
 
 		-
 			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:createNewsletter\\(\\) has parameter \\$email with no type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/NewsletterFixture.php
-
-		-
-			message: "#^Method App\\\\DataFixtures\\\\NewsletterFixture\\:\\:load\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/NewsletterFixture.php
 
@@ -515,16 +475,6 @@ parameters:
 			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:createReservation\\(\\) has parameter \\$user with no type specified\\.$#"
 			count: 1
 			path: src/DataFixtures/ReservationFixture.php
-
-		-
-			message: "#^Method App\\\\DataFixtures\\\\ReservationFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/ReservationFixture.php
-
-		-
-			message: "#^Method App\\\\DataFixtures\\\\UserFixture\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DataFixtures/UserFixture.php
 
 		-
 			message: "#^Property App\\\\DataFixtures\\\\UserFixture\\:\\:\\$passwordEncoder has no type specified\\.$#"
@@ -827,16 +777,6 @@ parameters:
 			path: src/Entity/Reservation.php
 
 		-
-			message: "#^Method App\\\\Entity\\\\User\\:\\:eraseCredentials\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: "#^Method App\\\\Entity\\\\User\\:\\:getSalt\\(\\) should return string\\|null but return statement is missing\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
 			message: "#^Method App\\\\Entity\\\\User\\:\\:setRoles\\(\\) has parameter \\$roles with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Entity/User.php
@@ -888,76 +828,6 @@ parameters:
 			"""
 			count: 1
 			path: src/Entity/User.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferFiltersType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferFiltersType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferFiltersType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferSearchType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\BookingOfferSearchType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/BookingOfferSearchType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/NewsletterType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\NewsletterType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/NewsletterType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RateOfferType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RateOfferType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RateOfferType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RegistrationType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\RegistrationType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/RegistrationType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/ReservationStartType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\ReservationStartType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/ReservationStartType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/SettingsType.php
-
-		-
-			message: "#^Method App\\\\Form\\\\SettingsType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Form/SettingsType.php
 
 		-
 			message: "#^Generator expects value type Symfony\\\\Component\\\\HttpKernel\\\\Bundle\\\\BundleInterface, object given\\.$#"

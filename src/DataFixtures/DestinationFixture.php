@@ -20,7 +20,7 @@ class DestinationFixture extends Fixture implements DependentFixtureInterface
     public const CHINA_REFERENCE = 'china';
     public const ARGENTINA_REFERENCE = 'argentina';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $destination = $this->createDestination('Spain',
             $this->getReference(ContinentFixture::EUROPE_REFERENCE));
