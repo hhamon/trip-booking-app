@@ -156,21 +156,6 @@ parameters:
 			path: src/Controller/SecurityController.php
 
 		-
-			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:login\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:logout\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\SecurityController\\:\\:register\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/SecurityController.php
-
-		-
 			message: "#^Parameter \\#1 \\$object of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:persist\\(\\) expects object, mixed given\\.$#"
 			count: 1
 			path: src/Controller/SecurityController.php

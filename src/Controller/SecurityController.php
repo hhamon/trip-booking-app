@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout()
+    public function logout(): never
     {
         throw new \Exception('Action forbidden');
     }
@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -75,6 +75,7 @@ class SecurityController extends AbstractController
             $em->persist($formUser);
             $em->flush();
 
+            /** @var Response */
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -94,7 +95,7 @@ class SecurityController extends AbstractController
      *
      * @return Response
      */
-    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator, AuthenticationUtils $authenticationUtils)
+    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(AuthType::class);
