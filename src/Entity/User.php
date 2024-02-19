@@ -6,7 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[UniqueEntity(fields: ['email'], message: 'Given e-mail is already taken.')]
+/**
+ * @UniqueEntity(fields={"email"}, message="Given e-mail is already taken.")
+ */
 #[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
 #[ORM\Table(name: 'app_user')]
 class User implements UserInterface

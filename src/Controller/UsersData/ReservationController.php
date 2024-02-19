@@ -9,7 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-    #[Route(path: '/reservations', name: 'reservations')]
+    /**
+     * @Route("/reservations", name="reservations")
+     */
     public function index()
     {
         $user = $this->getUser();

@@ -18,7 +18,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    /**
+     * @Route("/login", name="app_login")
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -39,13 +41,17 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    /**
+     * @Route("/logout", name="app_logout")
+     */
     public function logout(): never
     {
         throw new \Exception('Action forbidden');
     }
 
-    #[Route(path: '/register', name: 'app_register')]
+    /**
+     * @Route("/register", name="app_register")
+     */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -84,7 +90,11 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/auth', name: 'auth')]
+    /**
+     * @Route("/auth", name="auth")
+     *
+     * @return Response
+     */
     public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator): Response
     {
         $user = $this->getUser();

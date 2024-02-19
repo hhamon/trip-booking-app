@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-#[Route(path: '/newsletter', name: 'newsletter_')]
+/**
+ * @Route("/newsletter", name="newsletter_")
+ */
 class NewsletterController extends AbstractController
 {
     public function renderForm(Request $request, ValidatorInterface $validator)
@@ -30,9 +32,10 @@ class NewsletterController extends AbstractController
     }
 
     /**
+     * @Route("/signup", name="signup")
+     *
      * @return RedirectResponse
      */
-    #[Route(path: '/signup', name: 'signup')]
     public function signUp(Request $request)
     {
         if ($request->request->get('newsletter')) {

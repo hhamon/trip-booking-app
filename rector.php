@@ -21,7 +21,7 @@ return RectorConfig::configure()
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
-    ->withAttributesSets(symfony: true, doctrine: true)
+    ->withAttributesSets(doctrine: true)
     ->withPhpSets(php83: true)
     ->withImportNames(importShortClasses: false, removeUnusedImports: true)
     ->withPreparedSets(

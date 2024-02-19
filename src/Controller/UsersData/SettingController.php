@@ -12,9 +12,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SettingController extends AbstractController
 {
     /**
+     * @Route("/settings", name="settings")
+     *
      * @return Response
      */
-    #[Route(path: '/settings', name: 'settings')]
     public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         if ((isset($_SESSION['display_settings']) && $_SESSION['display_settings'] === true) || ! empty($request->request->all())) {

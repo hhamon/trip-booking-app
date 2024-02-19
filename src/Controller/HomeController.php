@@ -12,11 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * @Route("/", name="home")
+     *
      * @return Response
      *
      * @throws \Exception
      */
-    #[Route(path: '/', name: 'home')]
     public function index(Request $request)
     {
         $bookingOffer = new BookingOffer();
