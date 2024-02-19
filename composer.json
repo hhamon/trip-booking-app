@@ -26,6 +26,8 @@
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.4.*",
         "symfony/monolog-bundle": "^3.8",
+        "symfony/polyfill-php82": "^1.29",
+        "symfony/polyfill-php83": "^1.29",
         "symfony/process": "4.4.*",
         "symfony/property-access": "4.4.*",
         "symfony/property-info": "4.4.*",
