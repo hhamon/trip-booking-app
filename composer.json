@@ -107,7 +107,9 @@
         "check-cs": "vendor/bin/ecs check --ansi",
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "phpstan": "vendor/bin/phpstan",
-        "phpstan:baseline": "vendor/bin/phpstan --generate-baseline"
+        "phpstan:baseline": "vendor/bin/phpstan --generate-baseline",
+        "rector": "vendor/bin/rector",
+        "rector:dry": "vendor/bin/rector process --dry-run"
     },
     "conflict": {
         "symfony/symfony": "*"
