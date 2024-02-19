@@ -12,10 +12,26 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ])
+    ->withSkip([
+        __DIR__ . '/config/bundles.php',
+        __DIR__ . '/src/Migrations',
+    ])
     // uncomment to reach your current PHP version
     // ->withPhpSets()
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
     ->withAttributesSets(symfony: true, doctrine: true)
+    ->withPhpSets(php83: true)
+    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        strictBooleans: true,
+    )
 ;
