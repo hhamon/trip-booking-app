@@ -1,14 +1,25 @@
 parameters:
 	ignoreErrors:
 		-
+			message: """
+				#^Fetching class constant class of deprecated class Symfony\\\\Bundle\\\\WebServerBundle\\\\WebServerBundle\\:
+				since Symfony 4\\.4, to be removed in 5\\.0; the new Symfony local server has more features, you can use it instead\\.$#
+			"""
+			count: 1
+			path: config/bundles.php
+
+		-
+			message: """
+				#^Call to method enable\\(\\) of deprecated class Symfony\\\\Component\\\\Debug\\\\Debug\\:
+				since Symfony 4\\.4, use Symfony\\\\Component\\\\ErrorHandler\\\\Debug instead\\.$#
+			"""
+			count: 1
+			path: public/index.php
+
+		-
 			message: "#^Method App\\\\Controller\\\\CareerController\\:\\:index\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Controller/CareerController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/HomeController.php
 
 		-
 			message: "#^Variable \\$departureSpots might not be defined\\.$#"
@@ -41,11 +52,6 @@ parameters:
 			path: src/Controller/Offer/DestinationController.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\BookingOffer\\>\\:\\:findOffer\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Cannot access offset 'comebackDate' on mixed\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
@@ -66,17 +72,17 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
+			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
 			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
 		-
 			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnFormSubmission\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
-			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnFormSubmission\\(\\) has parameter \\$filtersForm with no value type specified in iterable type Symfony\\\\Component\\\\Form\\\\FormInterface\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -112,6 +118,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$departureSpot of method App\\\\Entity\\\\BookingOffer\\:\\:setDepartureSpot\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/Offer/OfferController.php
+
+		-
+			message: "#^Parameter \\#1 \\$dirs of method Symfony\\\\Component\\\\Finder\\\\Finder\\:\\:in\\(\\) expects array\\<string\\>\\|string, string\\|null given\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
 
@@ -189,16 +200,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$user of method App\\\\Entity\\\\CustomersRating\\:\\:setUser\\(\\) expects App\\\\Entity\\\\User\\|null, object\\|null given\\.$#"
 			count: 1
 			path: src/Controller/UsersData/RateOfferController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\CustomersRating\\>\\:\\:findIfOfferIsRated\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/UsersData/ReservationController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectRepository\\<App\\\\Entity\\\\Reservation\\>\\:\\:findReservationsByUser\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/UsersData/ReservationController.php
 
 		-
 			message: "#^Method App\\\\Controller\\\\UsersData\\\\ReservationController\\:\\:index\\(\\) has no return type specified\\.$#"
@@ -591,11 +592,6 @@ parameters:
 			path: src/Entity/BookingOffer.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/BookingOffer.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\BookingOffer\\:\\:\\$isFeatured has no type specified\\.$#"
 			count: 1
 			path: src/Entity/BookingOffer.php
@@ -646,11 +642,6 @@ parameters:
 			path: src/Entity/BookingOfferType.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/BookingOfferType.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\BookingOfferType\\:\\:\\$typeName has no type specified\\.$#"
 			count: 1
 			path: src/Entity/BookingOfferType.php
@@ -662,11 +653,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Entity/Career.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\Career\\:\\:\\$id is never written, only read\\.$#"
 			count: 1
 			path: src/Entity/Career.php
 
@@ -701,11 +687,6 @@ parameters:
 			path: src/Entity/Continent.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\Continent\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/Continent.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\Continent\\:\\:\\$name has no type specified\\.$#"
 			count: 1
 			path: src/Entity/Continent.php
@@ -717,11 +698,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Entity/CustomersRating.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\CustomersRating\\:\\:\\$id is never written, only read\\.$#"
 			count: 1
 			path: src/Entity/CustomersRating.php
 
@@ -771,11 +747,6 @@ parameters:
 			path: src/Entity/Destination.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/Destination.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\Destination\\:\\:\\$image has no type specified\\.$#"
 			count: 1
 			path: src/Entity/Destination.php
@@ -787,11 +758,6 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Entity\\\\Newsletter\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Entity/Newsletter.php
-
-		-
-			message: "#^Property App\\\\Entity\\\\Newsletter\\:\\:\\$id is never written, only read\\.$#"
 			count: 1
 			path: src/Entity/Newsletter.php
 
@@ -851,11 +817,6 @@ parameters:
 			path: src/Entity/Reservation.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/Reservation.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\Reservation\\:\\:\\$isPaidFor has no type specified\\.$#"
 			count: 1
 			path: src/Entity/Reservation.php
@@ -901,11 +862,6 @@ parameters:
 			path: src/Entity/User.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$id is never written, only read\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
 			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$lastName has no type specified\\.$#"
 			count: 1
 			path: src/Entity/User.php
@@ -921,12 +877,20 @@ parameters:
 			path: src/Entity/User.php
 
 		-
-			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$reservations is unused\\.$#"
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$reservations is never written, only read\\.$#"
 			count: 1
 			path: src/Entity/User.php
 
 		-
 			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$roles has no type specified\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: """
+				#^Return type of method App\\\\Entity\\\\User\\:\\:getRoles\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\Security\\\\Core\\\\Role\\\\Role\\:
+				since Symfony 4\\.3, to be removed in 5\\.0\\. Use strings as roles instead\\.$#
+			"""
 			count: 1
 			path: src/Entity/User.php
 
@@ -1031,7 +995,7 @@ parameters:
 			path: src/Repository/BookingOfferRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\BookingOfferRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\BookingOfferRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
@@ -1131,17 +1095,17 @@ parameters:
 			path: src/Repository/BookingOfferRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\BookingOfferTypeRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\BookingOfferTypeRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/BookingOfferTypeRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\CareerRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\CareerRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/CareerRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\ContinentRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\ContinentRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/ContinentRepository.php
 
@@ -1156,7 +1120,7 @@ parameters:
 			path: src/Repository/CustomersRatingRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\CustomersRatingRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\CustomersRatingRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/CustomersRatingRepository.php
 
@@ -1186,12 +1150,12 @@ parameters:
 			path: src/Repository/CustomersRatingRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\DestinationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\DestinationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/DestinationRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\NewsletterRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\NewsletterRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/NewsletterRepository.php
 
@@ -1226,7 +1190,7 @@ parameters:
 			path: src/Repository/ReservationRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\ReservationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\ReservationRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/ReservationRepository.php
 
@@ -1241,7 +1205,7 @@ parameters:
 			path: src/Repository/ReservationRepository.php
 
 		-
-			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+			message: "#^Class App\\\\Repository\\\\UserRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Repository/UserRepository.php
 
