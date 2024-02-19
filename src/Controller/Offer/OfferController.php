@@ -6,6 +6,7 @@ use App\Entity\BookingOffer;
 use App\Entity\BookingOfferType;
 use App\Entity\Destination;
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Form\BookingOfferFiltersType;
 use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
@@ -80,26 +81,35 @@ class OfferController extends AbstractController
 
     /**
      * @Route ("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
-     *
-     * @return Response
      */
     public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber): RedirectResponse|Response
     {
-        $reservation = new Reservation();
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
-        $reservation->setBookingOffer($offer);
-        $reservation->setAdultNumber($adultNumber);
-        $reservation->setChildNumber($childNumber);
+
+        if (!$offer instanceof BookingOffer) {
+            throw $this->createNotFoundException('Booking offer not found!');
+        }
+
+        $user = $this->getUser();
+        \assert($user instanceof User);
+
+        $reservation = new Reservation(
+            owner: $user,
+            offer: $offer,
+            adultNumber: $adultNumber,
+            childNumber: $childNumber,
+        );
+
         $reservation->setBankTransferTitle();
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
-        $reservation->setUser($this->getUser());
 
         $form = $this->createForm(ConfirmReservationType::class, $reservation);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->preConfirm();
+
             $em = $this->getDoctrine()->getManager();
-            $reservation->setDateOfBooking(new \DateTime('NOW'));
-            $reservation->setIsPaidFor(false);
             $em->persist($reservation);
             $em->flush();
 

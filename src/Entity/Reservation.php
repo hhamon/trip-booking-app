@@ -15,20 +15,20 @@ class Reservation
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private User $user;
 
     #[ORM\ManyToOne(targetEntity: BookingOffer::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?BookingOffer $bookingOffer = null;
+    private BookingOffer $bookingOffer;
 
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $dateOfBooking = null;
 
     #[ORM\Column(type: 'integer')]
-    private ?int $adultNumber = null;
+    private int $adultNumber;
 
     #[ORM\Column(type: 'integer')]
-    private ?int $childNumber = null;
+    private int $childNumber;
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $isPaidFor = null;
@@ -46,16 +46,39 @@ class Reservation
     #[ORM\Column(length: 20, nullable: true, unique: true)]
     private ?string $invoiceNumber = null;
 
+    public function __construct(
+        User $owner,
+        BookingOffer $offer,
+        int $adultNumber = 2,
+        int $childNumber = 0,
+    ) {
+        if ($adultNumber < 1) {
+            throw new \DomainException('Reservation must have at least 1 adult.');
+        }
+
+        if ($adultNumber > 10) {
+            throw new \DomainException('Reservation cannot be taken for more than 10 adults.');
+        }
+
+        $this->user = $owner;
+        $this->bookingOffer = $offer;
+        $this->adultNumber = $adultNumber;
+        $this->childNumber = $childNumber;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
+    /**
+     * @deprecated to be removed soon
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -63,11 +86,14 @@ class Reservation
         return $this;
     }
 
-    public function getBookingOffer(): ?BookingOffer
+    public function getBookingOffer(): BookingOffer
     {
         return $this->bookingOffer;
     }
 
+    /**
+     * @deprecated to be removed soon
+     */
     public function setBookingOffer(?BookingOffer $bookingOffer): self
     {
         $this->bookingOffer = $bookingOffer;
@@ -111,28 +137,14 @@ class Reservation
         return $this;
     }
 
-    public function getChildNumber(): ?int
+    public function getChildNumber(): int
     {
         return $this->childNumber;
     }
 
-    public function setChildNumber(?int $childNumber): self
-    {
-        $this->childNumber = $childNumber;
-
-        return $this;
-    }
-
-    public function getAdultNumber(): ?int
+    public function getAdultNumber(): int
     {
         return $this->adultNumber;
-    }
-
-    public function setAdultNumber(?int $adultNumber): self
-    {
-        $this->adultNumber = $adultNumber;
-
-        return $this;
     }
 
     public function getDestination(): ?string
@@ -174,5 +186,17 @@ class Reservation
     public function generateRandomString($length = 15): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+    }
+
+    public function preConfirm(
+        \DateTime $bookedAt = new \DateTime('NOW'),
+    ): void {
+        $this->setDateOfBooking($bookedAt);
+        $this->setIsPaidFor(false);
+    }
+
+    public function cancel(
+        \DateTime $canceledAt = new \DateTime('NOW'),
+    ): void {
     }
 }

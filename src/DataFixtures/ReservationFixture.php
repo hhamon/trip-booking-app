@@ -74,13 +74,15 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createReservation(?User $user, ?BookingOffer $bookingOffer, ?int $adultNumber, ?int $childNumber, ?\DateTimeInterface $dateOfBooking, bool $paid = false): Reservation
+    private function createReservation(?User $user, BookingOffer $bookingOffer, ?int $adultNumber, ?int $childNumber, ?\DateTimeInterface $dateOfBooking, bool $paid = false): Reservation
     {
-        $reservation = new Reservation();
-        $reservation->setUser($user);
-        $reservation->setBookingOffer($bookingOffer);
-        $reservation->setAdultNumber($adultNumber);
-        $reservation->setChildNumber($childNumber);
+        $reservation = new Reservation(
+            owner: $user,
+            offer: $bookingOffer,
+            adultNumber: $adultNumber,
+            childNumber: $childNumber,
+        );
+
         $reservation->setDateOfBooking($dateOfBooking);
         $reservation->setIsPaidFor($paid);
         $reservation->setBankTransferTitle();
