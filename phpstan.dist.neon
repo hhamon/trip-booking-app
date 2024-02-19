@@ -9,3 +9,9 @@ parameters:
         - public/
         - src/
         - tests/
+
+    checkAlwaysTrueInstanceof: true
+    checkAlwaysTrueStrictComparison: true
+    checkExplicitMixedMissingReturn: true
+    reportWrongPhpDocTypeInVarTag: true
+    treatPhpDocTypesAsCertain: false

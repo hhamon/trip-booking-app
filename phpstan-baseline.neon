@@ -72,11 +72,6 @@ parameters:
 			path: src/Controller/Offer/OfferController.php
 
 		-
-			message: "#^Cannot call method getPhotosDirectory\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Controller/Offer/OfferController.php
-
-		-
 			message: "#^Method App\\\\Controller\\\\Offer\\\\OfferController\\:\\:getOffersBasedOnDestination\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Controller/Offer/OfferController.php
@@ -970,27 +965,12 @@ parameters:
 			path: src/Kernel.php
 
 		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
 			message: "#^Cannot call method getPackageId\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
 		-
-			message: "#^Cannot call method getPackageId\\(\\) on mixed\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
 			message: "#^Cannot call method setRating\\(\\) on App\\\\Entity\\\\BookingOffer\\|null\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Cannot call method setRating\\(\\) on mixed\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 
@@ -1086,11 +1066,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$packageId of method App\\\\Repository\\\\BookingOfferRepository\\:\\:findOfferRating\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: src/Repository/BookingOfferRepository.php
-
-		-
-			message: "#^Property App\\\\Repository\\\\BookingOfferRepository\\:\\:\\$registry has no type specified\\.$#"
 			count: 1
 			path: src/Repository/BookingOfferRepository.php
 

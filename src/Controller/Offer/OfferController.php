@@ -111,14 +111,15 @@ class OfferController extends AbstractController
 
     /**
      * @Route ("/{id}", name="single")
-     *
-     * @param int $id
-     *
-     * @return Response
      */
-    public function displayOffer(Request $request, $id)
+    public function displayOffer(Request $request, int $id): Response
     {
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($id);
+
+        if (!$offer instanceof BookingOffer) {
+            throw $this->createNotFoundException(\sprintf('Unable to find booking offer identified by ID `%s`.', $id));
+        }
+
         $finder = new Finder();
         $finder->files()->in($offer->getPhotosDirectory());
         $photosCount = 0;

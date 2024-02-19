@@ -17,11 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookingOfferRepository extends ServiceEntityRepository
 {
-    private $registry;
+    private ManagerRegistry $registry;
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, BookingOffer::class);
+
         $this->registry = $registry;
     }
 
@@ -72,11 +73,16 @@ class BookingOfferRepository extends ServiceEntityRepository
             $priceMax,
             $bookingOfferTypes
         ));
+
+        /** @var BookingOffer[] $result */
         $result = $qb->getQuery()->getResult();
+
         foreach ($result as $row) {
-            $package_id = $row->getPackageId();
-            $rating = $this->findOfferRating($package_id);
-            $row->setRating($rating);
+            $packageId = $row->getPackageId();
+
+            if (\is_int($packageId)) {
+                $row->setRating($this->findOfferRating($packageId));
+            }
         }
 
         return $result;
